@@ -17,9 +17,6 @@
             <div class="brand-header">
                 <div class="brand-logo">
                     <div class="z-badge">Z</div>
-                    <div class="brand-text">
-                        <span class="title">Z</span>
-                    </div>
                 </div>
             </div>
 
@@ -194,40 +191,42 @@
                             <h3>Top Deal Nóng Cần 2 Sếp Duyệt Nhanh</h3>
                             <button class="btn btn-sm btn-glass" onclick="switchTab('forecast')">Xem Forecast</button>
                         </div>
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>Khách Hàng</th>
-                                    <th>Gói DV</th>
-                                    <th>Giá Trị</th>
-                                    <th>Tỷ Lệ</th>
-                                    <th>Dự Kiến Về</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
-                                    <td>Xstream Mũi Nhọn</td>
-                                    <td class="text-cyan">16.000.000 đ</td>
-                                    <td><span class="badge badge-hot">90% Firm</span></td>
-                                    <td>22/07/2026</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Anh Nam (Thời Trang)</strong></td>
-                                    <td>Xstream Mũi Nhọn</td>
-                                    <td class="text-cyan">12.000.000 đ</td>
-                                    <td><span class="badge badge-hot">85% Firm</span></td>
-                                    <td>23/07/2026</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Chị Lan (Gia Dụng)</strong></td>
-                                    <td>Gói Ecom Shopee</td>
-                                    <td class="text-purple">25.000.000 đ</td>
-                                    <td><span class="badge badge-warm">70% Pipeline</span></td>
-                                    <td>25/07/2026</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="galaxy-table">
+                                <thead>
+                                    <tr>
+                                        <th>Khách Hàng</th>
+                                        <th>Gói DV</th>
+                                        <th>Giá Trị</th>
+                                        <th>Tỷ Lệ</th>
+                                        <th>Dự Kiến Về</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
+                                        <td>Xstream Mũi Nhọn</td>
+                                        <td class="text-cyan">16.000.000 đ</td>
+                                        <td><span class="badge badge-hot">90% Firm</span></td>
+                                        <td>22/07/2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Anh Nam (Thời Trang)</strong></td>
+                                        <td>Xstream Mũi Nhọn</td>
+                                        <td class="text-cyan">12.000.000 đ</td>
+                                        <td><span class="badge badge-hot">85% Firm</span></td>
+                                        <td>23/07/2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Chị Lan (Gia Dụng)</strong></td>
+                                        <td>Gói Ecom Shopee</td>
+                                        <td class="text-purple">25.000.000 đ</td>
+                                        <td><span class="badge badge-warm">70% Pipeline</span></td>
+                                        <td>25/07/2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -252,24 +251,26 @@
                         <button class="sprint-chip">Sprint 5 (02-04/08) - Cán 25M</button>
                     </div>
 
-                    <table class="galaxy-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Thương Hiệu / KH</th>
-                                <th>Gói Dịch Vụ</th>
-                                <th>Doanh Thu Dự Báo</th>
-                                <th>Phân Loại Deal</th>
-                                <th>Hạn Về Tiền Dự Kiến</th>
-                                <th>Sale</th>
-                                <th>Cập Nhật Cuối</th>
-                                <th>Hành Động Chốt</th>
-                            </tr>
-                        </thead>
-                        <tbody id="forecastTableBody">
-                            <!-- Dynamic rendering -->
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Thương Hiệu / KH</th>
+                                    <th>Gói Dịch Vụ</th>
+                                    <th>Doanh Thu Dự Báo</th>
+                                    <th>Phân Loại Deal</th>
+                                    <th>Hạn Về Tiền Dự Kiến</th>
+                                    <th>Sale</th>
+                                    <th>Cập Nhật Cuối</th>
+                                    <th>Hành Động Chốt</th>
+                                </tr>
+                            </thead>
+                            <tbody id="forecastTableBody">
+                                <!-- Dynamic rendering -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -315,48 +316,44 @@
                 <div class="galaxy-panel">
                     <div class="panel-header">
                         <div>
-                            <h3>Master Lead Tracker</h3>
-                            <p class="panel-desc">Chuẩn hóa 19 cột thông tin theo dõi chi tiết từ Tiếp xúc ➔ Pipeline ➔ SLA ➔ Nghiệm thu</p>
+                            <h3>Master Lead & Hợp Đồng Tracker</h3>
+                            <p class="panel-desc">Chuẩn hóa cấu trúc Mã Khách Hàng (Vd: BHA-XSTREAM3T-0326-T4) và 31 cột quản lý toàn diện</p>
                         </div>
-                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
+                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Hợp Đồng / Lead Mới</button>
                     </div>
 
                     <!-- BỘ LỌC NÂNG CAO (MULTI-FILTER BAR) -->
                     <div class="filter-bar">
                         <div class="filter-item search-box">
-                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm tên Zalo, Brand, SĐT, Nguồn...">
+                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm Mã KH, Shop Name, Tên Công Ty, SĐT...">
                         </div>
                         <div class="filter-item">
                             <select id="filterStage" class="filter-control">
-                                <option value="all">Tất Cả Trạng Thái Pipeline</option>
-                                <option value="Khách Mới">1. Khách Mới</option>
+                                <option value="all">Tất Cả Giai Đoạn</option>
                                 <option value="Proposal">4. Proposal & Báo Giá</option>
-                                <option value="Đang Triển Khai">Đang Triển Khai</option>
-                                <option value="Nghiệm Thu">Nghiệm Thu (Thu Tiền)</option>
-                                <option value="Khách Cũ">Khách Cũ (Retained)</option>
-                                <option value="Ngưng Triển Khai">Ngưng Triển Khai</option>
+                                <option value="Triển Khai">Đang Triển Khai</option>
+                                <option value="Nghiệm Thu">Nghiệm Thu / Đã Thu Tiền</option>
+                                <option value="Khách Cũ">Khách Cũ / Retention</option>
+                                <option value="Ngưng">Ngưng Triển Khai</option>
                                 <option value="Cancel">Cancel / Hủy Deal</option>
                                 <option value="Cứu Net">Cứu Net (Win-back)</option>
                             </select>
                         </div>
                         <div class="filter-item">
                             <select id="filterChannel" class="filter-control">
-                                <option value="all">Tất Cả Sàn / Nguồn</option>
-                                <option value="Shopee">Shopee</option>
-                                <option value="TikTok">TikTok Shop</option>
-                                <option value="Website">Website / Direct</option>
-                                <option value="MT GT">Kênh MT-GT</option>
-                                <option value="Ads">Ads / Facebook</option>
+                                <option value="all">Tất Cả Loại Hình DN</option>
+                                <option value="Cá Nhân">Cá Nhân / Shop Online</option>
+                                <option value="Công Ty">Công Ty TNHH / Cổ Phần</option>
+                                <option value="Chuỗi">Chuỗi / Retail</option>
                             </select>
                         </div>
                         <div class="filter-item">
                             <select id="filterService" class="filter-control">
-                                <option value="all">Tất Cả Ngành Hàng</option>
-                                <option value="Mỹ Phẩm">Mỹ Phẩm</option>
-                                <option value="Thời Trang">Thời Trang</option>
-                                <option value="Gia Dụng">Gia Dụng</option>
-                                <option value="Mẹ & Bé">Mẹ & Bé</option>
-                                <option value="Nông Sản">Nông Sản</option>
+                                <option value="all">Tất Cả Dịch Vụ</option>
+                                <option value="Xstream">Xstream AI Live</option>
+                                <option value="Shopee">Vận Hành Shopee</option>
+                                <option value="TikTok">TikTok Growth</option>
+                                <option value="MT GT">Kênh MT-GT</option>
                             </select>
                         </div>
                         <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xóa Lọc</button>
@@ -366,29 +363,41 @@
                         <table class="galaxy-table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>NGÀY</th>
-                                    <th>NGUỒN</th>
-                                    <th>TÊN ZALO</th>
-                                    <th>Brand</th>
-                                    <th>ZALO / SDT</th>
-                                    <th>TIẾP XÚC 1</th>
-                                    <th>TIẾP XÚC 2</th>
-                                    <th>TIẾP XÚC 3</th>
-                                    <th>GIAI ĐOẠN / KẾT QUẢ</th>
-                                    <th>PHÂN LOẠI KH</th>
-                                    <th>Ngành hàng</th>
-                                    <th>MHKD</th>
-                                    <th>Đường Link / Audio</th>
-                                    <th>THÔNG TIN / NHU CẦU KHÁCH</th>
-                                    <th>Trạng thái Pipeline</th>
+                                    <th>MÃ KHÁCH HÀNG</th>
+                                    <th>TÊN SHOP / NHÃN HÀNG</th>
+                                    <th>TÊN CÔNG TY / CÁ NHÂN</th>
+                                    <th>DỊCH VỤ</th>
+                                    <th>MÃ HỢP ĐỒNG</th>
+                                    <th>FILE HỢP ĐỒNG</th>
+                                    <th>DOANH THU</th>
+                                    <th>NGÀY KÝ</th>
+                                    <th>NGÀY BẮT ĐẦU</th>
+                                    <th>NGÀY HẾT HẠN</th>
+                                    <th>LOẠI HÌNH DN</th>
+                                    <th>DOANH THU THỰC NHẬN</th>
+                                    <th>VAT</th>
+                                    <th>TỔNG GIÁ TRỊ</th>
+                                    <th>CƠ SỞ HOA HỒNG</th>
+                                    <th>CHỨNG TỪ</th>
+                                    <th>JOB CODE</th>
+                                    <th>WORKING FILE</th>
+                                    <th>SHOP NAME</th>
+                                    <th>T1</th>
+                                    <th>T2</th>
+                                    <th>T3</th>
+                                    <th>T4</th>
+                                    <th>T5 (Phuc Yen)</th>
+                                    <th>GIAI ĐOẠN</th>
                                     <th>Follow up tiếp theo</th>
                                     <th>SLA (ngày còn lại)</th>
                                     <th>Trạng thái SLA</th>
                                     <th>Cách thức liên hệ</th>
+                                    <th>Giờ</th>
+                                    <th>Ngày</th>
                                 </tr>
                             </thead>
                             <tbody id="masterLeadsTbody">
-                                <!-- Dynamic 19-column rendering -->
+                                <!-- Dynamic 31-column rendering -->
                             </tbody>
                         </table>
                     </div>
@@ -401,24 +410,26 @@
                     <div class="panel-header">
                         <h3>Xstream Call Remind & Showup Tracker</h3>
                     </div>
-                    <table class="galaxy-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Khách Hàng</th>
-                                <th>SĐT</th>
-                                <th>Giờ Hẹn Showup</th>
-                                <th>Remind 1 (24h)</th>
-                                <th>Remind 2 (2h)</th>
-                                <th>Kết Quả Showup</th>
-                                <th>Action Sau Showup</th>
-                                <th>Sale</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Khách Hàng</th>
+                                    <th>SĐT</th>
+                                    <th>Giờ Hẹn Showup</th>
+                                    <th>Remind 1 (24h)</th>
+                                    <th>Remind 2 (2h)</th>
+                                    <th>Kết Quả Showup</th>
+                                    <th>Action Sau Showup</th>
+                                    <th>Sale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic rendering -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -428,22 +439,24 @@
                     <div class="panel-header">
                         <h3>Leader Hường & 2 Sếp Nghe File Ghi Âm Cứu Net</h3>
                     </div>
-                    <table class="galaxy-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Khách Hàng</th>
-                                <th>Gói DV</th>
-                                <th>NGHE GHI ÂM THỰC TẾ</th>
-                                <th>Đánh Giá Nguyên Nhân Thật</th>
-                                <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
-                                <th>Kết Quả</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Khách Hàng</th>
+                                    <th>Gói DV</th>
+                                    <th>NGHE GHI ÂM THỰC TẾ</th>
+                                    <th>Đánh Giá Nguyên Nhân Thật</th>
+                                    <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
+                                    <th>Kết Quả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic rendering -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -459,24 +472,26 @@
                             <button class="btn btn-pink btn-lg" onclick="doCheckIn('out')"><i class="fa-solid fa-moon"></i> Check-out Cuối Ngày (17:30)</button>
                         </div>
                     </div>
-                    <table class="galaxy-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Ngày</th>
-                                <th>Tên Sale</th>
-                                <th>Check-in Sáng</th>
-                                <th>Target Calls Sáng</th>
-                                <th>Check-out Chiều</th>
-                                <th>Calls Thực Hiện</th>
-                                <th>Deals Chốt</th>
-                                <th>Trạng Thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ngày</th>
+                                    <th>Tên Sale</th>
+                                    <th>Check-in Sáng</th>
+                                    <th>Target Calls Sáng</th>
+                                    <th>Check-out Chiều</th>
+                                    <th>Calls Thực Hiện</th>
+                                    <th>Deals Chốt</th>
+                                    <th>Trạng Thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic rendering -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
         </main>
