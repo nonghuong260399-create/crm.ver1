@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Z CRM SYSTEM - FULLY DYNAMIC DUAL-LINKED STATE & LOCALSTORAGE PERSISTENCE
+   Z CRM SYSTEM - FULL LIFECYCLE STAGES, ADVANCED MULTI-FILTERS & UX/UI REFINEMENT
    ========================================================================== */
 
-// CENTRAL CRM STATE
+// CENTRAL CRM STATE WITH FULL LIFECYCLE DATA
 const DEFAULT_STATE = {
     targetMoc1: 25000000,
     targetMoc2: 75000000,
@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
             phone: '0981xxxxxx',
             channel: 'Shopee',
             service: 'Xstream Mũi Nhọn',
-            stage: '4. Proposal & Giá',
+            stage: '4. Proposal & Báo Giá',
             hotness: 'hot',
             revenue: 16000000,
             forecastType: 'Firm (90%)',
@@ -36,13 +36,13 @@ const DEFAULT_STATE = {
             phone: '0912xxxxxx',
             channel: 'TikTok Shop',
             service: 'Xstream Mũi Nhọn',
-            stage: '3. Showup Ok',
+            stage: '⚡ Đang Triển Khai',
             hotness: 'hot',
             revenue: 12000000,
             forecastType: 'Firm (85%)',
             forecastDate: '2026-07-23',
             nextActionDate: '2026-07-21',
-            nextAction: 'Gửi kịch bản demo + Báo giá',
+            nextAction: 'Theo dõi chỉ số live tuần 1',
             sale: 'Hường',
             audioUrl: '',
             remind1: '✅ Đã Gọi',
@@ -55,17 +55,40 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L003',
-            name: 'Chị Lan (Gia Dụng)',
+            name: 'Anh Minh (Đồ Điện)',
+            phone: '0974xxxxxx',
+            channel: 'Website',
+            service: 'Gói Ecom Shopee',
+            stage: '✅ Nghiệm Thu (Thu Tiền)',
+            hotness: 'hot',
+            revenue: 28000000,
+            forecastType: 'Firm (100%)',
+            forecastDate: '2026-07-20',
+            nextActionDate: '2026-07-25',
+            nextAction: 'Ký nghiệm thu đợt 1 & gửi báo cáo',
+            sale: 'Hường',
+            audioUrl: '',
+            remind1: '-',
+            remind2: '-',
+            showupStatus: '-',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L004',
+            name: 'Chị Thu (Mẹ & Bé)',
             phone: '0903xxxxxx',
             channel: 'Shopee',
             service: 'Gói Ecom Shopee',
-            stage: '5. Đàm Phán HĐ',
-            hotness: 'hot',
-            revenue: 25000000,
+            stage: '💎 Khách Cũ (Retained)',
+            hotness: 'warm',
+            revenue: 18000000,
             forecastType: 'Pipeline (70%)',
             forecastDate: '2026-07-25',
-            nextActionDate: '2026-07-22',
-            nextAction: 'Hường gọi chốt hợp đồng',
+            nextActionDate: '2026-07-26',
+            nextAction: 'Upsell gói Xstream duy trì',
             sale: 'Hường',
             audioUrl: '',
             remind1: '-',
@@ -77,12 +100,58 @@ const DEFAULT_STATE = {
             sprintId: 'sprint2'
         },
         {
-            id: 'L004',
-            name: 'Chị Mai (Mẹ & Bé)',
+            id: 'L005',
+            name: 'Anh Tuấn (Nông Sản)',
+            phone: '0945xxxxxx',
+            channel: 'TikTok Shop',
+            service: 'Xstream Mũi Nhọn',
+            stage: '⏸️ Ngưng Triển Khai',
+            hotness: 'cold',
+            revenue: 10000000,
+            forecastType: 'Pipeline (40%)',
+            forecastDate: '2026-07-30',
+            nextActionDate: '2026-07-28',
+            nextAction: 'Tạm dừng kho, chờ nhập hàng mới',
+            sale: 'Hường',
+            audioUrl: '',
+            remind1: '✅ Đã Gọi',
+            remind2: '⏳ Chờ',
+            showupStatus: '✅ Đã Tham Gia',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint4'
+        },
+        {
+            id: 'L006',
+            name: 'Anh Hoàng (Thời Trang Nam)',
+            phone: '0968xxxxxx',
+            channel: 'Kênh MT-GT',
+            service: 'Marketing MT-GT',
+            stage: '❌ Cancel / Hủy Deal',
+            hotness: 'cold',
+            revenue: 0,
+            forecastType: 'Lost',
+            forecastDate: '2026-07-19',
+            nextActionDate: '2026-07-20',
+            nextAction: 'Khách dời dự án sang năm sau',
+            sale: 'Hường',
+            audioUrl: '',
+            remind1: '-',
+            remind2: '-',
+            showupStatus: '-',
+            lostReason: 'Thay đổi ngân sách tập trung mở cửa hàng offline',
+            newAngle: '',
+            cuuNetStatus: 'Đã Hủy',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L007',
+            name: 'Chị Mai (Gia Dụng)',
             phone: '0935xxxxxx',
             channel: 'TikTok Shop',
             service: 'Xstream Mũi Nhọn',
-            stage: '7. Cứu Net',
+            stage: '🚨 Cứu Net (Win-back)',
             hotness: 'cold',
             revenue: 14000000,
             forecastType: 'Pipeline (50%)',
@@ -126,7 +195,14 @@ const DEFAULT_STATE = {
     ]
 };
 
-// State Manager
+// Filter State
+let currentFilters = {
+    search: '',
+    stage: 'all',
+    channel: 'all',
+    service: 'all'
+};
+
 let CRMState = loadState();
 let isUnlocked = false;
 let pendingTabTarget = null;
@@ -153,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initSecuritySystem();
     initThemeSwitcher();
+    initFilterBar();
     initForms();
     renderAll();
 });
@@ -168,24 +245,17 @@ function renderAll() {
 }
 
 /* ==========================================================================
-   1. DASHBOARD STATS (DYNAMIC LINKING)
+   1. DASHBOARD STATS (DYNAMIC REVENUE MATH)
    ========================================================================== */
 
 function renderDashboardStats() {
-    // Calculate Actual Revenue Won
     const actualWon = CRMState.leads
-        .filter(l => l.stage.includes('Won') || l.stage.includes('Đã Thu'))
-        .reduce((sum, l) => sum + (l.revenue || 0), 14000000); // 14M default demo won
-
-    // Calculate Pipeline Forecast for Sprint 1
-    const sprint1Forecast = CRMState.leads
-        .filter(l => l.sprintId === 'sprint1')
+        .filter(l => l.stage.includes('Nghiệm Thu') || l.stage.includes('Thu Tiền') || l.stage.includes('Won'))
         .reduce((sum, l) => sum + (l.revenue || 0), 0);
 
     const percentWon = Math.min(100, Math.round((actualWon / CRMState.targetMoc1) * 100));
     const remainingWon = Math.max(0, CRMState.targetMoc1 - actualWon);
 
-    // Update Card Values
     const moc1ValEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-value');
     const moc1ProgEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .progress');
     const moc1SubEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-sub');
@@ -194,13 +264,13 @@ function renderDashboardStats() {
     if (moc1ProgEl) moc1ProgEl.style.width = `${percentWon}%`;
     if (moc1SubEl) moc1SubEl.textContent = `Đạt ${percentWon}% - Còn thiếu ${formatVNĐ(remainingWon)} (15 Ngày)`;
 
-    // Top Hot Deals in Dashboard
+    // Render Top Hot Deals
     const topDealsTbody = document.querySelector('#dashboard-tab .galaxy-table tbody');
     if (topDealsTbody) {
         const hotLeads = CRMState.leads.filter(l => l.hotness === 'hot' || l.forecastType.includes('Firm')).slice(0, 4);
         topDealsTbody.innerHTML = hotLeads.map(l => `
             <tr>
-                <td><strong>${escapeHtml(l.name)}</strong></td>
+                <td><span class="cust-primary">${escapeHtml(l.name)}</span><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
                 <td>${escapeHtml(l.service)}</td>
                 <td class="text-cyan">${formatVNĐ(l.revenue)}</td>
                 <td><span class="badge badge-hot">${l.forecastType}</span></td>
@@ -211,19 +281,59 @@ function renderDashboardStats() {
 }
 
 /* ==========================================================================
-   2. MASTER LEAD TRACKER (WITH AUDIO STORAGE & DYNAMIC LINK)
+   2. MASTER LEAD TRACKER WITH ADVANCED MULTI-FILTER BAR & LIFECYCLE PILLS
    ========================================================================== */
 
+function initFilterBar() {
+    const searchInput = document.getElementById('searchInput');
+    const stageSelect = document.getElementById('filterStage');
+    const channelSelect = document.getElementById('filterChannel');
+    const serviceSelect = document.getElementById('filterService');
+    const resetBtn = document.getElementById('resetFilterBtn');
+
+    if (searchInput) searchInput.addEventListener('input', (e) => { currentFilters.search = e.target.value.toLowerCase(); renderMasterLeads(); });
+    if (stageSelect) stageSelect.addEventListener('change', (e) => { currentFilters.stage = e.target.value; renderMasterLeads(); });
+    if (channelSelect) channelSelect.addEventListener('change', (e) => { currentFilters.channel = e.target.value; renderMasterLeads(); });
+    if (serviceSelect) serviceSelect.addEventListener('change', (e) => { currentFilters.service = e.target.value; renderMasterLeads(); });
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            currentFilters = { search: '', stage: 'all', channel: 'all', service: 'all' };
+            if (searchInput) searchInput.value = '';
+            if (stageSelect) stageSelect.value = 'all';
+            if (channelSelect) channelSelect.value = 'all';
+            if (serviceSelect) serviceSelect.value = 'all';
+            renderMasterLeads();
+        });
+    }
+}
+
 function renderMasterLeads() {
-    const tbody = document.querySelector('#leads-tab .galaxy-table tbody');
+    const tbody = document.getElementById('masterLeadsTbody');
     if (!tbody) return;
 
-    tbody.innerHTML = CRMState.leads.map((l, index) => `
+    // Apply Filter Logic
+    const filteredLeads = CRMState.leads.filter(l => {
+        const matchSearch = !currentFilters.search || 
+            l.name.toLowerCase().includes(currentFilters.search) || 
+            l.phone.includes(currentFilters.search) || 
+            l.channel.toLowerCase().includes(currentFilters.search);
+
+        const matchStage = currentFilters.stage === 'all' || l.stage.toLowerCase().includes(currentFilters.stage.toLowerCase());
+        const matchChannel = currentFilters.channel === 'all' || l.channel.toLowerCase().includes(currentFilters.channel.toLowerCase());
+        const matchService = currentFilters.service === 'all' || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
+
+        return matchSearch && matchStage && matchChannel && matchService;
+    });
+
+    tbody.innerHTML = filteredLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td>21/07</td>
-            <td><strong>${escapeHtml(l.name)}</strong></td>
-            <td>${escapeHtml(l.phone)}</td>
+            <td>
+                <span class="cust-primary">${escapeHtml(l.name)}</span>
+                <span class="cust-secondary"><i class="fa-solid fa-phone"></i> ${escapeHtml(l.phone)}</span>
+            </td>
+            <td><span class="badge badge-purple">${escapeHtml(l.channel)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td><span class="status-pill ${getStagePillClass(l.stage)}">${escapeHtml(l.stage)}</span></td>
             <td><span class="badge ${l.hotness === 'hot' ? 'badge-hot' : 'badge-cold'}">${l.hotness === 'hot' ? '🔥 Hot' : '❄️ Cold'}</span></td>
@@ -234,20 +344,23 @@ function renderMasterLeads() {
                         `<button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')"><i class="fa-solid fa-play"></i> Nghe Audio</button>` :
                         `<button class="btn btn-xs btn-glass" onclick="playMockAudio('${escapeHtml(l.name)}')"><i class="fa-solid fa-headphones"></i> Demo</button>`
                     }
-                    <label class="btn btn-xs btn-glass upload-btn" title="Upload file audio từ máy">
+                    <label class="btn btn-xs btn-glass upload-btn" title="Upload file audio">
                         <i class="fa-solid fa-upload"></i> Thêm File
                         <input type="file" accept="audio/*" onchange="handleAudioUpload(event, '${l.id}')" hidden>
                     </label>
                 </div>
             </td>
-            <td>${escapeHtml(l.nextActionDate)} (${escapeHtml(l.nextAction)})</td>
+            <td>
+                <span class="cust-primary" style="font-size:12px;">${escapeHtml(l.nextActionDate)}</span>
+                <span class="cust-secondary">${escapeHtml(l.nextAction)}</span>
+            </td>
             <td>${escapeHtml(l.sale)}</td>
         </tr>
     `).join('');
 }
 
 /* ==========================================================================
-   3. 3-DAY SPRINT & DEAL FORECASTING TABLE
+   3. 3-DAY SPRINT FORECAST & TABLES
    ========================================================================== */
 
 function renderForecastTable() {
@@ -257,7 +370,7 @@ function renderForecastTable() {
     tbody.innerHTML = CRMState.leads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><strong>${escapeHtml(l.name)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td class="text-gradient">${formatVNĐ(l.revenue)}</td>
             <td><span class="badge ${l.forecastType.includes('Firm') ? 'badge-hot' : 'badge-warm'}">${escapeHtml(l.forecastType)}</span></td>
@@ -266,16 +379,12 @@ function renderForecastTable() {
             <td>21/07 14:00</td>
             <td>
                 <button class="btn btn-xs ${l.forecastType.includes('Firm') ? 'btn-green' : 'btn-purple'}" onclick="quickStageAdvance('${l.id}')">
-                    ${l.forecastType.includes('Firm') ? 'Gửi HĐ Chốt' : 'Hường Gọi Chốt'}
+                    ${l.stage.includes('Nghiệm Thu') ? '✅ Đã Thu Tiền' : 'Chuyển Nghiệm Thu'}
                 </button>
             </td>
         </tr>
     `).join('');
 }
-
-/* ==========================================================================
-   4. CALL REMIND & SHOWUP TRACKER (LINKED FROM XSTREAM LEADS)
-   ========================================================================== */
 
 function renderRemindTable() {
     const tbody = document.querySelector('#remind-tab .galaxy-table tbody');
@@ -286,7 +395,7 @@ function renderRemindTable() {
     tbody.innerHTML = xstreamLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><strong>${escapeHtml(l.name)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
             <td>${escapeHtml(l.phone)}</td>
             <td>21/07 14:00</td>
             <td><span class="badge badge-green">${escapeHtml(l.remind1 || '✅ Đã Gọi')}</span></td>
@@ -298,36 +407,28 @@ function renderRemindTable() {
     `).join('');
 }
 
-/* ==========================================================================
-   5. CỨU NET & FILE GHI ÂM (LINKED FROM CLOSED LOST / CỨU NET LEADS)
-   ========================================================================== */
-
 function renderCuuNetTable() {
     const tbody = document.querySelector('#cuunet-tab .galaxy-table tbody');
     if (!tbody) return;
 
-    const cuuNetLeads = CRMState.leads.filter(l => l.stage.includes('Cứu Net') || l.stage.includes('Lost') || l.cuuNetStatus !== 'Bình thường');
+    const cuuNetLeads = CRMState.leads.filter(l => l.stage.includes('Cứu Net') || l.stage.includes('Lost') || l.stage.includes('Cancel') || l.cuuNetStatus !== 'Bình thường');
 
     tbody.innerHTML = cuuNetLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><strong>${escapeHtml(l.name)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td>
                 <button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')">
                     <i class="fa-solid fa-play"></i> Nghe Audio Cuộc Gọi
                 </button>
             </td>
-            <td>${escapeHtml(l.lostReason || 'Chưa phân tích rõ bài toán ROI tiết kiệm 50% chi phí')}</td>
+            <td>${escapeHtml(l.lostReason || 'Thay đổi định hướng / Chưa phân tích rõ ROI')}</td>
             <td><strong>${escapeHtml(l.newAngle || 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live')}</strong></td>
             <td><span class="badge badge-yellow">${escapeHtml(l.cuuNetStatus || '⏳ Đang Gọi Lại')}</span></td>
         </tr>
     `).join('');
 }
-
-/* ==========================================================================
-   6. IMPROVEMENTS & CHECKINS
-   ========================================================================== */
 
 function renderImprovements() {
     const listContainer = document.querySelector('.improvement-list');
@@ -419,9 +520,9 @@ function closeAudioModal() {
 function quickStageAdvance(leadId) {
     const lead = CRMState.leads.find(l => l.id === leadId);
     if (lead) {
-        lead.stage = '6. Closed Won (Đã Thu Tiền)';
+        lead.stage = '✅ Nghiệm Thu (Thu Tiền)';
         saveState();
-        alert(`🎉 Chúc mừng Hường! Đã chốt thành công deal ${lead.name} (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
+        alert(`🎉 Chúc mừng Hường! Đã chuyển ${lead.name} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
     }
 }
 
@@ -461,7 +562,7 @@ function initForms() {
 }
 
 /* ==========================================================================
-   NAVIGATION & SECURITY SYSTEMS
+   NAVIGATION & THEME & SECURITY
    ========================================================================== */
 
 function initThemeSwitcher() {
@@ -603,7 +704,7 @@ document.getElementById('checkInQuickBtn').addEventListener('click', () => {
 });
 
 /* ==========================================================================
-   HELPERS & UTILS
+   HELPERS & LIFECYCLE PILL STYLES
    ========================================================================== */
 
 function formatVNĐ(num) {
@@ -618,9 +719,12 @@ function escapeHtml(str) {
 }
 
 function getStagePillClass(stage) {
-    if (stage.includes('Won') || stage.includes('Thu Tiền')) return 'status-green';
-    if (stage.includes('Proposal') || stage.includes('Giá')) return 'status-purple';
-    if (stage.includes('Showup')) return 'status-orange';
-    if (stage.includes('Cứu Net') || stage.includes('Lost')) return 'status-red';
-    return 'status-purple';
+    if (stage.includes('Nghiệm Thu') || stage.includes('Thu Tiền') || stage.includes('Won')) return 'status-delivered';
+    if (stage.includes('Triển Khai')) return 'status-active';
+    if (stage.includes('Proposal') || stage.includes('Giá')) return 'status-proposal';
+    if (stage.includes('Khách Cũ') || stage.includes('Retained')) return 'status-retained';
+    if (stage.includes('Ngưng') || stage.includes('Paused')) return 'status-paused';
+    if (stage.includes('Cancel') || stage.includes('Hủy')) return 'status-canceled';
+    if (stage.includes('Cứu Net') || stage.includes('Win-back')) return 'status-cuunet';
+    return 'status-new';
 }

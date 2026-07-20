@@ -267,39 +267,7 @@
                             </tr>
                         </thead>
                         <tbody id="forecastTableBody">
-                            <tr>
-                                <td>1</td>
-                                <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
-                                <td>Xstream Mũi Nhọn</td>
-                                <td class="text-gradient">16.000.000 đ</td>
-                                <td><span class="badge badge-hot">Firm (90%)</span></td>
-                                <td>22/07/2026</td>
-                                <td>Hường</td>
-                                <td>21/07 10:30</td>
-                                <td><button class="btn btn-xs btn-green">Gửi HĐ Chốt</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><strong>Anh Nam (Thời Trang)</strong></td>
-                                <td>Xstream Mũi Nhọn</td>
-                                <td class="text-gradient">12.000.000 đ</td>
-                                <td><span class="badge badge-hot">Firm (85%)</span></td>
-                                <td>23/07/2026</td>
-                                <td>Hường</td>
-                                <td>21/07 14:15</td>
-                                <td><button class="btn btn-xs btn-green">Remind Báo Giá</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><strong>Chị Lan (Gia Dụng)</strong></td>
-                                <td>Gói Ecom Shopee</td>
-                                <td class="text-purple">25.000.000 đ</td>
-                                <td><span class="badge badge-warm">Pipeline (70%)</span></td>
-                                <td>25/07/2026</td>
-                                <td>Hường</td>
-                                <td>20/07 17:00</td>
-                                <td><button class="btn btn-xs btn-purple">Hường Gọi Chốt</button></td>
-                            </tr>
+                            <!-- Dynamic rendering -->
                         </tbody>
                     </table>
                 </div>
@@ -325,7 +293,7 @@
                                 <label>Ngân sách / Chi phí phát sinh (Nếu có):</label>
                                 <input type="text" class="form-control" placeholder="0 VNĐ">
                             </div>
-                            <button type="button" class="btn btn-galaxy" onclick="alert('Đã gửi đề xuất đến 2 Sếp!')">
+                            <button type="button" class="btn btn-galaxy">
                                 <i class="fa-solid fa-paper-plane"></i> Gửi Đề Xuất Nhanh
                             </button>
                         </form>
@@ -336,16 +304,7 @@
                             <h3><i class="fa-solid fa-list-check"></i> Danh Sách Đề Xuất Đang Chờ Sếp Duyệt</h3>
                         </div>
                         <div class="improvement-list">
-                            <div class="improvement-card">
-                                <div class="card-header">
-                                    <span class="author">Hường (Solo Sale) - 21/07</span>
-                                    <span class="badge badge-approved">✅ Sếp Phong Đã Duyệt</span>
-                                </div>
-                                <div class="card-body">
-                                    <strong>Vấn đề:</strong> Khách chê giá gói Xstream 1 tháng.
-                                    <p><strong>Đề xuất:</strong> Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán mốc 25M.</p>
-                                </div>
-                            </div>
+                            <!-- Dynamic rendering -->
                         </div>
                     </div>
                 </div>
@@ -356,82 +315,68 @@
                 <div class="galaxy-panel">
                     <div class="panel-header">
                         <div>
-                            <h3><i class="fa-solid fa-users-line"></i> Master Lead Tracker (Tích hợp Upload File Ghi Âm 🎙️)</h3>
-                            <p class="panel-desc">Bấm "Upload Audio" để tải file ghi âm từ điện thoại/máy tính hoặc dán link Cloud Zalo/Drive</p>
+                            <h3><i class="fa-solid fa-users-line"></i> Master Lead Tracker</h3>
+                            <p class="panel-desc">Quản lý toàn bộ vòng đời khách hàng (Khách Mới ➔ Triển Khai ➔ Nghiệm Thu ➔ Ngưng ➔ Cancel ➔ Cứu Net)</p>
                         </div>
                         <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
                     </div>
+
+                    <!-- BỘ LỌC NÂNG CAO (MULTI-FILTER BAR) -->
+                    <div class="filter-bar">
+                        <div class="filter-item search-box">
+                            <i class="fa-solid fa-magnifying-glass filter-icon"></i>
+                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm tên, SĐT, brand...">
+                        </div>
+                        <div class="filter-item">
+                            <select id="filterStage" class="filter-control">
+                                <option value="all">📊 Tất Cả Trạng Thái Khách</option>
+                                <option value="Khách Mới">1. Khách Mới</option>
+                                <option value="Proposal">4. Proposal & Báo Giá</option>
+                                <option value="Đang Triển Khai">⚡ Đang Triển Khai</option>
+                                <option value="Nghiệm Thu">✅ Nghiệm Thu (Thu Tiền)</option>
+                                <option value="Khách Cũ">💎 Khách Cũ (Retained)</option>
+                                <option value="Ngưng Triển Khai">⏸️ Ngưng Triển Khai</option>
+                                <option value="Cancel">❌ Cancel / Hủy Deal</option>
+                                <option value="Cứu Net">🚨 Cứu Net (Win-back)</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <select id="filterChannel" class="filter-control">
+                                <option value="all">🛒 Tất Cả Sàn / Kênh Bán</option>
+                                <option value="Shopee">Shopee</option>
+                                <option value="TikTok">TikTok Shop</option>
+                                <option value="Website">Website / Direct</option>
+                                <option value="MT GT">Kênh MT-GT</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <select id="filterService" class="filter-control">
+                                <option value="all">💎 Tất Cả Gói Dịch Vụ</option>
+                                <option value="Xstream">Xstream Mũi Nhọn</option>
+                                <option value="Ecom">Gói Ecom (Shopee/TikTok)</option>
+                                <option value="Marketing">Marketing MT-GT / Tổng Thể</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-glass btn-sm" id="resetFilterBtn"><i class="fa-solid fa-rotate-left"></i> Xóa Lọc</button>
+                    </div>
+
                     <table class="galaxy-table">
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Ngày</th>
-                                <th>Tên Khách Hàng</th>
-                                <th>SĐT / Zalo</th>
-                                <th>Gói DV</th>
-                                <th>Pipeline Stage</th>
+                                <th>Thông Tin Khách Hàng (Tên, SĐT)</th>
+                                <th>Sàn / Kênh</th>
+                                <th>Gói Dịch Vụ</th>
+                                <th>Trạng Thái Vòng Đời</th>
                                 <th>Mức HOT</th>
                                 <th>Doanh Thu</th>
-                                <th>🎙️ LƯU FILE GHI ÂM CUỘC GỌI</th>
-                                <th>Lịch Next Action</th>
+                                <th>🎙️ LƯU FILE GHI ÂM</th>
+                                <th>Hành Động Tiếp (Next Action)</th>
                                 <th>Sale</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>21/07</td>
-                                <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
-                                <td>0981xxxxxx</td>
-                                <td>Xstream Mũi Nhọn</td>
-                                <td><span class="status-pill status-purple">4. Proposal & Giá</span></td>
-                                <td><span class="badge badge-hot">🔥 Hot</span></td>
-                                <td class="text-cyan">16.000.000 đ</td>
-                                <td>
-                                    <div class="audio-cell">
-                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Hằng (Mỹ Phẩm)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
-                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Chị Hằng (Mỹ Phẩm)')" hidden></label>
-                                    </div>
-                                </td>
-                                <td>22/07 (Call chốt)</td>
-                                <td>Hường</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>21/07</td>
-                                <td><strong>Anh Nam (Thời Trang)</strong></td>
-                                <td>0912xxxxxx</td>
-                                <td>Xstream Mũi Nhọn</td>
-                                <td><span class="status-pill status-orange">3. Showup Ok</span></td>
-                                <td><span class="badge badge-hot">🔥 Hot</span></td>
-                                <td class="text-cyan">12.000.000 đ</td>
-                                <td>
-                                    <div class="audio-cell">
-                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Anh Nam (Thời Trang)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
-                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Anh Nam (Thời Trang)')" hidden></label>
-                                    </div>
-                                </td>
-                                <td>21/07 (Gửi giá)</td>
-                                <td>Hường</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>20/07</td>
-                                <td><strong>Chị Mai (Mẹ & Bé)</strong></td>
-                                <td>0935xxxxxx</td>
-                                <td>Xstream Mũi Nhọn</td>
-                                <td><span class="status-pill status-red">7. Cứu Net</span></td>
-                                <td><span class="badge badge-cold">❄️ Cold</span></td>
-                                <td class="text-purple">14.000.000 đ</td>
-                                <td>
-                                    <div class="audio-cell">
-                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Mai (Mẹ & Bé)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
-                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Chị Mai (Mẹ & Bé)')" hidden></label>
-                                    </div>
-                                </td>
-                                <td>22/07 (Hường gọi)</td>
-                                <td>Hường</td>
-                            </tr>
+                        <tbody id="masterLeadsTbody">
+                            <!-- Dynamic rendering -->
                         </tbody>
                     </table>
                 </div>
@@ -458,28 +403,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Anh Nam (Thời Trang)</td>
-                                <td>0912xxxxxx</td>
-                                <td>21/07 14:00</td>
-                                <td><span class="badge badge-green">✅ Đã Gọi</span></td>
-                                <td><span class="badge badge-green">✅ Nhắn Link</span></td>
-                                <td><span class="badge badge-green">✅ Đã Tham Gia</span></td>
-                                <td>Gửi Báo Giá 16h</td>
-                                <td>Hường</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Chị Minh (Nông Sản)</td>
-                                <td>0945xxxxxx</td>
-                                <td>21/07 15:30</td>
-                                <td><span class="badge badge-green">✅ Đã Gọi</span></td>
-                                <td><span class="badge badge-yellow">⏳ Chờ Gọi</span></td>
-                                <td><span class="badge badge-yellow">⏳ Chờ Showup</span></td>
-                                <td>Call Remind 13h30</td>
-                                <td>Hường</td>
-                            </tr>
+                            <!-- Dynamic rendering -->
                         </tbody>
                     </table>
                 </div>
@@ -504,17 +428,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Chị Mai (Mẹ & Bé)</td>
-                                <td>Xstream 14M</td>
-                                <td>
-                                    <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Mai (Mẹ & Bé)')"><i class="fa-solid fa-play"></i> Nghe File Cuộc Gọi</button>
-                                </td>
-                                <td>Chưa phân tích rõ bài toán ROI tiết kiệm 50% chi phí host live</td>
-                                <td>Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live</td>
-                                <td><span class="badge badge-yellow">⏳ Đang Gọi Lại</span></td>
-                            </tr>
+                            <!-- Dynamic rendering -->
                         </tbody>
                     </table>
                 </div>
@@ -547,17 +461,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>21/07/2026</td>
-                                <td>Hường</td>
-                                <td>08:25 AM</td>
-                                <td>20 calls</td>
-                                <td>17:35 PM</td>
-                                <td>22 calls</td>
-                                <td>1 Deal (14M)</td>
-                                <td><span class="badge badge-green">✅ Chuẩn KPI</span></td>
-                            </tr>
+                            <!-- Dynamic rendering -->
                         </tbody>
                     </table>
                 </div>
