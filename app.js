@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Z CRM SYSTEM - EXECUTIVE 3-SALE MATRIX REPORT (EXCEL REPLICA)
+   Z CRM SYSTEM - 3-SALES VISUAL COMMAND CENTER & MATRIX INTEGRATION
    ========================================================================== */
 
 // CENTRAL 3-SALE PERFORMANCE MATRIX DATA (EXACT REPLICA FROM EXCEL)
@@ -182,7 +182,7 @@ let pendingTabTarget = null;
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V5');
+    const saved = localStorage.getItem('Z_CRM_STATE_V6');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -210,7 +210,7 @@ function loadState() {
 }
 
 function saveState() {
-    localStorage.setItem('Z_CRM_STATE_V5', JSON.stringify(CRMState));
+    localStorage.setItem('Z_CRM_STATE_V6', JSON.stringify(CRMState));
     renderAll();
 }
 
@@ -239,8 +239,26 @@ function renderAll() {
 }
 
 /* ==========================================================================
-   1. DASHBOARD MATRIX REPORT - EXACT 3-SALE EXCEL REPLICA
+   1. DASHBOARD MATRIX & OVERVIEW MODE SWITCHER
    ========================================================================== */
+
+function switchOverviewMode(mode) {
+    const cardsEl = document.getElementById('overviewCardsMode');
+    const excelEl = document.getElementById('overviewExcelMode');
+    const tabs = document.querySelectorAll('.switch-tab');
+
+    if (mode === 'cards') {
+        cardsEl.classList.add('active');
+        excelEl.classList.remove('active');
+        tabs[0].classList.add('active');
+        tabs[1].classList.remove('active');
+    } else {
+        cardsEl.classList.remove('active');
+        excelEl.classList.add('active');
+        tabs[0].classList.remove('active');
+        tabs[1].classList.add('active');
+    }
+}
 
 function renderMatrixReport() {
     const tbody = document.getElementById('matrixTbody');
@@ -249,7 +267,6 @@ function renderMatrixReport() {
     let html = '';
 
     CRMState.matrix.sections.forEach(section => {
-        // Section title header row
         html += `
             <tr class="row-header-section">
                 <td colspan="14">${escapeHtml(section.title)}</td>
@@ -259,7 +276,6 @@ function renderMatrixReport() {
         section.rows.forEach(r => {
             const isYellowClass = r.isYellow ? 'row-highlight-yellow' : '';
 
-            // Calculate Team Totals
             const totalPlan = typeof r.huyen.plan === 'number' ? (r.huyen.plan + r.uyen.plan + r.ngan.plan) : r.huyen.plan;
             const totalAct = typeof r.huyen.act === 'number' ? (r.huyen.act + r.uyen.act + r.ngan.act) : r.huyen.act;
             const totalRate = (typeof totalPlan === 'number' && totalPlan > 0) ? ((totalAct / totalPlan) * 100).toFixed(2) + '%' : r.huyen.rate;
@@ -334,7 +350,6 @@ function renderMasterLeads() {
     const tbody = document.getElementById('masterLeadsTbody');
     if (!tbody) return;
 
-    // Filter Logic
     const filteredLeads = CRMState.leads.filter(l => {
         const matchSearch = !currentFilters.search || 
             l.customerCode.toLowerCase().includes(currentFilters.search) || 
@@ -690,7 +705,7 @@ function updatePageTitle(tabId) {
     const subtitleEl = document.getElementById('pageSubtitle');
 
     const titles = {
-        'dashboard': { title: 'KẾ HOẠCH VÀ BÁO CÁO THÁNG 07/2026 (TEAM 3 SALE)', subtitle: 'Theo dõi chỉ số KPI & Doanh số thực tế của 3 Sale: Huyền (Hường) - Uyên - Ngân' },
+        'dashboard': { title: '3-SALES EXECUTIVE COMMAND CENTER', subtitle: 'Trung tâm điều hành doanh số & chỉ số hiệu suất 3 Sale (Huyền - Uyên - Ngân)' },
         'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (3 Sale)' },
         'improvements': { title: 'Hộp Đề Xuất Cải Tiến', subtitle: 'Gửi khuyến nghị kịch bản & ưu đãi cho 2 Sếp phê duyệt' },
         'leads': { title: 'Master Lead & Hợp Đồng Tracker (Phân Cho 3 Sale)', subtitle: 'Theo dõi thông tin chi tiết từng hợp đồng phân bổ cho 3 Sale: Huyền (Hường), Uyên, Ngân.' },
