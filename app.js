@@ -1,84 +1,282 @@
 /* ==========================================================================
-   Z CRM SYSTEM - FULL REAL-TIME DATA REACTION & SYNCHRONIZATION
+   Z CRM SYSTEM - 19 STANDARD COLUMNS RENDERING & DYNAMIC STATE
    ========================================================================== */
 
-// CENTRAL SINGLE SOURCE OF TRUTH (STATE)
-const DEFAULT_TARGETS = {
-    huyen: 12000000000,
-    uyen: 6200000000,
-    ngan: 1800000000
+// CENTRAL CRM STATE WITH 19 COLUMNS STRUCTURE
+const DEFAULT_STATE = {
+    targetMoc1: 25000000,
+    targetMoc2: 75000000,
+    leads: [
+        {
+            id: 'L001',
+            date: '21/07/2026',
+            source: 'Ads Facebook',
+            zaloName: 'Hằng Nguyễn',
+            brand: 'Mỹ Phẩm Hằng Beauty',
+            phone: '0981xxxxxx',
+            contact1: 'Gọi 21/07: Hỏi gói Xstream & Báo giá',
+            contact2: 'Nhắn Zalo: Gửi Proposal 1 trang',
+            contact3: 'Hẹn Call chốt: 22/07 10:00',
+            stageResult: 'Gửi Proposal / Báo Giá',
+            customerClass: 'Hot (ICP)',
+            category: 'Mỹ Phẩm',
+            mhkd: 'B2C / Online Shop',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Live mệt, tốn chi phí host, lead rớt sau gọi. Cần gói Xstream bám đuổi',
+            pipelineStage: '4. Proposal & Báo Giá',
+            followUpDate: '22/07/2026',
+            slaDays: 1,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo / Call',
+            revenue: 16000000,
+            forecastType: 'Firm (90%)',
+            forecastDate: '2026-07-22',
+            sale: 'Hường',
+            remind1: '✅ Đã Gọi',
+            remind2: '✅ Nhắn Link',
+            showupStatus: '✅ Đã Tham Gia',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L002',
+            date: '21/07/2026',
+            source: 'TikTok Outbound',
+            zaloName: 'Nam Đỗ',
+            brand: 'Nam Shop Thời Trang',
+            phone: '0912xxxxxx',
+            contact1: 'Gọi 21/07: Khai thác nỗi đau live',
+            contact2: 'Showup Demo Xstream 14:00',
+            contact3: 'Chờ chốt HĐ ngày 23/07',
+            stageResult: 'Đang Triển Khai HĐ',
+            customerClass: 'Hot',
+            category: 'Thời Trang',
+            mhkd: 'B2C Shop',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'TikTok Shop view thấp, muốn chạy Xstream tự động',
+            pipelineStage: '⚡ Đang Triển Khai',
+            followUpDate: '21/07/2026',
+            slaDays: 2,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo Call',
+            revenue: 12000000,
+            forecastType: 'Firm (85%)',
+            forecastDate: '2026-07-23',
+            sale: 'Hường',
+            remind1: '✅ Đã Gọi',
+            remind2: '✅ Nhắn Link',
+            showupStatus: '✅ Đã Tham Gia',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L003',
+            date: '20/07/2026',
+            source: 'Referral',
+            zaloName: 'Minh Trần',
+            brand: 'Điện Máy Minh Gia',
+            phone: '0974xxxxxx',
+            contact1: 'Họp Zoom 20/07: Tư vấn Ecom Shopee',
+            contact2: 'Gửi Hợp Đồng 21/07',
+            contact3: 'Đã thanh toán 100% đợt 1',
+            stageResult: 'Nghiệm Thu / Thu Tiền',
+            customerClass: 'VVIP (ICP)',
+            category: 'Gia Dụng / Đồ Điện',
+            mhkd: 'B2B & B2C',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Cần vận hành gian hàng Shopee trọn gói + Chạy ads tối ưu',
+            pipelineStage: '✅ Nghiệm Thu (Thu Tiền)',
+            followUpDate: '25/07/2026',
+            slaDays: 5,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Direct Meeting',
+            revenue: 28000000,
+            forecastType: 'Firm (100%)',
+            forecastDate: '2026-07-20',
+            sale: 'Hường',
+            remind1: '-',
+            remind2: '-',
+            showupStatus: '-',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L004',
+            date: '19/07/2026',
+            source: 'Event Agency',
+            zaloName: 'Thu Mẹ Bé',
+            brand: 'Thu Baby Store',
+            phone: '0903xxxxxx',
+            contact1: 'Gọi 19/07: Review gian hàng',
+            contact2: 'Gửi Proposal Retain',
+            contact3: 'Khách dời lịch ký sang tuần sau',
+            stageResult: 'Khách Cũ / Retention',
+            customerClass: 'Warm',
+            category: 'Mẹ & Bé',
+            mhkd: 'Retail / Chuỗi',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Khách cũ tái ký hợp đồng vận hành Shopee đợt 2',
+            pipelineStage: '💎 Khách Cũ (Retained)',
+            followUpDate: '26/07/2026',
+            slaDays: 0,
+            slaStatus: 'Cảnh Báo',
+            contactMethod: 'Zalo',
+            revenue: 18000000,
+            forecastType: 'Pipeline (70%)',
+            forecastDate: '2026-07-25',
+            sale: 'Hường',
+            remind1: '-',
+            remind2: '-',
+            showupStatus: '-',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint2'
+        },
+        {
+            id: 'L005',
+            date: '18/07/2026',
+            source: 'Ads Facebook',
+            zaloName: 'Tuấn Nông Sản',
+            brand: 'Nông Sản Xanh Tuấn',
+            phone: '0945xxxxxx',
+            contact1: 'Gọi 18/07: Tư vấn Xstream',
+            contact2: 'Khách dời lịch sang tháng sau',
+            contact3: 'Chờ nhập hàng mới',
+            stageResult: 'Ngưng Triển Khai',
+            customerClass: 'Cold',
+            category: 'Nông Sản',
+            mhkd: 'B2C Online',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Kho tạm dừng nhập hàng, chờ giải quyết xong đợt cũ',
+            pipelineStage: '⏸️ Ngưng Triển Khai',
+            followUpDate: '28/07/2026',
+            slaDays: -2,
+            slaStatus: 'Quá Hạn',
+            contactMethod: 'Call',
+            revenue: 10000000,
+            forecastType: 'Pipeline (40%)',
+            forecastDate: '2026-07-30',
+            sale: 'Hường',
+            remind1: '✅ Đã Gọi',
+            remind2: '⏳ Chờ',
+            showupStatus: '✅ Đã Tham Gia',
+            lostReason: '',
+            newAngle: '',
+            cuuNetStatus: 'Bình thường',
+            sprintId: 'sprint4'
+        },
+        {
+            id: 'L006',
+            date: '17/07/2026',
+            source: 'Outbound Zalo',
+            zaloName: 'Hoàng Nam',
+            brand: 'Hoàng Nam Menswear',
+            phone: '0968xxxxxx',
+            contact1: 'Gọi 17/07: Pitching MT-GT',
+            contact2: 'Khách báo hủy dự án',
+            contact3: 'Bỏ qua',
+            stageResult: 'Cancel / Hủy Deal',
+            customerClass: 'Lost',
+            category: 'Thời Trang',
+            mhkd: 'B2C Offline',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Thay đổi kế hoạch kinh doanh tập trung mở shop phố',
+            pipelineStage: '❌ Cancel / Hủy Deal',
+            followUpDate: '20/07/2026',
+            slaDays: -5,
+            slaStatus: 'Quá Hạn',
+            contactMethod: 'Call',
+            revenue: 0,
+            forecastType: 'Lost',
+            forecastDate: '2026-07-19',
+            sale: 'Hường',
+            remind1: '-',
+            remind2: '-',
+            showupStatus: '-',
+            lostReason: 'Chuyển ngân sách mở cửa hàng phố',
+            newAngle: '',
+            cuuNetStatus: 'Đã Hủy',
+            sprintId: 'sprint1'
+        },
+        {
+            id: 'L007',
+            date: '16/07/2026',
+            source: 'TikTok Ads',
+            zaloName: 'Mai Gia Dụng',
+            brand: 'Mai Home Mart',
+            phone: '0935xxxxxx',
+            contact1: 'Gọi 16/07: Tư vấn gói Xstream',
+            contact2: 'Khách im lặng sau nhận giá',
+            contact3: 'Hường chuyển góc Cứu Net',
+            stageResult: 'Cứu Net (Win-back)',
+            customerClass: 'Cold',
+            category: 'Gia Dụng',
+            mhkd: 'B2C Online',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Chê giá gói 1 tháng đắt so với thuê sinh viên live',
+            pipelineStage: '🚨 Cứu Net (Win-back)',
+            followUpDate: '22/07/2026',
+            slaDays: 1,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo / Call',
+            revenue: 14000000,
+            forecastType: 'Pipeline (50%)',
+            forecastDate: '2026-07-28',
+            sale: 'Hường',
+            remind1: '✅ Đã Gọi',
+            remind2: '❌ Vắng',
+            showupStatus: '❌ Vắng Mặt',
+            lostReason: 'Chê giá gói 1 tháng đắt so với thuê sinh viên live',
+            newAngle: 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live',
+            cuuNetStatus: '⏳ Đang Gọi Lại',
+            sprintId: 'sprint3'
+        }
+    ],
+    improvements: [
+        {
+            id: 'IMP01',
+            author: 'Hường (Solo Sale)',
+            date: '21/07/2026',
+            problem: 'Khách chê giá gói Xstream 1 tháng.',
+            solution: 'Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán mốc 25M.',
+            budget: '0 VNĐ',
+            status: 'approved',
+            statusText: '✅ Sếp Phong Đã Duyệt'
+        }
+    ],
+    checkins: [
+        {
+            date: '21/07/2026',
+            sale: 'Hường',
+            timeIn: '08:25 AM',
+            targetCalls: '20 calls',
+            timeOut: '17:35 PM',
+            actualCalls: '22 calls',
+            dealsWon: '1 Deal (14M)',
+            status: '✅ Chuẩn KPI'
+        }
+    ]
 };
 
-const INITIAL_LEADS = [
-    {
-        id: 'L001',
-        customerCode: 'BHA-XSTREAM3T-0326-T4',
-        shopBrand: 'Mỹ Phẩm Hằng Beauty',
-        companyName: 'Công Ty TNHH Beauty Hằng',
-        sale: 'Huyền',
-        service: 'Xstream AI Live 3M',
-        contractCode: 'HD-0326-BHA',
-        contractFile: 'HD_BeautyHang_Signed.pdf',
-        revenue: 4440559765,
-        stage: '✅ Nghiệm Thu (Thu Tiền)',
-        signDate: '21/07/2026',
-        startDate: '01/08/2026',
-        forecastType: 'Firm (100%)',
-        forecastDate: '2026-07-22'
-    },
-    {
-        id: 'L002',
-        customerCode: 'NAM-XSTREAM1T-0326-T4',
-        shopBrand: 'Nam Shop Thời Trang',
-        companyName: 'Cá Nhân Đỗ Nam',
-        sale: 'Uyên',
-        service: 'Xstream AI Live 1M',
-        contractCode: 'HD-0326-NAM',
-        contractFile: 'HD_NamShop_Signed.pdf',
-        revenue: 1856003515,
-        stage: '✅ Nghiệm Thu (Thu Tiền)',
-        signDate: '21/07/2026',
-        startDate: '01/08/2026',
-        forecastType: 'Firm (100%)',
-        forecastDate: '2026-07-23'
-    },
-    {
-        id: 'L003',
-        customerCode: 'MINH-ECOM6T-0326-T4',
-        shopBrand: 'Điện Máy Minh Gia',
-        companyName: 'Công Ty Cổ Phần Minh Gia',
-        sale: 'Ngân',
-        service: 'Vận Hành Ecom Shopee 6M',
-        contractCode: 'HD-0326-MINH',
-        contractFile: 'HD_MinhGia_Signed.pdf',
-        revenue: 1086292500,
-        stage: '✅ Nghiệm Thu (Thu Tiền)',
-        signDate: '20/07/2026',
-        startDate: '25/07/2026',
-        forecastType: 'Firm (100%)',
-        forecastDate: '2026-07-20'
-    },
-    {
-        id: 'L004',
-        customerCode: 'LAN-ECOM3T-0326-T4',
-        shopBrand: 'Gia Dụng Lan Anh',
-        companyName: 'Cá Nhân Lan Anh',
-        sale: 'Huyền',
-        service: 'Vận Hành Ecom Shopee 3M',
-        contractCode: 'HD-0326-LAN',
-        contractFile: 'HD_LanAnh.pdf',
-        revenue: 2500000000,
-        stage: '⚡ Đang Triển Khai',
-        signDate: '21/07/2026',
-        startDate: '01/08/2026',
-        forecastType: 'Firm (90%)',
-        forecastDate: '2026-07-25'
-    }
-];
-
+// Filter State
 let currentFilters = {
     search: '',
-    sale: 'all',
+    stage: 'all',
+    channel: 'all',
     service: 'all'
 };
 
@@ -88,36 +286,15 @@ let pendingTabTarget = null;
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V7');
+    const saved = localStorage.getItem('Z_CRM_STATE_V2');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
-    return {
-        targets: DEFAULT_TARGETS,
-        daysRemaining: 10,
-        leads: INITIAL_LEADS,
-        improvements: [
-            {
-                id: 'IMP01',
-                author: 'Hường (Solo Sale)',
-                date: '21/07/2026',
-                problem: 'Khách chê giá gói Xstream 1 tháng.',
-                solution: 'Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán target 3 Sale.',
-                budget: '0 VNĐ',
-                status: 'approved',
-                statusText: '✅ Sếp Phong Đã Duyệt'
-            }
-        ],
-        checkins: [
-            { date: '21/07/2026', sale: 'Huyền', timeIn: '08:25 AM', targetCalls: '30 calls', timeOut: '17:35 PM', actualCalls: '32 calls', dealsWon: '1 Deal (16M)', status: '✅ Chuẩn KPI' },
-            { date: '21/07/2026', sale: 'Uyên', timeIn: '08:28 AM', targetCalls: '25 calls', timeOut: '17:30 PM', actualCalls: '26 calls', dealsWon: '1 Deal (12M)', status: '✅ Chuẩn KPI' },
-            { date: '21/07/2026', sale: 'Ngân', timeIn: '08:30 AM', targetCalls: '25 calls', timeOut: '17:40 PM', actualCalls: '28 calls', dealsWon: '1 Deal (28M)', status: '✅ Chuẩn KPI' }
-        ]
-    };
+    return JSON.parse(JSON.stringify(DEFAULT_STATE));
 }
 
 function saveState() {
-    localStorage.setItem('Z_CRM_STATE_V7', JSON.stringify(CRMState));
+    localStorage.setItem('Z_CRM_STATE_V2', JSON.stringify(CRMState));
     renderAll();
 }
 
@@ -131,12 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeSwitcher();
     initFilterBar();
     initForms();
-    initAddLeadSystem();
     renderAll();
 });
 
 function renderAll() {
-    syncDynamicRevenueMath();
+    renderDashboardStats();
     renderMasterLeads();
     renderForecastTable();
     renderRemindTable();
@@ -146,180 +322,63 @@ function renderAll() {
 }
 
 /* ==========================================================================
-   1. DYNAMIC REAL-TIME DATA REACTION (DASHBOARD OVERVIEW LINKING)
+   1. DASHBOARD STATS (DYNAMIC REVENUE MATH)
    ========================================================================== */
 
-function syncDynamicRevenueMath() {
-    // 1. Calculate Won/Delivered Revenue for each of the 3 Sales dynamically from CRMState.leads
-    let huyenActual = 0;
-    let uyenActual = 0;
-    let nganActual = 0;
+function renderDashboardStats() {
+    const actualWon = CRMState.leads
+        .filter(l => l.pipelineStage.includes('Nghiệm Thu') || l.pipelineStage.includes('Thu Tiền') || l.pipelineStage.includes('Won'))
+        .reduce((sum, l) => sum + (l.revenue || 0), 0);
 
-    CRMState.leads.forEach(l => {
-        const isWon = !l.stage || l.stage.includes('Nghiệm Thu') || l.stage.includes('Thu Tiền') || l.stage.includes('Won') || l.stage.includes('Triển Khai');
-        const rev = l.revenue || 0;
+    const percentWon = Math.min(100, Math.round((actualWon / CRMState.targetMoc1) * 100));
+    const remainingWon = Math.max(0, CRMState.targetMoc1 - actualWon);
 
-        if (isWon) {
-            if (l.sale.includes('Huyền') || l.sale.includes('Hường')) huyenActual += rev;
-            else if (l.sale.includes('Uyên')) uyenActual += rev;
-            else if (l.sale.includes('Ngân')) nganActual += rev;
-        }
-    });
+    const moc1ValEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-value');
+    const moc1ProgEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .progress');
+    const moc1SubEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-sub');
 
-    const huyenTarget = CRMState.targets.huyen;
-    const uyenTarget = CRMState.targets.uyen;
-    const nganTarget = CRMState.targets.ngan;
+    if (moc1ValEl) moc1ValEl.textContent = formatVNĐ(actualWon);
+    if (moc1ProgEl) moc1ProgEl.style.width = `${percentWon}%`;
+    if (moc1SubEl) moc1SubEl.textContent = `Đạt ${percentWon}% - Còn thiếu ${formatVNĐ(remainingWon)} (15 Ngày)`;
 
-    const huyenRate = ((huyenActual / huyenTarget) * 100).toFixed(2);
-    const uyenRate = ((uyenActual / uyenTarget) * 100).toFixed(2);
-    const nganRate = ((nganActual / nganTarget) * 100).toFixed(2);
-
-    const teamActual = huyenActual + uyenActual + nganActual;
-    const teamTarget = huyenTarget + uyenTarget + nganTarget;
-    const teamRate = ((teamActual / teamTarget) * 100).toFixed(1);
-
-    const daysLeft = CRMState.daysRemaining;
-
-    // Remaining daily needed
-    const huyenDaily = Math.max(0, Math.round((huyenTarget - huyenActual) / daysLeft));
-    const uyenDaily = Math.max(0, Math.round((uyenTarget - uyenActual) / daysLeft));
-    const nganDaily = Math.max(0, Math.round((nganTarget - nganActual) / daysLeft));
-    const teamDaily = Math.max(0, Math.round((teamTarget - teamActual) / daysLeft));
-
-    // Update DOM Cards in Overview
-    const huyenRevEl = document.getElementById('huyenRevenue');
-    const huyenRateEl = document.getElementById('huyenRate');
-    if (huyenRevEl) huyenRevEl.textContent = formatVNĐ(huyenActual);
-    if (huyenRateEl) huyenRateEl.textContent = `Target: ${formatVNĐ(huyenTarget)} (Đạt ${huyenRate}%)`;
-    const huyenProgressEl = document.querySelector('.sale-card.border-cyan .sale-progress-bar .progress');
-    if (huyenProgressEl) huyenProgressEl.style.width = `${Math.min(100, huyenRate)}%`;
-    const huyenDailyEl = document.querySelector('.daily-target-box.box-cyan .box-val');
-    if (huyenDailyEl) huyenDailyEl.textContent = formatVNĐ(huyenDaily) + ' / Ngày';
-
-    const uyenRevEl = document.getElementById('uyenRevenue');
-    const uyenRateEl = document.getElementById('uyenRate');
-    if (uyenRevEl) uyenRevEl.textContent = formatVNĐ(uyenActual);
-    if (uyenRateEl) uyenRateEl.textContent = `Target: ${formatVNĐ(uyenTarget)} (Đạt ${uyenRate}%)`;
-    const uyenProgressEl = document.querySelector('.sale-card.border-purple .sale-progress-bar .progress');
-    if (uyenProgressEl) uyenProgressEl.style.width = `${Math.min(100, uyenRate)}%`;
-    const uyenDailyEl = document.querySelector('.daily-target-box.box-purple .box-val');
-    if (uyenDailyEl) uyenDailyEl.textContent = formatVNĐ(uyenDaily) + ' / Ngày';
-
-    const nganRevEl = document.getElementById('nganRevenue');
-    const nganRateEl = document.getElementById('nganRate');
-    if (nganRevEl) nganRevEl.textContent = formatVNĐ(nganActual);
-    if (nganRateEl) nganRateEl.textContent = `Target: ${formatVNĐ(nganTarget)} (Đạt ${nganRate}%)`;
-    const nganProgressEl = document.querySelector('.sale-card.border-pink .sale-progress-bar .progress');
-    if (nganProgressEl) nganProgressEl.style.width = `${Math.min(100, nganRate)}%`;
-    const nganDailyEl = document.querySelector('.daily-target-box.box-pink .box-val');
-    if (nganDailyEl) nganDailyEl.textContent = formatVNĐ(nganDaily) + ' / Ngày';
-
-    // Top Banner Sync
-    const teamDailyEl = document.querySelector('.runrate-banner .highlight-yellow');
-    if (teamDailyEl) teamDailyEl.textContent = formatVNĐ(teamDaily) + ' / Ngày';
-
-    const bannerInfoEl = document.querySelector('.runrate-banner .banner-info p');
-    if (bannerInfoEl) bannerInfoEl.innerHTML = `Tổng doanh số đã thu: <strong>${formatVNĐ(teamActual)}</strong> / Plan ${formatVNĐ(teamTarget)} (Đạt ${teamRate}% Target Tháng 7)`;
-
-    const bannerProgressEl = document.querySelector('.runrate-banner .overall-progress-bar .progress');
-    if (bannerProgressEl) bannerProgressEl.style.width = `${Math.min(100, teamRate)}%`;
-
-    const bannerLabelEl = document.querySelector('.runrate-banner .progress-label');
-    if (bannerLabelEl) bannerLabelEl.textContent = `Tiến độ toàn team: ${teamRate}%`;
-
-    // Sync Excel Matrix Table Rows dynamically
-    renderMatrixReportRows(huyenActual, huyenRate, uyenActual, uyenRate, nganActual, nganRate, teamActual, teamRate, huyenDaily, uyenDaily, nganDaily);
-}
-
-function renderMatrixReportRows(huyenAct, huyenRate, uyenAct, uyenRate, nganAct, nganRate, teamAct, teamRate, huyenDaily, uyenDaily, nganDaily) {
-    const tbody = document.getElementById('matrixTbody');
-    if (!tbody) return;
-
-    const huyenTarget = CRMState.targets.huyen;
-    const uyenTarget = CRMState.targets.uyen;
-    const nganTarget = CRMState.targets.ngan;
-    const teamTarget = huyenTarget + uyenTarget + nganTarget;
-
-    let html = `
-        <tr class="row-header-section"><td colspan="14">I. KẾT QUẢ KINH DOANH</td></tr>
-        <tr>
-            <td>Doanh số</td><td style="text-align:center;">VNĐ</td>
-            <td>${formatVNĐ(huyenTarget)}</td><td>${formatVNĐ(huyenAct)}</td><td><strong class="text-cyan">${huyenRate}%</strong></td>
-            <td>${formatVNĐ(uyenTarget)}</td><td>${formatVNĐ(uyenAct)}</td><td><strong class="text-purple">${uyenRate}%</strong></td>
-            <td>${formatVNĐ(nganTarget)}</td><td>${formatVNĐ(nganAct)}</td><td><strong class="text-pink">${nganRate}%</strong></td>
-            <td>${formatVNĐ(teamTarget)}</td><td>${formatVNĐ(teamAct)}</td><td><strong class="text-green">${teamRate}%</strong></td>
-        </tr>
-        <tr>
-            <td>SL Đơn hàng</td><td style="text-align:center;">Đơn</td>
-            <td>10</td><td>319</td><td><strong class="text-cyan">3157.14%</strong></td>
-            <td>0</td><td>118</td><td><strong class="text-purple">100%</strong></td>
-            <td>10</td><td>128</td><td><strong class="text-pink">1266.82%</strong></td>
-            <td>20</td><td>565</td><td><strong class="text-green">2825.00%</strong></td>
-        </tr>
-
-        <tr class="row-header-section"><td colspan="14">II. HOẠT ĐỘNG BÁN HÀNG</td></tr>
-        <tr>
-            <td>Khách đã chăm</td><td style="text-align:center;">Khách</td>
-            <td>25</td><td>5</td><td><strong class="text-cyan">20.00%</strong></td>
-            <td>5</td><td>1</td><td><strong class="text-purple">6.25%</strong></td>
-            <td>5</td><td>1</td><td><strong class="text-pink">6.67%</strong></td>
-            <td>35</td><td>7</td><td><strong class="text-green">20.00%</strong></td>
-        </tr>
-
-        <tr class="row-header-section"><td colspan="14">III. DỰ BÁO & QUẢN TRỊ (10 NGÀY CÒN LẠI)</td></tr>
-        <tr class="row-highlight-yellow">
-            <td>Doanh số/ngày cần đạt</td><td style="text-align:center;">VNĐ/Ngày</td>
-            <td>${formatVNĐ(huyenDaily)}</td><td>${formatVNĐ(huyenDaily)}</td><td><strong class="text-cyan">CẦN ĐẠT</strong></td>
-            <td>${formatVNĐ(uyenDaily)}</td><td>${formatVNĐ(uyenDaily)}</td><td><strong class="text-purple">CẦN ĐẠT</strong></td>
-            <td>${formatVNĐ(nganDaily)}</td><td>${formatVNĐ(nganDaily)}</td><td><strong class="text-pink">CẦN ĐẠT</strong></td>
-            <td>${formatVNĐ(huyenDaily + uyenDaily + nganDaily)}</td><td>${formatVNĐ(huyenDaily + uyenDaily + nganDaily)}</td><td><strong class="text-green">CẦN ĐẠT</strong></td>
-        </tr>
-    `;
-
-    tbody.innerHTML = html;
-}
-
-/* ==========================================================================
-   2. OVERVIEW MODE SWITCHER
-   ========================================================================== */
-
-function switchOverviewMode(mode) {
-    const cardsEl = document.getElementById('overviewCardsMode');
-    const excelEl = document.getElementById('overviewExcelMode');
-    const tabs = document.querySelectorAll('.switch-tab');
-
-    if (mode === 'cards') {
-        cardsEl.classList.add('active');
-        excelEl.classList.remove('active');
-        tabs[0].classList.add('active');
-        tabs[1].classList.remove('active');
-    } else {
-        cardsEl.classList.remove('active');
-        excelEl.classList.add('active');
-        tabs[0].classList.remove('active');
-        tabs[1].classList.add('active');
+    // Render Top Hot Deals
+    const topDealsTbody = document.querySelector('#dashboard-tab .galaxy-table tbody');
+    if (topDealsTbody) {
+        const hotLeads = CRMState.leads.filter(l => l.customerClass.includes('Hot') || l.customerClass.includes('VVIP') || l.forecastType.includes('Firm')).slice(0, 4);
+        topDealsTbody.innerHTML = hotLeads.map(l => `
+            <tr>
+                <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
+                <td>${escapeHtml(l.service)}</td>
+                <td class="text-cyan">${formatVNĐ(l.revenue)}</td>
+                <td><span class="badge badge-hot">${l.forecastType}</span></td>
+                <td>${escapeHtml(l.forecastDate)}</td>
+            </tr>
+        `).join('');
     }
 }
 
 /* ==========================================================================
-   3. MASTER LEAD TRACKER (SALES EDITION)
+   2. MASTER LEAD TRACKER - 19 STANDARD COLUMNS RENDERING
    ========================================================================== */
 
 function initFilterBar() {
     const searchInput = document.getElementById('searchInput');
-    const saleSelect = document.getElementById('filterSale');
+    const stageSelect = document.getElementById('filterStage');
+    const channelSelect = document.getElementById('filterChannel');
     const serviceSelect = document.getElementById('filterService');
     const resetBtn = document.getElementById('resetFilterBtn');
 
     if (searchInput) searchInput.addEventListener('input', (e) => { currentFilters.search = e.target.value.toLowerCase(); renderMasterLeads(); });
-    if (saleSelect) saleSelect.addEventListener('change', (e) => { currentFilters.sale = e.target.value; renderMasterLeads(); });
+    if (stageSelect) stageSelect.addEventListener('change', (e) => { currentFilters.stage = e.target.value; renderMasterLeads(); });
+    if (channelSelect) channelSelect.addEventListener('change', (e) => { currentFilters.channel = e.target.value; renderMasterLeads(); });
     if (serviceSelect) serviceSelect.addEventListener('change', (e) => { currentFilters.service = e.target.value; renderMasterLeads(); });
 
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            currentFilters = { search: '', sale: 'all', service: 'all' };
+            currentFilters = { search: '', stage: 'all', channel: 'all', service: 'all' };
             if (searchInput) searchInput.value = '';
-            if (saleSelect) saleSelect.value = 'all';
+            if (stageSelect) stageSelect.value = 'all';
+            if (channelSelect) channelSelect.value = 'all';
             if (serviceSelect) serviceSelect.value = 'all';
             renderMasterLeads();
         });
@@ -330,133 +389,59 @@ function renderMasterLeads() {
     const tbody = document.getElementById('masterLeadsTbody');
     if (!tbody) return;
 
+    // Filter Logic
     const filteredLeads = CRMState.leads.filter(l => {
         const matchSearch = !currentFilters.search || 
-            l.customerCode.toLowerCase().includes(currentFilters.search) || 
-            l.shopBrand.toLowerCase().includes(currentFilters.search) || 
-            l.companyName.toLowerCase().includes(currentFilters.search);
+            l.zaloName.toLowerCase().includes(currentFilters.search) || 
+            l.brand.toLowerCase().includes(currentFilters.search) || 
+            l.phone.includes(currentFilters.search) || 
+            l.source.toLowerCase().includes(currentFilters.search);
 
-        const matchSale = !currentFilters.sale || currentFilters.sale === 'all' || l.sale.toLowerCase().includes(currentFilters.sale.toLowerCase());
-        const matchService = !currentFilters.service || currentFilters.service === 'all' || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
+        const matchStage = currentFilters.stage === 'all' || l.pipelineStage.toLowerCase().includes(currentFilters.stage.toLowerCase());
+        const matchChannel = currentFilters.channel === 'all' || l.channel.toLowerCase().includes(currentFilters.channel.toLowerCase()) || l.source.toLowerCase().includes(currentFilters.channel.toLowerCase());
+        const matchService = currentFilters.service === 'all' || l.category.toLowerCase().includes(currentFilters.service.toLowerCase()) || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
 
-        return matchSearch && matchSale && matchService;
+        return matchSearch && matchStage && matchChannel && matchService;
     });
 
-    if (filteredLeads.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 24px; color: var(--text-muted);">Không tìm thấy hợp đồng nào.</td></tr>`;
-        return;
-    }
-
-    tbody.innerHTML = filteredLeads.map((l, index) => `
+    tbody.innerHTML = filteredLeads.map(l => `
         <tr>
-            <td>${index + 1}</td>
-            <td><span class="code-pill">${escapeHtml(l.customerCode)}</span></td>
-            <td><strong>${escapeHtml(l.shopBrand)}</strong></td>
-            <td><span class="cust-primary">${escapeHtml(l.companyName)}</span></td>
-            <td><span class="badge ${getSaleBadgeClass(l.sale)}">${escapeHtml(l.sale)}</span></td>
-            <td>${escapeHtml(l.service)}</td>
-            <td><span class="cust-secondary">${escapeHtml(l.contractCode)}</span></td>
-            <td class="text-cyan font-bold">${formatVNĐ(l.revenue)}</td>
-            <td>${escapeHtml(l.signDate)}</td>
-            <td>${escapeHtml(l.startDate)}</td>
+            <td>${escapeHtml(l.date)}</td>
+            <td><span class="badge badge-purple">${escapeHtml(l.source)}</span></td>
+            <td><strong>${escapeHtml(l.zaloName)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand)}</span></td>
+            <td><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact1)}</td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact2)}</td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact3)}</td>
+            <td><span class="cust-primary" style="font-size:12px;">${escapeHtml(l.stageResult)}</span></td>
+            <td><span class="badge ${getHotnessBadgeClass(l.customerClass)}">${escapeHtml(l.customerClass)}</span></td>
+            <td>${escapeHtml(l.category)}</td>
+            <td>${escapeHtml(l.mhkd)}</td>
             <td>
-                <div style="display:flex; gap: 6px;">
-                    <button class="btn btn-xs btn-purple" title="Sửa doanh thu" onclick="editLead('${l.id}')">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="btn btn-xs btn-pink" title="Xóa hợp đồng" onclick="deleteLead('${l.id}', '${escapeHtml(l.shopBrand)}')">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                <div class="audio-cell">
+                    ${l.audioUrl ? 
+                        `<button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')">Nghe Audio</button>` :
+                        `<button class="btn btn-xs btn-glass" onclick="playMockAudio('${escapeHtml(l.brand)}')">Link / Audio</button>`
+                    }
+                    <label class="btn btn-xs btn-glass upload-btn" title="Upload Audio">
+                        Upload
+                        <input type="file" accept="audio/*" onchange="handleAudioUpload(event, '${l.id}')" hidden>
+                    </label>
                 </div>
             </td>
+            <td style="max-width:180px; font-size:11px; white-space:normal;">${escapeHtml(l.customerInfo)}</td>
+            <td><span class="status-pill ${getStagePillClass(l.pipelineStage)}">${escapeHtml(l.pipelineStage)}</span></td>
+            <td><strong>${escapeHtml(l.followUpDate)}</strong></td>
+            <td style="text-align:center;"><strong>${l.slaDays} ngày</strong></td>
+            <td><span class="sla-pill ${getSlaPillClass(l.slaStatus)}">${escapeHtml(l.slaStatus)}</span></td>
+            <td>${escapeHtml(l.contactMethod)}</td>
         </tr>
     `).join('');
 }
 
-function getSaleBadgeClass(sale) {
-    if (sale.includes('Huyền') || sale.includes('Hường')) return 'badge-hot';
-    if (sale.includes('Uyên')) return 'badge-purple';
-    return 'badge-warm';
-}
-
 /* ==========================================================================
-   4. ADD, EDIT & DELETE LEAD SYSTEM (REACTS DIRECTLY WITH OVERVIEW)
-   ========================================================================== */
-
-function initAddLeadSystem() {
-    const openBtn = document.getElementById('openAddLeadModalBtn');
-    const modal = document.getElementById('addLeadModal');
-    const form = document.getElementById('addLeadForm');
-
-    if (openBtn) openBtn.addEventListener('click', () => modal.classList.add('active'));
-
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const shopBrand = document.getElementById('newShopBrand').value.trim();
-            const companyName = document.getElementById('newCompanyName').value.trim();
-            const sale = document.getElementById('newSale').value;
-            const service = document.getElementById('newService').value;
-            const revenue = parseFloat(document.getElementById('newRevenue').value) || 0;
-            let code = document.getElementById('newCustomerCode').value.trim();
-
-            if (!code) {
-                const acronym = shopBrand.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 3) || 'CUST';
-                code = `${acronym}-${service.includes('Xstream') ? 'XSTREAM' : 'ECOM'}-0726-T4`;
-            }
-
-            const newLead = {
-                id: 'L' + Date.now(),
-                customerCode: code,
-                shopBrand: shopBrand,
-                companyName: companyName,
-                sale: sale,
-                service: service,
-                contractCode: document.getElementById('newContractCode').value.trim() || 'HD-' + Date.now().toString().slice(-4),
-                revenue: revenue,
-                stage: '✅ Nghiệm Thu (Thu Tiền)',
-                signDate: document.getElementById('newSignDate').value || '21/07/2026',
-                startDate: '01/08/2026',
-                forecastType: 'Firm (100%)',
-                forecastDate: '2026-07-21'
-            };
-
-            CRMState.leads.unshift(newLead);
-            saveState();
-            closeAddLeadModal();
-            form.reset();
-            alert(`🎉 Đã thêm hợp đồng mới cho ${shopBrand} (Sale: ${sale}) với doanh thu ${formatVNĐ(revenue)}! Báo cáo Dashboard Overview đã được tính toán lại tự động.`);
-        });
-    }
-}
-
-function closeAddLeadModal() {
-    document.getElementById('addLeadModal').classList.remove('active');
-}
-
-function deleteLead(leadId, shopBrand) {
-    if (confirm(`⚠️ XÓA hợp đồng "${shopBrand}" khỏi danh sách? Báo cáo Overview sẽ tự động cập nhật lại.`)) {
-        CRMState.leads = CRMState.leads.filter(l => l.id !== leadId);
-        saveState();
-        alert(`✅ Đã xóa hợp đồng "${shopBrand}" thành công!`);
-    }
-}
-
-function editLead(leadId) {
-    const lead = CRMState.leads.find(l => l.id === leadId);
-    if (!lead) return;
-
-    const newRev = prompt(`Sửa doanh thu hợp đồng ${lead.shopBrand} (VNĐ):`, lead.revenue);
-    if (newRev !== null && !isNaN(parseFloat(newRev))) {
-        lead.revenue = parseFloat(newRev);
-        saveState();
-        alert(`✅ Đã cập nhật doanh thu cho ${lead.shopBrand} thành ${formatVNĐ(lead.revenue)}! Báo cáo Overview đã được đồng bộ tự động.`);
-    }
-}
-
-/* ==========================================================================
-   5. OTHER DETAILED TABS (PRESERVED INTACT)
+   3. 3-DAY SPRINT FORECAST & TABLES
    ========================================================================== */
 
 function renderForecastTable() {
@@ -466,16 +451,16 @@ function renderForecastTable() {
     tbody.innerHTML = CRMState.leads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td class="text-gradient">${formatVNĐ(l.revenue)}</td>
-            <td><span class="badge ${l.forecastType && l.forecastType.includes('Firm') ? 'badge-hot' : 'badge-warm'}">${escapeHtml(l.forecastType || 'Firm (90%)')}</span></td>
-            <td>${escapeHtml(l.forecastDate || '22/07/2026')}</td>
-            <td><strong>${escapeHtml(l.sale)}</strong></td>
+            <td><span class="badge ${l.forecastType.includes('Firm') ? 'badge-hot' : 'badge-warm'}">${escapeHtml(l.forecastType)}</span></td>
+            <td>${escapeHtml(l.forecastDate)}</td>
+            <td>${escapeHtml(l.sale)}</td>
             <td>21/07 14:00</td>
             <td>
-                <button class="btn btn-xs btn-green" onclick="quickStageAdvance('${l.id}')">
-                    Đã Thu Tiền
+                <button class="btn btn-xs ${l.forecastType.includes('Firm') ? 'btn-green' : 'btn-purple'}" onclick="quickStageAdvance('${l.id}')">
+                    ${l.pipelineStage.includes('Nghiệm Thu') ? 'Đã Thu Tiền' : 'Chuyển Nghiệm Thu'}
                 </button>
             </td>
         </tr>
@@ -491,14 +476,14 @@ function renderRemindTable() {
     tbody.innerHTML = xstreamLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span></td>
-            <td>${escapeHtml(l.customerCode)}</td>
-            <td><strong>${escapeHtml(l.sale)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
+            <td>${escapeHtml(l.phone)}</td>
             <td>21/07 14:00</td>
-            <td><span class="badge badge-green">✅ Đã Gọi</span></td>
-            <td><span class="badge badge-green">✅ Nhắn Link</span></td>
-            <td><span class="badge badge-green">✅ Đã Tham Gia</span></td>
-            <td>Call nhắc chốt HĐ</td>
+            <td><span class="badge badge-green">${escapeHtml(l.remind1 || '✅ Đã Gọi')}</span></td>
+            <td><span class="badge badge-green">${escapeHtml(l.remind2 || '✅ Nhắn Link')}</span></td>
+            <td><span class="badge badge-green">${escapeHtml(l.showupStatus || '✅ Đã Tham Gia')}</span></td>
+            <td>${escapeHtml(l.nextAction)}</td>
+            <td>${escapeHtml(l.sale)}</td>
         </tr>
     `).join('');
 }
@@ -507,20 +492,21 @@ function renderCuuNetTable() {
     const tbody = document.querySelector('#cuunet-tab .galaxy-table tbody');
     if (!tbody) return;
 
-    tbody.innerHTML = CRMState.leads.map((l, index) => `
+    const cuuNetLeads = CRMState.leads.filter(l => l.pipelineStage.includes('Cứu Net') || l.pipelineStage.includes('Lost') || l.pipelineStage.includes('Cancel') || l.cuuNetStatus !== 'Bình thường');
+
+    tbody.innerHTML = cuuNetLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span></td>
-            <td><strong>${escapeHtml(l.sale)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td>
-                <button class="btn btn-xs btn-purple" onclick="playMockAudio('${escapeHtml(l.shopBrand)}')">
+                <button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')">
                     Nghe Audio Cuộc Gọi
                 </button>
             </td>
-            <td>Chưa phân tích rõ bài toán ROI</td>
-            <td><strong>Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live</strong></td>
-            <td><span class="badge badge-yellow">⏳ Đang Bám Chốt</span></td>
+            <td>${escapeHtml(l.lostReason || 'Chưa phân tích rõ bài toán ROI tiết kiệm 50% chi phí')}</td>
+            <td><strong>${escapeHtml(l.newAngle || 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live')}</strong></td>
+            <td><span class="badge badge-yellow">${escapeHtml(l.cuuNetStatus || '⏳ Đang Gọi Lại')}</span></td>
         </tr>
     `).join('');
 }
@@ -566,10 +552,43 @@ function renderCheckins() {
    ACTIONS & EVENT HANDLERS
    ========================================================================== */
 
+function handleAudioUpload(event, leadId) {
+    const file = event.target.files[0];
+    if (file) {
+        const audioUrl = URL.createObjectURL(file);
+        const lead = CRMState.leads.find(l => l.id === leadId);
+        if (lead) {
+            lead.audioUrl = audioUrl;
+            saveState();
+            alert(`✅ Đã lưu và liên kết file ghi âm "${file.name}" cho ${lead.brand || lead.zaloName}!`);
+        }
+    }
+}
+
+function playRealAudio(leadId) {
+    const lead = CRMState.leads.find(l => l.id === leadId);
+    if (!lead) return;
+
+    const modal = document.getElementById('audioModal');
+    const player = document.getElementById('realAudioPlayer');
+    document.getElementById('audioCustomerTitle').textContent = `File Ghi Âm: ${lead.brand || lead.zaloName}`;
+
+    if (lead.audioUrl) {
+        player.src = lead.audioUrl;
+        document.getElementById('audioMetaInfo').textContent = `File ghi âm thực tế đã tải lên`;
+    } else {
+        document.getElementById('audioMetaInfo').textContent = `File ghi âm mẫu (Bấm Upload để chọn file từ máy)`;
+        player.src = "";
+    }
+
+    modal.classList.add('active');
+    player.play().catch(() => {});
+}
+
 function playMockAudio(name) {
     const modal = document.getElementById('audioModal');
-    document.getElementById('audioCustomerTitle').textContent = `Ghi Âm Cuộc Gọi: ${name}`;
-    document.getElementById('audioMetaInfo').textContent = `File ghi âm cuộc gọi đính kèm hợp đồng`;
+    document.getElementById('audioCustomerTitle').textContent = `Ghi Âm Mẫu: ${name}`;
+    document.getElementById('audioMetaInfo').textContent = `Bấm "Upload" để chọn file ghi âm thực tế của bạn`;
     modal.classList.add('active');
 }
 
@@ -582,9 +601,10 @@ function closeAudioModal() {
 function quickStageAdvance(leadId) {
     const lead = CRMState.leads.find(l => l.id === leadId);
     if (lead) {
-        lead.stage = '✅ Nghiệm Thu (Thu Tiền)';
+        lead.pipelineStage = '✅ Nghiệm Thu (Thu Tiền)';
+        lead.stageResult = 'Nghiệm Thu / Thu Tiền';
         saveState();
-        alert(`🎉 Chúc mừng ${lead.sale}! Đã chuyển ${lead.shopBrand} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Báo cáo Overview đã tự động cập nhật.`);
+        alert(`🎉 Chúc mừng Hường! Đã chuyển ${lead.brand || lead.zaloName} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
     }
 }
 
@@ -686,10 +706,10 @@ function updatePageTitle(tabId) {
     const subtitleEl = document.getElementById('pageSubtitle');
 
     const titles = {
-        'dashboard': { title: '3-SALES EXECUTIVE COMMAND CENTER', subtitle: 'Trung tâm điều hành doanh số & chỉ số hiệu suất 3 Sale (Huyền - Uyên - Ngân)' },
-        'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (3 Sale)' },
+        'dashboard': { title: 'Dashboard Overview Sếp', subtitle: 'Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)' },
+        'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (Solo Sale)' },
         'improvements': { title: 'Hộp Đề Xuất Cải Tiến', subtitle: 'Gửi khuyến nghị kịch bản & ưu đãi cho 2 Sếp phê duyệt' },
-        'leads': { title: 'Master Lead & Hợp Đồng Tracker (Phân Cho 3 Sale)', subtitle: 'Theo dõi thông tin chi tiết từng hợp đồng phân bổ cho 3 Sale: Huyền (Hường), Uyên, Ngân.' },
+        'leads': { title: 'Master Lead Tracker', subtitle: 'Chuẩn hóa 19 cột thông tin theo dõi chi tiết từ Tiếp xúc ➔ Pipeline ➔ SLA ➔ Nghiệm thu' },
         'remind': { title: 'Call Remind & Showup Tracker', subtitle: 'Quản lý lịch nhắc 24h & 2h cho gói Xstream' },
         'cuunet': { title: 'Leader Cứu Net & File Audio', subtitle: 'Nghe lại ghi âm cuộc gọi & chuyển angle chốt mới' },
         'checkin': { title: 'Remind & Chấm Công Daily', subtitle: 'Điểm danh Check-in sáng 08:30 & Check-out chiều 17:30' }
@@ -750,7 +770,7 @@ function closeSecurityModal() {
 
 function doCheckIn(type) {
     if (type === 'in') {
-        alert('Check-in thành công 08:25 AM! Chúc Team 3 Sale bùng nổ KPI!');
+        alert('Check-in thành công 08:25 AM! Chúc Hường chốt bùng nổ 25M trước 05/08!');
     } else {
         alert('Check-out thành công 17:35 PM! Đã lưu tiến độ làm việc trong ngày!');
     }
@@ -766,7 +786,7 @@ document.getElementById('checkInQuickBtn').addEventListener('click', () => {
 });
 
 /* ==========================================================================
-   HELPERS
+   HELPERS & LIFECYCLE PILL STYLES
    ========================================================================== */
 
 function formatVNĐ(num) {
@@ -778,4 +798,30 @@ function escapeHtml(str) {
     return str.replace(/[&<>"']/g, function(m) {
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
     });
+}
+
+function getStagePillClass(stage) {
+    if (!stage) return 'status-new';
+    if (stage.includes('Nghiệm Thu') || stage.includes('Thu Tiền') || stage.includes('Won')) return 'status-delivered';
+    if (stage.includes('Triển Khai')) return 'status-active';
+    if (stage.includes('Proposal') || stage.includes('Giá')) return 'status-proposal';
+    if (stage.includes('Khách Cũ') || stage.includes('Retained')) return 'status-retained';
+    if (stage.includes('Ngưng') || stage.includes('Paused')) return 'status-paused';
+    if (stage.includes('Cancel') || stage.includes('Hủy')) return 'status-canceled';
+    if (stage.includes('Cứu Net') || stage.includes('Win-back')) return 'status-cuunet';
+    return 'status-new';
+}
+
+function getHotnessBadgeClass(cls) {
+    if (!cls) return 'badge-cold';
+    if (cls.includes('Hot') || cls.includes('VVIP') || cls.includes('ICP')) return 'badge-hot';
+    if (cls.includes('Warm')) return 'badge-warm';
+    return 'badge-cold';
+}
+
+function getSlaPillClass(status) {
+    if (!status) return 'sla-ok';
+    if (status.includes('Đúng')) return 'sla-ok';
+    if (status.includes('Cảnh Báo')) return 'sla-warning';
+    return 'sla-overdue';
 }

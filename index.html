@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z CRM System - Executive 3-Sales Command Center</title>
+    <title>Z CRM System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,6 +17,9 @@
             <div class="brand-header">
                 <div class="brand-logo">
                     <div class="z-badge">Z</div>
+                    <div class="brand-text">
+                        <span class="title">Z</span>
+                    </div>
                 </div>
             </div>
 
@@ -25,7 +28,7 @@
                     <div class="group-title">SẾP OVERVIEW & DỰ BÁO</div>
                     <a href="#dashboard" class="nav-item active" data-tab="dashboard">
                         <i class="fa-solid fa-chart-pie"></i>
-                        <span>Command Center 3 Sale</span>
+                        <span>Dashboard Sếp</span>
                     </a>
                     <a href="#forecast" class="nav-item" data-tab="forecast">
                         <i class="fa-solid fa-bolt"></i>
@@ -67,8 +70,8 @@
                 <div class="user-card">
                     <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
                     <div class="user-info">
-                        <span class="name">Ms. Hường / Huyền</span>
-                        <span class="role">Sales Team Leader</span>
+                        <span class="name">Ms. Hường</span>
+                        <span class="role">Solo Sales Leader</span>
                     </div>
                     <button class="lock-btn" id="lockSystemBtn" title="Khóa ứng dụng (Mã 8888)"><i class="fa-solid fa-shield-halved"></i></button>
                 </div>
@@ -80,19 +83,20 @@
             <!-- TOP BAR -->
             <header class="top-header">
                 <div class="header-title">
-                    <h1 id="pageTitle">3-SALES EXECUTIVE COMMAND CENTER</h1>
-                    <p id="pageSubtitle">Trung tâm điều hành doanh số & chỉ số hiệu suất 3 Sale (Huyền - Uyên - Ngân)</p>
+                    <h1 id="pageTitle">Dashboard Overview Sếp</h1>
+                    <p id="pageSubtitle">Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)</p>
                 </div>
 
                 <div class="header-actions">
+                    <!-- THEME TOGGLE BUTTON -->
                     <button class="btn btn-glass" id="themeToggleBtn" title="Chuyển chế độ Ngày / Đêm">
                         <i class="fa-solid fa-sun" id="themeIcon"></i>
                         <span id="themeToggleText">Chế Độ Ngày</span>
                     </button>
 
-                    <div class="countdown-chip">
-                        <span class="label">SỐ NGÀY CÒN LẠI / THÁNG:</span>
-                        <span class="value text-warning">10 NGÀY</span>
+                    <div class="target-chip">
+                        <span class="label">Target Mốc 1 (05/08):</span>
+                        <span class="value text-gradient">25,000,000 đ</span>
                     </div>
                     <button class="btn btn-galaxy" id="checkInQuickBtn">
                         <i class="fa-solid fa-fingerprint"></i>
@@ -101,243 +105,130 @@
                 </div>
             </header>
 
-            <!-- TAB 1: EXECUTIVE COMMAND CENTER 3 SALE (NEW MODERN VISUAL STYLE) -->
+            <!-- TAB 1: DASHBOARD OVERVIEW SẾP -->
             <section id="dashboard-tab" class="tab-content active">
-                
-                <!-- TOP BANNER RUN-RATE KPI FOR THE REMAINING 10 DAYS -->
-                <div class="runrate-banner galaxy-panel">
-                    <div class="banner-main">
-                        <div class="banner-info">
-                            <span class="badge badge-warning">🎯 DỰ BÁO RUN-RATE 10 NGÀY CÒN LẠI</span>
-                            <h2>Doanh Số Cần Đạt Mỗi Ngày Toàn Team: <span class="highlight-yellow">1,261,714,422 đ / Ngày</span></h2>
-                            <p>Tổng doanh số đã thu: <strong>7,382,855,780 đ</strong> / Plan 20,000,000,000 đ (Đạt 36.9% Target Tháng 7)</p>
-                        </div>
-                        <div class="banner-progress">
-                            <div class="overall-progress-bar">
-                                <div class="progress" style="width: 36.9%;"></div>
+                <div class="stats-grid">
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon cyan"><i class="fa-solid fa-vault"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Mốc 1 (Trước 05/08)</span>
+                            <h2 class="card-value">14.000.000 đ</h2>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 56%;"></div>
                             </div>
-                            <span class="progress-label">Tiến độ toàn team: 36.9%</span>
+                            <span class="card-sub">Đạt 56% - Còn thiếu 11.000.000 đ (15 Ngày)</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Mốc 2 (Tháng 8)</span>
+                            <h2 class="card-value">75.000.000 đ</h2>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%;"></div>
+                            </div>
+                            <span class="card-sub">Khởi động từ ngày 06/08</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon pink"><i class="fa-solid fa-fire"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Deal Nóng Dự Báo (Sprint 1)</span>
+                            <h2 class="card-value">28.000.000 đ</h2>
+                            <span class="card-tag">3 Deals Chờ Thu Tiền</span>
+                            <span class="card-sub">Dự kiến cán đích 25M trong 48h tới</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-phone-volume"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Tỷ Lệ Showup Live</span>
+                            <h2 class="card-value">83.5%</h2>
+                            <span class="card-sub">Nhờ quy trình Call Remind 2h</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3 LEADERBOARD SALE CARDS -->
-                <div class="sales-leaderboard-grid">
-                    <!-- SALE 1: HUYỀN -->
-                    <div class="sale-card galaxy-card border-cyan">
-                        <div class="sale-card-header">
-                            <div class="sale-avatar avatar-cyan">H1</div>
-                            <div class="sale-meta">
-                                <h3>Sale 1: Huyền (Hường)</h3>
-                                <span class="badge badge-hot">Team Leader</span>
-                            </div>
-                            <div class="sale-rank">🥇 Top 1 Rev</div>
+                <!-- 3-DAY RHYTHM OVERVIEW & DEAL PIPELINE -->
+                <div class="grid-2col">
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3>Tiến Độ Doanh Số Chu Kỳ 3 Ngày</h3>
+                            <span class="panel-tag">Sprint Tracker</span>
                         </div>
-
-                        <div class="sale-metric-main">
-                            <span class="metric-label">Doanh Số Thực Tế</span>
-                            <h2 class="text-cyan">4,440,559,765 đ</h2>
-                            <span class="metric-sub">Target: 12.0 Tỷ đ (Đạt 37.00%)</span>
-                        </div>
-
-                        <div class="sale-progress-bar">
-                            <div class="progress bg-cyan" style="width: 37%;"></div>
-                        </div>
-
-                        <div class="sale-stats-row">
-                            <div class="stat-pill">
-                                <span class="lbl">SL Đơn:</span>
-                                <span class="val">319 đơn</span>
-                            </div>
-                            <div class="stat-pill">
-                                <span class="lbl">Đơn TB:</span>
-                                <span class="val">13.9 triệu/đơn</span>
-                            </div>
-                        </div>
-
-                        <div class="daily-target-box box-cyan">
-                            <span class="box-lbl">KPI Cần Đạt 10 Ngày Còn Lại:</span>
-                            <strong class="box-val text-cyan">755.9 Triệu đ / Ngày</strong>
-                        </div>
-                    </div>
-
-                    <!-- SALE 2: UYÊN -->
-                    <div class="sale-card galaxy-card border-purple">
-                        <div class="sale-card-header">
-                            <div class="sale-avatar avatar-purple">U2</div>
-                            <div class="sale-meta">
-                                <h3>Sale 2: Uyên</h3>
-                                <span class="badge badge-purple">Senior Sale</span>
-                            </div>
-                            <div class="sale-rank">🥈 Top 2 Rev</div>
-                        </div>
-
-                        <div class="sale-metric-main">
-                            <span class="metric-label">Doanh Số Thực Tế</span>
-                            <h2 class="text-purple">1,856,003,515 đ</h2>
-                            <span class="metric-sub">Target: 6.2 Tỷ đ (Đạt 29.94%)</span>
-                        </div>
-
-                        <div class="sale-progress-bar">
-                            <div class="progress bg-purple" style="width: 29.9%;"></div>
-                        </div>
-
-                        <div class="sale-stats-row">
-                            <div class="stat-pill">
-                                <span class="lbl">SL Đơn:</span>
-                                <span class="val">118 đơn</span>
-                            </div>
-                            <div class="stat-pill">
-                                <span class="lbl">Đơn TB:</span>
-                                <span class="val">15.7 triệu/đơn</span>
-                            </div>
-                        </div>
-
-                        <div class="daily-target-box box-purple">
-                            <span class="box-lbl">KPI Cần Đạt 10 Ngày Còn Lại:</span>
-                            <strong class="box-val text-purple">434.4 Triệu đ / Ngày</strong>
-                        </div>
-                    </div>
-
-                    <!-- SALE 3: NGÂN -->
-                    <div class="sale-card galaxy-card border-pink">
-                        <div class="sale-card-header">
-                            <div class="sale-avatar avatar-pink">N3</div>
-                            <div class="sale-meta">
-                                <h3>Sale 3: Ngân</h3>
-                                <span class="badge badge-pink">Top % Tiến Độ</span>
-                            </div>
-                            <div class="sale-rank">👑 Top % KPI</div>
-                        </div>
-
-                        <div class="sale-metric-main">
-                            <span class="metric-label">Doanh Số Thực Tế</span>
-                            <h2 class="text-pink">1,086,292,500 đ</h2>
-                            <span class="metric-sub">Target: 1.8 Tỷ đ (Đạt 60.35%)</span>
-                        </div>
-
-                        <div class="sale-progress-bar">
-                            <div class="progress bg-pink" style="width: 60.35%;"></div>
-                        </div>
-
-                        <div class="sale-stats-row">
-                            <div class="stat-pill">
-                                <span class="lbl">SL Đơn:</span>
-                                <span class="val">128 đơn</span>
-                            </div>
-                            <div class="stat-pill">
-                                <span class="lbl">Đơn TB:</span>
-                                <span class="val">8.4 triệu/đơn</span>
-                            </div>
-                        </div>
-
-                        <div class="daily-target-box box-pink">
-                            <span class="box-lbl">KPI Cần Đạt 10 Ngày Còn Lại:</span>
-                            <strong class="box-val text-pink">71.3 Triệu đ / Ngày</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SWITCHABLE VIEW MODES: CARDS VS EXCEL MATRIX TABLE -->
-                <div class="galaxy-panel" style="margin-top: 28px;">
-                    <div class="panel-header">
-                        <div class="view-switch-tabs">
-                            <button class="switch-tab active" onclick="switchOverviewMode('cards')">
-                                <i class="fa-solid fa-border-all"></i> Thẻ Chỉ Số Trực Quan
-                            </button>
-                            <button class="switch-tab" onclick="switchOverviewMode('excel')">
-                                <i class="fa-solid fa-table"></i> Xem Bảng Excel Chi Tiết
-                            </button>
-                        </div>
-                        <span class="panel-tag">Live Analytics</span>
-                    </div>
-
-                    <!-- MODE 1: VISUAL SCORECARD CARDS -->
-                    <div id="overviewCardsMode" class="overview-mode-content active">
-                        <div class="grid-2col">
-                            <!-- HOẠT ĐỘNG BÁN HÀNG CARD -->
-                            <div class="sub-panel">
-                                <h4><i class="fa-solid fa-phone-volume text-cyan"></i> Hoạt Động Bán Hàng & Chăm Khách</h4>
-                                <div class="metric-list">
-                                    <div class="metric-item">
-                                        <span>Khách đã chăm sóc:</span>
-                                        <strong>7 Khách (Toàn Team)</strong>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span>Tổng lượt chăm sóc:</span>
-                                        <strong>4 Lượt</strong>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span>Mẫu đã gửi khách:</span>
-                                        <strong>3 Mẫu</strong>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span>Báo giá đã phát hành:</span>
-                                        <strong>0 Báo giá</strong>
-                                    </div>
+                        <div class="sprint-timeline">
+                            <div class="sprint-item completed">
+                                <div class="sprint-badge">Sprint 1 (21-23/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Doanh thu: 14.000.000 đ</strong> / Target 10M
+                                    <p>Chốt 1 HĐ Xstream 14M (Chị Hằng)</p>
                                 </div>
+                                <span class="status-pill status-green">Đạt 140%</span>
                             </div>
 
-                            <!-- DỰ BÁO 10 NGÀY CÒN LẠI -->
-                            <div class="sub-panel">
-                                <h4><i class="fa-solid fa-bullseye text-pink"></i> Dự Báo & Chốt Deal 10 Ngày Cuối</h4>
-                                <div class="metric-list">
-                                    <div class="metric-item">
-                                        <span>Đơn hàng dự kiến chốt:</span>
-                                        <strong class="text-gradient">21 Đơn (Huyền: 12, Uyên: 5, Ngân: 4)</strong>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span>Doanh số dự kiến về thêm:</span>
-                                        <strong class="text-cyan">10.2 Tỷ VNĐ</strong>
-                                    </div>
-                                    <div class="metric-item">
-                                        <span>Khả năng hoàn thành Target:</span>
-                                        <span class="badge badge-green">88% Khả Thi</span>
-                                    </div>
+                            <div class="sprint-item active">
+                                <div class="sprint-badge">Sprint 2 (24-26/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Dự báo: 16.000.000 đ</strong> / Target 15M
+                                    <p>Deal Anh Nam & Chị Lan đang bám chốt</p>
                                 </div>
+                                <span class="status-pill status-orange">Đang Chạy</span>
+                            </div>
+
+                            <div class="sprint-item">
+                                <div class="sprint-badge">Sprint 3 (27-29/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Dự báo: 12.000.000 đ</strong>
+                                    <p>Quét tệp Call Remind Showup</p>
+                                </div>
+                                <span class="status-pill">Sắp tới</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- MODE 2: EXCEL MATRIX TABLE (HIDDEN BY DEFAULT) -->
-                    <div id="overviewExcelMode" class="overview-mode-content">
-                        <div class="table-responsive">
-                            <table class="galaxy-table matrix-table">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="min-width: 220px;">Nội dung chỉ số</th>
-                                        <th rowspan="2" style="width: 80px; text-align: center;">ĐVT</th>
-                                        <th colspan="3" class="header-sale sale-huyen">SALE 1: HUYỀN (HƯỜNG)</th>
-                                        <th colspan="3" class="header-sale sale-uyen">SALE 2: UYÊN</th>
-                                        <th colspan="3" class="header-sale sale-ngan">SALE 3: NGÂN</th>
-                                        <th colspan="3" class="header-sale sale-total">TỔNG TOÀN TEAM</th>
-                                    </tr>
-                                    <tr>
-                                        <!-- Huyền -->
-                                        <th class="sub-th">Kế hoạch</th>
-                                        <th class="sub-th">Thực tế</th>
-                                        <th class="sub-th">% Đạt</th>
-                                        <!-- Uyên -->
-                                        <th class="sub-th">Kế hoạch</th>
-                                        <th class="sub-th">Thực tế</th>
-                                        <th class="sub-th">% Đạt</th>
-                                        <!-- Ngân -->
-                                        <th class="sub-th">Kế hoạch</th>
-                                        <th class="sub-th">Thực tế</th>
-                                        <th class="sub-th">% Đạt</th>
-                                        <!-- Tổng Team -->
-                                        <th class="sub-th">Kế hoạch</th>
-                                        <th class="sub-th">Thực tế</th>
-                                        <th class="sub-th">% Đạt</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="matrixTbody">
-                                    <!-- Dynamic rendering -->
-                                </tbody>
-                            </table>
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3>Top Deal Nóng Cần 2 Sếp Duyệt Nhanh</h3>
+                            <button class="btn btn-sm btn-glass" onclick="switchTab('forecast')">Xem Forecast</button>
                         </div>
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>Khách Hàng</th>
+                                    <th>Gói DV</th>
+                                    <th>Giá Trị</th>
+                                    <th>Tỷ Lệ</th>
+                                    <th>Dự Kiến Về</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
+                                    <td>Xstream Mũi Nhọn</td>
+                                    <td class="text-cyan">16.000.000 đ</td>
+                                    <td><span class="badge badge-hot">90% Firm</span></td>
+                                    <td>22/07/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Anh Nam (Thời Trang)</strong></td>
+                                    <td>Xstream Mũi Nhọn</td>
+                                    <td class="text-cyan">12.000.000 đ</td>
+                                    <td><span class="badge badge-hot">85% Firm</span></td>
+                                    <td>23/07/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chị Lan (Gia Dụng)</strong></td>
+                                    <td>Gói Ecom Shopee</td>
+                                    <td class="text-purple">25.000.000 đ</td>
+                                    <td><span class="badge badge-warm">70% Pipeline</span></td>
+                                    <td>25/07/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </section>
 
@@ -347,7 +238,7 @@
                     <div class="panel-header">
                         <div>
                             <h3>Bảng Đo Lường & Dự Báo Deal Chu Kỳ 3 Ngày</h3>
-                            <p class="panel-desc">Cập nhật định kỳ 3 ngày/lần để bảo đảm target 3 Sale</p>
+                            <p class="panel-desc">Cập nhật định kỳ 3 ngày/lần để bảo đảm mốc 25M trước ngày 05/08</p>
                         </div>
                         <button class="btn btn-galaxy" id="addForecastBtn"><i class="fa-solid fa-plus"></i> Thêm Deal Dự Báo</button>
                     </div>
@@ -358,29 +249,27 @@
                         <button class="sprint-chip">Sprint 2 (24-26/07)</button>
                         <button class="sprint-chip">Sprint 3 (27-29/07)</button>
                         <button class="sprint-chip">Sprint 4 (30/07-01/08)</button>
-                        <button class="sprint-chip">Sprint 5 (02-04/08) - Cán Target</button>
+                        <button class="sprint-chip">Sprint 5 (02-04/08) - Cán 25M</button>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Thương Hiệu / KH</th>
-                                    <th>Gói Dịch Vụ</th>
-                                    <th>Doanh Thu Dự Báo</th>
-                                    <th>Phân Loại Deal</th>
-                                    <th>Hạn Về Tiền Dự Kiến</th>
-                                    <th>Sale Phụ Trách</th>
-                                    <th>Cập Nhật Cuối</th>
-                                    <th>Hành Động Chốt</th>
-                                </tr>
-                            </thead>
-                            <tbody id="forecastTableBody">
-                                <!-- Dynamic rendering -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Thương Hiệu / KH</th>
+                                <th>Gói Dịch Vụ</th>
+                                <th>Doanh Thu Dự Báo</th>
+                                <th>Phân Loại Deal</th>
+                                <th>Hạn Về Tiền Dự Kiến</th>
+                                <th>Sale</th>
+                                <th>Cập Nhật Cuối</th>
+                                <th>Hành Động Chốt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forecastTableBody">
+                            <!-- Dynamic rendering -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -421,38 +310,53 @@
                 </div>
             </section>
 
-            <!-- TAB PROTECTED: MASTER LEAD TRACKER (SALES EDITION) -->
+            <!-- TAB PROTECTED: MASTER LEAD TRACKER -->
             <section id="leads-tab" class="tab-content">
                 <div class="galaxy-panel">
                     <div class="panel-header">
                         <div>
-                            <h3>Master Lead & Hợp Đồng Tracker (Phân Cho 3 Sale)</h3>
-                            <p class="panel-desc">Theo dõi thông tin chi tiết từng hợp đồng phân bổ cho 3 Sale: Huyền (Hường), Uyên, Ngân.</p>
+                            <h3>Master Lead Tracker</h3>
+                            <p class="panel-desc">Chuẩn hóa 19 cột thông tin theo dõi chi tiết từ Tiếp xúc ➔ Pipeline ➔ SLA ➔ Nghiệm thu</p>
                         </div>
-                        <button class="btn btn-galaxy" id="openAddLeadModalBtn">
-                            <i class="fa-solid fa-plus"></i> Thêm Hợp Đồng / Khách Mới
-                        </button>
+                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
                     </div>
 
-                    <!-- BỘ LỌC NÂNG CAO -->
+                    <!-- BỘ LỌC NÂNG CAO (MULTI-FILTER BAR) -->
                     <div class="filter-bar">
                         <div class="filter-item search-box">
-                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm Mã KH, Shop Name, Tên Công Ty, Dịch vụ...">
+                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm tên Zalo, Brand, SĐT, Nguồn...">
                         </div>
                         <div class="filter-item">
-                            <select id="filterSale" class="filter-control">
-                                <option value="all">Tất Cả 3 Sale</option>
-                                <option value="Huyền">Sale 1: Huyền (Hường)</option>
-                                <option value="Uyên">Sale 2: Uyên</option>
-                                <option value="Ngân">Sale 3: Ngân</option>
+                            <select id="filterStage" class="filter-control">
+                                <option value="all">Tất Cả Trạng Thái Pipeline</option>
+                                <option value="Khách Mới">1. Khách Mới</option>
+                                <option value="Proposal">4. Proposal & Báo Giá</option>
+                                <option value="Đang Triển Khai">Đang Triển Khai</option>
+                                <option value="Nghiệm Thu">Nghiệm Thu (Thu Tiền)</option>
+                                <option value="Khách Cũ">Khách Cũ (Retained)</option>
+                                <option value="Ngưng Triển Khai">Ngưng Triển Khai</option>
+                                <option value="Cancel">Cancel / Hủy Deal</option>
+                                <option value="Cứu Net">Cứu Net (Win-back)</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <select id="filterChannel" class="filter-control">
+                                <option value="all">Tất Cả Sàn / Nguồn</option>
+                                <option value="Shopee">Shopee</option>
+                                <option value="TikTok">TikTok Shop</option>
+                                <option value="Website">Website / Direct</option>
+                                <option value="MT GT">Kênh MT-GT</option>
+                                <option value="Ads">Ads / Facebook</option>
                             </select>
                         </div>
                         <div class="filter-item">
                             <select id="filterService" class="filter-control">
-                                <option value="all">Tất Cả Dịch Vụ</option>
-                                <option value="Xstream">Xstream AI Live</option>
-                                <option value="Shopee">Vận Hành Shopee</option>
-                                <option value="TikTok">TikTok Growth</option>
+                                <option value="all">Tất Cả Ngành Hàng</option>
+                                <option value="Mỹ Phẩm">Mỹ Phẩm</option>
+                                <option value="Thời Trang">Thời Trang</option>
+                                <option value="Gia Dụng">Gia Dụng</option>
+                                <option value="Mẹ & Bé">Mẹ & Bé</option>
+                                <option value="Nông Sản">Nông Sản</option>
                             </select>
                         </div>
                         <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xóa Lọc</button>
@@ -462,21 +366,29 @@
                         <table class="galaxy-table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
-                                    <th>MÃ KHÁCH HÀNG</th>
-                                    <th>TÊN SHOP / NHÃN HÀNG</th>
-                                    <th>TÊN CÔNG TY / CÁ NHÂN</th>
-                                    <th>SALE PHỤ TRÁCH</th>
-                                    <th>DỊCH VỤ</th>
-                                    <th>MÃ HỢP ĐỒNG</th>
-                                    <th>DOANH THU</th>
-                                    <th>NGÀY KÝ</th>
-                                    <th>NGÀY BẮT ĐẦU</th>
-                                    <th>HÀNH ĐỘNG</th>
+                                    <th>NGÀY</th>
+                                    <th>NGUỒN</th>
+                                    <th>TÊN ZALO</th>
+                                    <th>Brand</th>
+                                    <th>ZALO / SDT</th>
+                                    <th>TIẾP XÚC 1</th>
+                                    <th>TIẾP XÚC 2</th>
+                                    <th>TIẾP XÚC 3</th>
+                                    <th>GIAI ĐOẠN / KẾT QUẢ</th>
+                                    <th>PHÂN LOẠI KH</th>
+                                    <th>Ngành hàng</th>
+                                    <th>MHKD</th>
+                                    <th>Đường Link / Audio</th>
+                                    <th>THÔNG TIN / NHU CẦU KHÁCH</th>
+                                    <th>Trạng thái Pipeline</th>
+                                    <th>Follow up tiếp theo</th>
+                                    <th>SLA (ngày còn lại)</th>
+                                    <th>Trạng thái SLA</th>
+                                    <th>Cách thức liên hệ</th>
                                 </tr>
                             </thead>
                             <tbody id="masterLeadsTbody">
-                                <!-- Dynamic rendering -->
+                                <!-- Dynamic 19-column rendering -->
                             </tbody>
                         </table>
                     </div>
@@ -489,26 +401,24 @@
                     <div class="panel-header">
                         <h3>Xstream Call Remind & Showup Tracker</h3>
                     </div>
-                    <div class="table-responsive">
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Khách Hàng</th>
-                                    <th>Mã KH</th>
-                                    <th>Sale Phụ Trách</th>
-                                    <th>Giờ Hẹn Showup</th>
-                                    <th>Remind 1 (24h)</th>
-                                    <th>Remind 2 (2h)</th>
-                                    <th>Kết Quả Showup</th>
-                                    <th>Action Sau Showup</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Dynamic rendering -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Khách Hàng</th>
+                                <th>SĐT</th>
+                                <th>Giờ Hẹn Showup</th>
+                                <th>Remind 1 (24h)</th>
+                                <th>Remind 2 (2h)</th>
+                                <th>Kết Quả Showup</th>
+                                <th>Action Sau Showup</th>
+                                <th>Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rendering -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -518,25 +428,22 @@
                     <div class="panel-header">
                         <h3>Leader Hường & 2 Sếp Nghe File Ghi Âm Cứu Net</h3>
                     </div>
-                    <div class="table-responsive">
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Khách Hàng</th>
-                                    <th>Sale Phụ Trách</th>
-                                    <th>Gói DV</th>
-                                    <th>NGHE GHI ÂM THỰC TẾ</th>
-                                    <th>Đánh Giá Nguyên Nhân Thật</th>
-                                    <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
-                                    <th>Kết Quả</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Dynamic rendering -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Khách Hàng</th>
+                                <th>Gói DV</th>
+                                <th>NGHE GHI ÂM THỰC TẾ</th>
+                                <th>Đánh Giá Nguyên Nhân Thật</th>
+                                <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
+                                <th>Kết Quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rendering -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -544,7 +451,7 @@
             <section id="checkin-tab" class="tab-content">
                 <div class="galaxy-panel">
                     <div class="panel-header">
-                        <h3>Remind & Chấm Công Daily 3 Sale</h3>
+                        <h3>Remind & Chấm Công Daily Solo Sale</h3>
                     </div>
                     <div class="checkin-box">
                         <div class="checkin-actions">
@@ -552,98 +459,27 @@
                             <button class="btn btn-pink btn-lg" onclick="doCheckIn('out')"><i class="fa-solid fa-moon"></i> Check-out Cuối Ngày (17:30)</button>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ngày</th>
-                                    <th>Tên Sale</th>
-                                    <th>Check-in Sáng</th>
-                                    <th>Target Calls Sáng</th>
-                                    <th>Check-out Chiều</th>
-                                    <th>Calls Thực Hiện</th>
-                                    <th>Deals Chốt</th>
-                                    <th>Trạng Thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Dynamic rendering -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Tên Sale</th>
+                                <th>Check-in Sáng</th>
+                                <th>Target Calls Sáng</th>
+                                <th>Check-out Chiều</th>
+                                <th>Calls Thực Hiện</th>
+                                <th>Deals Chốt</th>
+                                <th>Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic rendering -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- ADD NEW LEAD / CONTRACT MODAL -->
-    <div class="modal-backdrop" id="addLeadModal">
-        <div class="modal-card galaxy-card" style="width: 540px; text-align: left;">
-            <div class="modal-icon"><i class="fa-solid fa-user-plus"></i></div>
-            <h3 style="text-align: center;">Thêm Khách Hàng / Hợp Đồng Mới</h3>
-            <p style="text-align: center;">Phân bổ deal cho 3 Sale (Huyền, Uyên, Ngân)</p>
-
-            <form id="addLeadForm">
-                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
-                    <div class="form-group">
-                        <label>Mã Khách Hàng (Tự tạo nếu trống):</label>
-                        <input type="text" id="newCustomerCode" class="form-control" placeholder="BHA-XSTREAM3T-0326-T4">
-                    </div>
-                    <div class="form-group">
-                        <label>Sale Phụ Trách (*):</label>
-                        <select id="newSale" class="form-control">
-                            <option value="Huyền">Huyền (Hường)</option>
-                            <option value="Uyên">Uyên</option>
-                            <option value="Ngân">Ngân</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
-                    <div class="form-group">
-                        <label>Tên Shop / Nhãn Hàng (*):</label>
-                        <input type="text" id="newShopBrand" class="form-control" placeholder="Mỹ Phẩm Hằng Beauty" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tên Công Ty / Cá Nhân (*):</label>
-                        <input type="text" id="newCompanyName" class="form-control" placeholder="Công Ty TNHH..." required>
-                    </div>
-                </div>
-
-                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
-                    <div class="form-group">
-                        <label>Gói Dịch Vụ (*):</label>
-                        <select id="newService" class="form-control">
-                            <option value="Xstream AI Live 3M">Xstream AI Live 3M</option>
-                            <option value="Xstream AI Live 1M">Xstream AI Live 1M</option>
-                            <option value="Vận Hành Ecom Shopee 6M">Vận Hành Ecom Shopee 6M</option>
-                            <option value="TikTok Growth Partner">TikTok Growth Partner</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Doanh Thu (VNĐ) (*):</label>
-                        <input type="number" id="newRevenue" class="form-control" placeholder="16000000" required>
-                    </div>
-                </div>
-
-                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
-                    <div class="form-group">
-                        <label>Mã Hợp Đồng:</label>
-                        <input type="text" id="newContractCode" class="form-control" placeholder="HD-0326-BHA">
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày Ký:</label>
-                        <input type="date" id="newSignDate" class="form-control">
-                    </div>
-                </div>
-
-                <div class="modal-actions" style="margin-top: 24px;">
-                    <button type="button" class="btn btn-glass" onclick="closeAddLeadModal()">Hủy Bỏ</button>
-                    <button type="submit" class="btn btn-galaxy">Lưu Khách Hàng</button>
-                </div>
-            </form>
-        </div>
     </div>
 
     <!-- SECURITY PASSCODE MODAL -->
