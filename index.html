@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z CRM System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="galaxy-theme dark-mode" id="appBody">
+    <div class="app-container">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="brand-header">
+                <div class="brand-logo">
+                    <div class="z-badge">Z</div>
+                    <div class="brand-text">
+                        <span class="title">Z</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-group">
+                    <div class="group-title">SẾP OVERVIEW & DỰ BÁO</div>
+                    <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard Sếp</span>
+                    </a>
+                    <a href="#forecast" class="nav-item" data-tab="forecast">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Chu Kỳ 3 Ngày & Forecast</span>
+                        <span class="badge badge-pulse">3D</span>
+                    </a>
+                    <a href="#improvements" class="nav-item" data-tab="improvements">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Hộp Đề Xuất Cải Tiến</span>
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="group-title">QUẢN LÝ SALES (BẢO MẬT 🔒 PIN: 8888)</div>
+                    <a href="#leads" class="nav-item protected" data-tab="leads">
+                        <i class="fa-solid fa-users-line"></i>
+                        <span>Master Lead Tracker</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </a>
+                    <a href="#remind" class="nav-item protected" data-tab="remind">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Call Remind & Showup</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </a>
+                    <a href="#cuunet" class="nav-item protected" data-tab="cuunet">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>Cứu Net & File Ghi Âm</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </a>
+                    <a href="#checkin" class="nav-item protected" data-tab="checkin">
+                        <i class="fa-solid fa-user-clock"></i>
+                        <span>Remind & Chấm Công</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-card">
+                    <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                    <div class="user-info">
+                        <span class="name">Ms. Hường</span>
+                        <span class="role">Solo Sales Leader</span>
+                    </div>
+                    <button class="lock-btn" id="lockSystemBtn" title="Khóa ứng dụng (Mã 8888)"><i class="fa-solid fa-shield-halved"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="pageTitle">📊 Dashboard Overview Sếp</h1>
+                    <p id="pageSubtitle">Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)</p>
+                </div>
+
+                <div class="header-actions">
+                    <!-- THEME TOGGLE BUTTON -->
+                    <button class="btn btn-glass" id="themeToggleBtn" title="Chuyển chế độ Ngày / Đêm">
+                        <i class="fa-solid fa-sun" id="themeIcon"></i>
+                        <span id="themeToggleText">Chế Độ Ngày</span>
+                    </button>
+
+                    <div class="target-chip">
+                        <span class="label">Target Mốc 1 (05/08):</span>
+                        <span class="value text-gradient">25,000,000 đ</span>
+                    </div>
+                    <button class="btn btn-galaxy" id="checkInQuickBtn">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <span>Daily Check-in / Out</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: DASHBOARD OVERVIEW SẾP -->
+            <section id="dashboard-tab" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon cyan"><i class="fa-solid fa-vault"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Mốc 1 (Trước 05/08)</span>
+                            <h2 class="card-value">14.000.000 đ</h2>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 56%;"></div>
+                            </div>
+                            <span class="card-sub">Đạt 56% - Còn thiếu 11.000.000 đ (15 Ngày)</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Mốc 2 (Tháng 8)</span>
+                            <h2 class="card-value">75.000.000 đ</h2>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%;"></div>
+                            </div>
+                            <span class="card-sub">Sẽ khởi động từ ngày 06/08</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon pink"><i class="fa-solid fa-fire"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Deal Nóng Dự Báo (Sprint 1)</span>
+                            <h2 class="card-value">28.000.000 đ</h2>
+                            <span class="card-tag">3 Deals Chờ Thu Tiền</span>
+                            <span class="card-sub">Dự kiến cán đích 25M trong 48h tới 🔥</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card galaxy-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-phone-volume"></i></div>
+                        <div class="card-data">
+                            <span class="card-label">Tỷ Lệ Showup Live</span>
+                            <h2 class="card-value">83.5%</h2>
+                            <span class="card-sub">Nhờ quy trình Call Remind 2h</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-DAY RHYTHM OVERVIEW & DEAL PIPELINE -->
+                <div class="grid-2col">
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Tiến Độ Doanh Số Chu Kỳ 3 Ngày (Solo Sale Hường)</h3>
+                            <span class="panel-tag">Sprint Tracker</span>
+                        </div>
+                        <div class="sprint-timeline">
+                            <div class="sprint-item completed">
+                                <div class="sprint-badge">Sprint 1 (21-23/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Doanh thu: 14.000.000 đ</strong> / Target 10M
+                                    <p>Chốt 1 HĐ Xstream 14M (Chị Hằng)</p>
+                                </div>
+                                <span class="status-pill status-green">Đạt 140%</span>
+                            </div>
+
+                            <div class="sprint-item active">
+                                <div class="sprint-badge">Sprint 2 (24-26/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Dự báo: 16.000.000 đ</strong> / Target 15M
+                                    <p>Deal Anh Nam & Chị Lan đang bám chốt</p>
+                                </div>
+                                <span class="status-pill status-orange">Đang Chạy 🔥</span>
+                            </div>
+
+                            <div class="sprint-item">
+                                <div class="sprint-badge">Sprint 3 (27-29/07)</div>
+                                <div class="sprint-info">
+                                    <strong>Dự báo: 12.000.000 đ</strong>
+                                    <p>Quét tệp Call Remind Showup</p>
+                                </div>
+                                <span class="status-pill">Sắp tới</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-crown"></i> Top Deal Nóng Cần 2 Sếp Duyệt Nhanh</h3>
+                            <button class="btn btn-sm btn-glass" onclick="switchTab('forecast')">Xem Forecast</button>
+                        </div>
+                        <table class="galaxy-table">
+                            <thead>
+                                <tr>
+                                    <th>Khách Hàng</th>
+                                    <th>Gói DV</th>
+                                    <th>Giá Trị</th>
+                                    <th>Tỷ Lệ</th>
+                                    <th>Dự Kiến Về</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
+                                    <td>Xstream Mũi Nhọn</td>
+                                    <td class="text-cyan">16.000.000 đ</td>
+                                    <td><span class="badge badge-hot">90% Firm</span></td>
+                                    <td>22/07/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Anh Nam (Thời Trang)</strong></td>
+                                    <td>Xstream Mũi Nhọn</td>
+                                    <td class="text-cyan">12.000.000 đ</td>
+                                    <td><span class="badge badge-hot">85% Firm</span></td>
+                                    <td>23/07/2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chị Lan (Gia Dụng)</strong></td>
+                                    <td>Gói Ecom Shopee</td>
+                                    <td class="text-purple">25.000.000 đ</td>
+                                    <td><span class="badge badge-warm">70% Pipeline</span></td>
+                                    <td>25/07/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: CHU KỲ 3 NGÀY & FORECASTING -->
+            <section id="forecast-tab" class="tab-content">
+                <div class="galaxy-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3><i class="fa-solid fa-bolt"></i> Bảng Đo Lường & Dự Báo Deal Chu Kỳ 3 Ngày</h3>
+                            <p class="panel-desc">Cập nhật định kỳ 3 ngày/lần để bảo đảm mốc 25M trước ngày 05/08</p>
+                        </div>
+                        <button class="btn btn-galaxy" id="addForecastBtn"><i class="fa-solid fa-plus"></i> Thêm Deal Dự Báo</button>
+                    </div>
+
+                    <div class="sprint-selector-bar">
+                        <span class="bar-title">Chọn Chu Kỳ Sprint:</span>
+                        <button class="sprint-chip active">Sprint 1 (21-23/07)</button>
+                        <button class="sprint-chip">Sprint 2 (24-26/07)</button>
+                        <button class="sprint-chip">Sprint 3 (27-29/07)</button>
+                        <button class="sprint-chip">Sprint 4 (30/07-01/08)</button>
+                        <button class="sprint-chip">Sprint 5 (02-04/08) - Cán 25M 🎯</button>
+                    </div>
+
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Thương Hiệu / KH</th>
+                                <th>Gói Dịch Vụ</th>
+                                <th>Doanh Thu Dự Báo</th>
+                                <th>Phân Loại Deal</th>
+                                <th>Hạn Về Tiền Dự Kiến</th>
+                                <th>Sale</th>
+                                <th>Cập Nhật Cuối</th>
+                                <th>Hành Động Chốt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forecastTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
+                                <td>Xstream Mũi Nhọn</td>
+                                <td class="text-gradient">16.000.000 đ</td>
+                                <td><span class="badge badge-hot">Firm (90%)</span></td>
+                                <td>22/07/2026</td>
+                                <td>Hường</td>
+                                <td>21/07 10:30</td>
+                                <td><button class="btn btn-xs btn-green">Gửi HĐ Chốt</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>Anh Nam (Thời Trang)</strong></td>
+                                <td>Xstream Mũi Nhọn</td>
+                                <td class="text-gradient">12.000.000 đ</td>
+                                <td><span class="badge badge-hot">Firm (85%)</span></td>
+                                <td>23/07/2026</td>
+                                <td>Hường</td>
+                                <td>21/07 14:15</td>
+                                <td><button class="btn btn-xs btn-green">Remind Báo Giá</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>Chị Lan (Gia Dụng)</strong></td>
+                                <td>Gói Ecom Shopee</td>
+                                <td class="text-purple">25.000.000 đ</td>
+                                <td><span class="badge badge-warm">Pipeline (70%)</span></td>
+                                <td>25/07/2026</td>
+                                <td>Hường</td>
+                                <td>20/07 17:00</td>
+                                <td><button class="btn btn-xs btn-purple">Hường Gọi Chốt</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 3: HỘP ĐỀ XUẤT CẢI TIẾN -->
+            <section id="improvements-tab" class="tab-content">
+                <div class="grid-2col">
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-paper-plane"></i> Gửi Đề Xuất Cải Tiến Cho 2 Sếp</h3>
+                        </div>
+                        <form id="improvementForm">
+                            <div class="form-group">
+                                <label>Vấn đề hiện tại gặp phải (Pain Point):</label>
+                                <textarea class="form-control" rows="3" placeholder="Ví dụ: Khách chê gói Xstream 1 tháng hơi đắt..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung đề xuất cải tiến / Khuyến nghị:</label>
+                                <textarea class="form-control" rows="3" placeholder="Ví dụ: Đề xuất tặng kèm 5 kịch bản live cho khách chốt trước 05/08..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngân sách / Chi phí phát sinh (Nếu có):</label>
+                                <input type="text" class="form-control" placeholder="0 VNĐ">
+                            </div>
+                            <button type="button" class="btn btn-galaxy" onclick="alert('Đã gửi đề xuất đến 2 Sếp!')">
+                                <i class="fa-solid fa-paper-plane"></i> Gửi Đề Xuất Nhanh
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="galaxy-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-list-check"></i> Danh Sách Đề Xuất Đang Chờ Sếp Duyệt</h3>
+                        </div>
+                        <div class="improvement-list">
+                            <div class="improvement-card">
+                                <div class="card-header">
+                                    <span class="author">Hường (Solo Sale) - 21/07</span>
+                                    <span class="badge badge-approved">✅ Sếp Phong Đã Duyệt</span>
+                                </div>
+                                <div class="card-body">
+                                    <strong>Vấn đề:</strong> Khách chê giá gói Xstream 1 tháng.
+                                    <p><strong>Đề xuất:</strong> Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán mốc 25M.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB PROTECTED: MASTER LEAD TRACKER -->
+            <section id="leads-tab" class="tab-content">
+                <div class="galaxy-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3><i class="fa-solid fa-users-line"></i> Master Lead Tracker (Tích hợp Upload File Ghi Âm 🎙️)</h3>
+                            <p class="panel-desc">Bấm "Upload Audio" để tải file ghi âm từ điện thoại/máy tính hoặc dán link Cloud Zalo/Drive</p>
+                        </div>
+                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
+                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Tên Khách Hàng</th>
+                                <th>SĐT / Zalo</th>
+                                <th>Gói DV</th>
+                                <th>Pipeline Stage</th>
+                                <th>Mức HOT</th>
+                                <th>Doanh Thu</th>
+                                <th>🎙️ LƯU FILE GHI ÂM CUỘC GỌI</th>
+                                <th>Lịch Next Action</th>
+                                <th>Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>21/07</td>
+                                <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
+                                <td>0981xxxxxx</td>
+                                <td>Xstream Mũi Nhọn</td>
+                                <td><span class="status-pill status-purple">4. Proposal & Giá</span></td>
+                                <td><span class="badge badge-hot">🔥 Hot</span></td>
+                                <td class="text-cyan">16.000.000 đ</td>
+                                <td>
+                                    <div class="audio-cell">
+                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Hằng (Mỹ Phẩm)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
+                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Chị Hằng (Mỹ Phẩm)')" hidden></label>
+                                    </div>
+                                </td>
+                                <td>22/07 (Call chốt)</td>
+                                <td>Hường</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>21/07</td>
+                                <td><strong>Anh Nam (Thời Trang)</strong></td>
+                                <td>0912xxxxxx</td>
+                                <td>Xstream Mũi Nhọn</td>
+                                <td><span class="status-pill status-orange">3. Showup Ok</span></td>
+                                <td><span class="badge badge-hot">🔥 Hot</span></td>
+                                <td class="text-cyan">12.000.000 đ</td>
+                                <td>
+                                    <div class="audio-cell">
+                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Anh Nam (Thời Trang)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
+                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Anh Nam (Thời Trang)')" hidden></label>
+                                    </div>
+                                </td>
+                                <td>21/07 (Gửi giá)</td>
+                                <td>Hường</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>20/07</td>
+                                <td><strong>Chị Mai (Mẹ & Bé)</strong></td>
+                                <td>0935xxxxxx</td>
+                                <td>Xstream Mũi Nhọn</td>
+                                <td><span class="status-pill status-red">7. Cứu Net</span></td>
+                                <td><span class="badge badge-cold">❄️ Cold</span></td>
+                                <td class="text-purple">14.000.000 đ</td>
+                                <td>
+                                    <div class="audio-cell">
+                                        <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Mai (Mẹ & Bé)')"><i class="fa-solid fa-play"></i> Nghe Cuộc Gọi</button>
+                                        <label class="btn btn-xs btn-glass upload-btn"><i class="fa-solid fa-upload"></i> Thêm File<input type="file" accept="audio/*" onchange="uploadAudio(event, 'Chị Mai (Mẹ & Bé)')" hidden></label>
+                                    </div>
+                                </td>
+                                <td>22/07 (Hường gọi)</td>
+                                <td>Hường</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB PROTECTED: CALL REMIND & SHOWUP -->
+            <section id="remind-tab" class="tab-content">
+                <div class="galaxy-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-calendar-check"></i> Xstream Call Remind & Showup Tracker</h3>
+                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Khách Hàng</th>
+                                <th>SĐT</th>
+                                <th>Giờ Hẹn Showup</th>
+                                <th>Remind 1 (24h)</th>
+                                <th>Remind 2 (2h)</th>
+                                <th>Kết Quả Showup</th>
+                                <th>Action Sau Showup</th>
+                                <th>Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Anh Nam (Thời Trang)</td>
+                                <td>0912xxxxxx</td>
+                                <td>21/07 14:00</td>
+                                <td><span class="badge badge-green">✅ Đã Gọi</span></td>
+                                <td><span class="badge badge-green">✅ Nhắn Link</span></td>
+                                <td><span class="badge badge-green">✅ Đã Tham Gia</span></td>
+                                <td>Gửi Báo Giá 16h</td>
+                                <td>Hường</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Chị Minh (Nông Sản)</td>
+                                <td>0945xxxxxx</td>
+                                <td>21/07 15:30</td>
+                                <td><span class="badge badge-green">✅ Đã Gọi</span></td>
+                                <td><span class="badge badge-yellow">⏳ Chờ Gọi</span></td>
+                                <td><span class="badge badge-yellow">⏳ Chờ Showup</span></td>
+                                <td>Call Remind 13h30</td>
+                                <td>Hường</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB PROTECTED: LEADER CỨU NET & FILE GHI ÂM -->
+            <section id="cuunet-tab" class="tab-content">
+                <div class="galaxy-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-headset"></i> Leader Hường & 2 Sếp Nghe File Ghi Âm Cứu Net</h3>
+                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Khách Hàng</th>
+                                <th>Gói DV</th>
+                                <th>🎙️ NGHE GHI ÂM THỰC TẾ</th>
+                                <th>Đánh Giá Nguyên Nhân Thật</th>
+                                <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
+                                <th>Kết Quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Chị Mai (Mẹ & Bé)</td>
+                                <td>Xstream 14M</td>
+                                <td>
+                                    <button class="btn btn-xs btn-purple" onclick="playAudio('Chị Mai (Mẹ & Bé)')"><i class="fa-solid fa-play"></i> Nghe File Cuộc Gọi</button>
+                                </td>
+                                <td>Chưa phân tích rõ bài toán ROI tiết kiệm 50% chi phí host live</td>
+                                <td>Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live</td>
+                                <td><span class="badge badge-yellow">⏳ Đang Gọi Lại</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB PROTECTED: CHECK-IN / CHECK-OUT -->
+            <section id="checkin-tab" class="tab-content">
+                <div class="galaxy-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-user-clock"></i> Remind & Chấm Công Daily Solo Sale</h3>
+                    </div>
+                    <div class="checkin-box">
+                        <div class="checkin-actions">
+                            <button class="btn btn-galaxy btn-lg" onclick="doCheckIn('in')"><i class="fa-solid fa-sun"></i> Check-in Đầu Ngày (08:30)</button>
+                            <button class="btn btn-pink btn-lg" onclick="doCheckIn('out')"><i class="fa-solid fa-moon"></i> Check-out Cuối Ngày (17:30)</button>
+                        </div>
+                    </div>
+                    <table class="galaxy-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Tên Sale</th>
+                                <th>Check-in Sáng</th>
+                                <th>Target Calls Sáng</th>
+                                <th>Check-out Chiều</th>
+                                <th>Calls Thực Hiện</th>
+                                <th>Deals Chốt</th>
+                                <th>Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>21/07/2026</td>
+                                <td>Hường</td>
+                                <td>08:25 AM</td>
+                                <td>20 calls</td>
+                                <td>17:35 PM</td>
+                                <td>22 calls</td>
+                                <td>1 Deal (14M)</td>
+                                <td><span class="badge badge-green">✅ Chuẩn KPI</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- SECURITY PASSCODE MODAL -->
+    <div class="modal-backdrop" id="securityModal">
+        <div class="modal-card galaxy-card">
+            <div class="modal-icon"><i class="fa-solid fa-shield-cat"></i></div>
+            <h3>Nhập Mã PIN Bảo Mật CRM</h3>
+            <p>Trang này yêu cầu mã mở khóa dành cho 2 Sếp & Hường</p>
+            <div class="pin-input-group">
+                <input type="password" id="pinInput" class="form-control pin-box" placeholder="Mã PIN: 8888" maxlength="6" autofocus>
+            </div>
+            <p class="pin-error" id="pinError">Mã PIN không chính xác (Mặc định: 8888)</p>
+            <div class="modal-actions">
+                <button class="btn btn-glass" id="cancelPinBtn">Hủy Bỏ</button>
+                <button class="btn btn-galaxy" id="submitPinBtn">Mở Khóa Trang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO PLAYER MODAL -->
+    <div class="modal-backdrop" id="audioModal">
+        <div class="modal-card galaxy-card">
+            <div class="modal-icon"><i class="fa-solid fa-headphones"></i></div>
+            <h3 id="audioCustomerTitle">Nghe File Ghi Âm Cuộc Gọi</h3>
+            <p id="audioMetaInfo">File audio cuộc gọi đã tải lên - Sẵn sàng phát</p>
+            <div class="audio-player-mock">
+                <audio id="realAudioPlayer" controls style="width: 100%; border-radius: 8px;"></audio>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-glass" onclick="closeAudioModal()">Đóng Player</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
