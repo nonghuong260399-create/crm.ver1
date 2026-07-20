@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z CRM System</title>
+    <title>Z CRM System — Sales Command Center</title>
+    <meta name="description" content="Hệ thống CRM quản lý khách hàng, doanh số & dự báo dành cho Sales Team ZCOM Agency">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -73,7 +74,7 @@
                         <span class="name">Ms. Hường</span>
                         <span class="role">Solo Sales Leader</span>
                     </div>
-                    <button class="lock-btn" id="lockSystemBtn" title="Khóa ứng dụng (Mã 8888)"><i class="fa-solid fa-shield-halved"></i></button>
+                    <button class="lock-btn" id="lockSystemBtn" title="Khóa ứng dụng"><i class="fa-solid fa-shield-halved"></i></button>
                 </div>
             </div>
         </aside>
@@ -84,20 +85,13 @@
             <header class="top-header">
                 <div class="header-title">
                     <h1 id="pageTitle">Dashboard Overview Sếp</h1>
-                    <p id="pageSubtitle">Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)</p>
+                    <p id="pageSubtitle">Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8) — Real-time</p>
                 </div>
-
                 <div class="header-actions">
-                    <!-- THEME TOGGLE BUTTON -->
                     <button class="btn btn-glass" id="themeToggleBtn" title="Chuyển chế độ Ngày / Đêm">
                         <i class="fa-solid fa-sun" id="themeIcon"></i>
                         <span id="themeToggleText">Chế Độ Ngày</span>
                     </button>
-
-                    <div class="target-chip">
-                        <span class="label">Target Mốc 1 (05/08):</span>
-                        <span class="value text-gradient">25,000,000 đ</span>
-                    </div>
                     <button class="btn btn-galaxy" id="checkInQuickBtn">
                         <i class="fa-solid fa-fingerprint"></i>
                         <span>Daily Check-in / Out</span>
@@ -105,130 +99,15 @@
                 </div>
             </header>
 
-            <!-- TAB 1: DASHBOARD OVERVIEW SẾP -->
+            <!-- TAB 1: DASHBOARD OVERVIEW SẾP (100% DATA-DRIVEN) -->
             <section id="dashboard-tab" class="tab-content active">
-                <div class="stats-grid">
-                    <div class="stat-card galaxy-card">
-                        <div class="card-icon cyan"><i class="fa-solid fa-vault"></i></div>
-                        <div class="card-data">
-                            <span class="card-label">Mốc 1 (Trước 05/08)</span>
-                            <h2 class="card-value">14.000.000 đ</h2>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 56%;"></div>
-                            </div>
-                            <span class="card-sub">Đạt 56% - Còn thiếu 11.000.000 đ (15 Ngày)</span>
-                        </div>
-                    </div>
+                <!-- 5 Cards rendered by JS -->
+                <div class="stats-grid" id="dashboardCards"><!-- renderDashboardCards() --></div>
 
-                    <div class="stat-card galaxy-card">
-                        <div class="card-icon purple"><i class="fa-solid fa-bullseye"></i></div>
-                        <div class="card-data">
-                            <span class="card-label">Mốc 2 (Tháng 8)</span>
-                            <h2 class="card-value">75.000.000 đ</h2>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 0%;"></div>
-                            </div>
-                            <span class="card-sub">Khởi động từ ngày 06/08</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card galaxy-card">
-                        <div class="card-icon pink"><i class="fa-solid fa-fire"></i></div>
-                        <div class="card-data">
-                            <span class="card-label">Deal Nóng Dự Báo (Sprint 1)</span>
-                            <h2 class="card-value">28.000.000 đ</h2>
-                            <span class="card-tag">3 Deals Chờ Thu Tiền</span>
-                            <span class="card-sub">Dự kiến cán đích 25M trong 48h tới</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-card galaxy-card">
-                        <div class="card-icon blue"><i class="fa-solid fa-phone-volume"></i></div>
-                        <div class="card-data">
-                            <span class="card-label">Tỷ Lệ Showup Live</span>
-                            <h2 class="card-value">83.5%</h2>
-                            <span class="card-sub">Nhờ quy trình Call Remind 2h</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3-DAY RHYTHM OVERVIEW & DEAL PIPELINE -->
+                <!-- Sprint + Top Deals rendered by JS -->
                 <div class="grid-2col">
-                    <div class="galaxy-panel">
-                        <div class="panel-header">
-                            <h3>Tiến Độ Doanh Số Chu Kỳ 3 Ngày</h3>
-                            <span class="panel-tag">Sprint Tracker</span>
-                        </div>
-                        <div class="sprint-timeline">
-                            <div class="sprint-item completed">
-                                <div class="sprint-badge">Sprint 1 (21-23/07)</div>
-                                <div class="sprint-info">
-                                    <strong>Doanh thu: 14.000.000 đ</strong> / Target 10M
-                                    <p>Chốt 1 HĐ Xstream 14M (Chị Hằng)</p>
-                                </div>
-                                <span class="status-pill status-green">Đạt 140%</span>
-                            </div>
-
-                            <div class="sprint-item active">
-                                <div class="sprint-badge">Sprint 2 (24-26/07)</div>
-                                <div class="sprint-info">
-                                    <strong>Dự báo: 16.000.000 đ</strong> / Target 15M
-                                    <p>Deal Anh Nam & Chị Lan đang bám chốt</p>
-                                </div>
-                                <span class="status-pill status-orange">Đang Chạy</span>
-                            </div>
-
-                            <div class="sprint-item">
-                                <div class="sprint-badge">Sprint 3 (27-29/07)</div>
-                                <div class="sprint-info">
-                                    <strong>Dự báo: 12.000.000 đ</strong>
-                                    <p>Quét tệp Call Remind Showup</p>
-                                </div>
-                                <span class="status-pill">Sắp tới</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="galaxy-panel">
-                        <div class="panel-header">
-                            <h3>Top Deal Nóng Cần 2 Sếp Duyệt Nhanh</h3>
-                            <button class="btn btn-sm btn-glass" onclick="switchTab('forecast')">Xem Forecast</button>
-                        </div>
-                        <table class="galaxy-table">
-                            <thead>
-                                <tr>
-                                    <th>Khách Hàng</th>
-                                    <th>Gói DV</th>
-                                    <th>Giá Trị</th>
-                                    <th>Tỷ Lệ</th>
-                                    <th>Dự Kiến Về</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Chị Hằng (Mỹ Phẩm)</strong></td>
-                                    <td>Xstream Mũi Nhọn</td>
-                                    <td class="text-cyan">16.000.000 đ</td>
-                                    <td><span class="badge badge-hot">90% Firm</span></td>
-                                    <td>22/07/2026</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Anh Nam (Thời Trang)</strong></td>
-                                    <td>Xstream Mũi Nhọn</td>
-                                    <td class="text-cyan">12.000.000 đ</td>
-                                    <td><span class="badge badge-hot">85% Firm</span></td>
-                                    <td>23/07/2026</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Chị Lan (Gia Dụng)</strong></td>
-                                    <td>Gói Ecom Shopee</td>
-                                    <td class="text-purple">25.000.000 đ</td>
-                                    <td><span class="badge badge-warm">70% Pipeline</span></td>
-                                    <td>25/07/2026</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="galaxy-panel" id="sprintPanel"><!-- renderSprintTimeline() --></div>
+                    <div class="galaxy-panel" id="topDealsPanel"><!-- renderTopDeals() --></div>
                 </div>
             </section>
 
@@ -240,35 +119,23 @@
                             <h3>Bảng Đo Lường & Dự Báo Deal Chu Kỳ 3 Ngày</h3>
                             <p class="panel-desc">Cập nhật định kỳ 3 ngày/lần để bảo đảm mốc 25M trước ngày 05/08</p>
                         </div>
-                        <button class="btn btn-galaxy" id="addForecastBtn"><i class="fa-solid fa-plus"></i> Thêm Deal Dự Báo</button>
                     </div>
-
                     <div class="sprint-selector-bar">
                         <span class="bar-title">Chọn Chu Kỳ Sprint:</span>
                         <button class="sprint-chip active">Sprint 1 (21-23/07)</button>
                         <button class="sprint-chip">Sprint 2 (24-26/07)</button>
                         <button class="sprint-chip">Sprint 3 (27-29/07)</button>
                         <button class="sprint-chip">Sprint 4 (30/07-01/08)</button>
-                        <button class="sprint-chip">Sprint 5 (02-04/08) - Cán 25M</button>
+                        <button class="sprint-chip">Sprint 5 (02-04/08)</button>
                     </div>
-
                     <table class="galaxy-table">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Thương Hiệu / KH</th>
-                                <th>Gói Dịch Vụ</th>
-                                <th>Doanh Thu Dự Báo</th>
-                                <th>Phân Loại Deal</th>
-                                <th>Hạn Về Tiền Dự Kiến</th>
-                                <th>Sale</th>
-                                <th>Cập Nhật Cuối</th>
-                                <th>Hành Động Chốt</th>
+                                <th>STT</th><th>Thương Hiệu / KH</th><th>Ngành</th><th>Doanh Thu Dự Báo</th>
+                                <th>Phân Loại Deal</th><th>Hạn Về Tiền</th><th>Sale</th><th>Update</th><th>Hành Động</th>
                             </tr>
                         </thead>
-                        <tbody id="forecastTableBody">
-                            <!-- Dynamic rendering -->
-                        </tbody>
+                        <tbody id="forecastTableBody"><!-- renderForecastTable() --></tbody>
                     </table>
                 </div>
             </section>
@@ -277,9 +144,7 @@
             <section id="improvements-tab" class="tab-content">
                 <div class="grid-2col">
                     <div class="galaxy-panel">
-                        <div class="panel-header">
-                            <h3>Gửi Đề Xuất Cải Tiến Cho 2 Sếp</h3>
-                        </div>
+                        <div class="panel-header"><h3>Gửi Đề Xuất Cải Tiến Cho 2 Sếp</h3></div>
                         <form id="improvementForm">
                             <div class="form-group">
                                 <label>Vấn đề hiện tại gặp phải (Pain Point):</label>
@@ -289,23 +154,12 @@
                                 <label>Nội dung đề xuất cải tiến / Khuyến nghị:</label>
                                 <textarea class="form-control" rows="3" placeholder="Ví dụ: Đề xuất tặng kèm 5 kịch bản live cho khách chốt trước 05/08..."></textarea>
                             </div>
-                            <div class="form-group">
-                                <label>Ngân sách / Chi phí phát sinh (Nếu có):</label>
-                                <input type="text" class="form-control" placeholder="0 VNĐ">
-                            </div>
-                            <button type="button" class="btn btn-galaxy">
-                                <i class="fa-solid fa-paper-plane"></i> Gửi Đề Xuất Nhanh
-                            </button>
+                            <button type="button" class="btn btn-galaxy"><i class="fa-solid fa-paper-plane"></i> Gửi Đề Xuất Nhanh</button>
                         </form>
                     </div>
-
                     <div class="galaxy-panel">
-                        <div class="panel-header">
-                            <h3>Danh Sách Đề Xuất Đang Chờ Sếp Duyệt</h3>
-                        </div>
-                        <div class="improvement-list">
-                            <!-- Dynamic rendering -->
-                        </div>
+                        <div class="panel-header"><h3>Danh Sách Đề Xuất Đang Chờ Sếp Duyệt</h3></div>
+                        <div class="improvement-list"><!-- renderImprovements() --></div>
                     </div>
                 </div>
             </section>
@@ -316,42 +170,42 @@
                     <div class="panel-header">
                         <div>
                             <h3>Master Lead Tracker</h3>
-                            <p class="panel-desc">Chuẩn hóa 19 cột thông tin theo dõi chi tiết từ Tiếp xúc ➔ Pipeline ➔ SLA ➔ Nghiệm thu</p>
+                            <p class="panel-desc">19 cột chuẩn + Activity Log không giới hạn + SLA tự động cảnh báo</p>
                         </div>
-                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
+                        <button class="btn btn-galaxy" id="openAddLeadBtn"><i class="fa-solid fa-user-plus"></i> Thêm Lead Mới</button>
                     </div>
 
-                    <!-- BỘ LỌC NÂNG CAO (MULTI-FILTER BAR) -->
+                    <!-- FILTER BAR (UPGRADED: +Sale +DateRange, fix channel→source) -->
                     <div class="filter-bar">
                         <div class="filter-item search-box">
                             <input type="text" id="searchInput" class="filter-control" placeholder="Tìm tên Zalo, Brand, SĐT, Nguồn...">
                         </div>
                         <div class="filter-item">
                             <select id="filterStage" class="filter-control">
-                                <option value="all">Tất Cả Trạng Thái Pipeline</option>
-                                <option value="Khách Mới">1. Khách Mới</option>
-                                <option value="Proposal">4. Proposal & Báo Giá</option>
-                                <option value="Đang Triển Khai">Đang Triển Khai</option>
-                                <option value="Nghiệm Thu">Nghiệm Thu (Thu Tiền)</option>
-                                <option value="Khách Cũ">Khách Cũ (Retained)</option>
-                                <option value="Ngưng Triển Khai">Ngưng Triển Khai</option>
-                                <option value="Cancel">Cancel / Hủy Deal</option>
-                                <option value="Cứu Net">Cứu Net (Win-back)</option>
+                                <option value="all">Tất Cả Pipeline</option>
+                                <option value="KHACH_MOI">Khách Mới</option>
+                                <option value="PROPOSAL">Proposal & Báo Giá</option>
+                                <option value="DANG_TRIEN_KHAI">Đang Triển Khai</option>
+                                <option value="NGHIEM_THU">Nghiệm Thu</option>
+                                <option value="KHACH_CU">Khách Cũ (Retained)</option>
+                                <option value="NGUNG">Ngưng Triển Khai</option>
+                                <option value="CANCEL">Cancel / Hủy</option>
+                                <option value="CUU_NET">Cứu Net</option>
                             </select>
                         </div>
                         <div class="filter-item">
-                            <select id="filterChannel" class="filter-control">
-                                <option value="all">Tất Cả Sàn / Nguồn</option>
-                                <option value="Shopee">Shopee</option>
-                                <option value="TikTok">TikTok Shop</option>
-                                <option value="Website">Website / Direct</option>
-                                <option value="MT GT">Kênh MT-GT</option>
-                                <option value="Ads">Ads / Facebook</option>
+                            <select id="filterSource" class="filter-control">
+                                <option value="all">Tất Cả Nguồn</option>
+                                <option value="Ads Facebook">Ads Facebook</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="Referral">Referral</option>
+                                <option value="Outbound">Outbound Zalo</option>
+                                <option value="Event">Event Agency</option>
                             </select>
                         </div>
                         <div class="filter-item">
-                            <select id="filterService" class="filter-control">
-                                <option value="all">Tất Cả Ngành Hàng</option>
+                            <select id="filterCategory" class="filter-control">
+                                <option value="all">Tất Cả Ngành</option>
                                 <option value="Mỹ Phẩm">Mỹ Phẩm</option>
                                 <option value="Thời Trang">Thời Trang</option>
                                 <option value="Gia Dụng">Gia Dụng</option>
@@ -359,37 +213,37 @@
                                 <option value="Nông Sản">Nông Sản</option>
                             </select>
                         </div>
-                        <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xóa Lọc</button>
+                        <div class="filter-item">
+                            <select id="filterSale" class="filter-control">
+                                <option value="all">Tất Cả Sale</option>
+                                <option value="Hường">Hường</option>
+                                <option value="Huyền">Huyền</option>
+                                <option value="Uyên">Uyên</option>
+                                <option value="Ngân">Ngân</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <input type="date" id="filterDateFrom" class="filter-control" title="Từ ngày">
+                        </div>
+                        <div class="filter-item">
+                            <input type="date" id="filterDateTo" class="filter-control" title="Đến ngày">
+                        </div>
+                        <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xoá Lọc</button>
                     </div>
 
                     <div class="table-responsive">
                         <table class="galaxy-table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>NGÀY</th>
-                                    <th>NGUỒN</th>
-                                    <th>TÊN ZALO</th>
-                                    <th>Brand</th>
-                                    <th>ZALO / SDT</th>
-                                    <th>TIẾP XÚC 1</th>
-                                    <th>TIẾP XÚC 2</th>
-                                    <th>TIẾP XÚC 3</th>
-                                    <th>GIAI ĐOẠN / KẾT QUẢ</th>
-                                    <th>PHÂN LOẠI KH</th>
-                                    <th>Ngành hàng</th>
-                                    <th>MHKD</th>
-                                    <th>Đường Link / Audio</th>
-                                    <th>THÔNG TIN / NHU CẦU KHÁCH</th>
-                                    <th>Trạng thái Pipeline</th>
-                                    <th>Follow up tiếp theo</th>
-                                    <th>SLA (ngày còn lại)</th>
-                                    <th>Trạng thái SLA</th>
-                                    <th>Cách thức liên hệ</th>
+                                    <th>NGÀY</th><th>NGUỒN</th><th>TÊN ZALO</th><th>Brand</th><th>ZALO / SDT</th>
+                                    <th>TIẾP XÚC 1</th><th>TIẾP XÚC 2</th><th>TIẾP XÚC 3+</th>
+                                    <th>GIAI ĐOẠN</th><th>PHÂN LOẠI KH</th>
+                                    <th>Ngành hàng</th><th>MHKD</th><th>Link / Audio</th>
+                                    <th>THÔNG TIN / NHU CẦU</th><th>Pipeline</th>
+                                    <th>Follow up</th><th>SLA</th><th>Trạng thái SLA</th><th>Liên hệ</th>
                                 </tr>
                             </thead>
-                            <tbody id="masterLeadsTbody">
-                                <!-- Dynamic 19-column rendering -->
-                            </tbody>
+                            <tbody id="masterLeadsTbody"><!-- renderMasterLeads() --></tbody>
                         </table>
                     </div>
                 </div>
@@ -398,26 +252,16 @@
             <!-- TAB PROTECTED: CALL REMIND & SHOWUP -->
             <section id="remind-tab" class="tab-content">
                 <div class="galaxy-panel">
-                    <div class="panel-header">
-                        <h3>Xstream Call Remind & Showup Tracker</h3>
-                    </div>
+                    <div class="panel-header"><h3>Xstream Call Remind & Showup Tracker</h3></div>
                     <table class="galaxy-table">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Khách Hàng</th>
-                                <th>SĐT</th>
-                                <th>Giờ Hẹn Showup</th>
-                                <th>Remind 1 (24h)</th>
-                                <th>Remind 2 (2h)</th>
-                                <th>Kết Quả Showup</th>
-                                <th>Action Sau Showup</th>
-                                <th>Sale</th>
+                                <th>STT</th><th>Khách Hàng</th><th>SĐT</th><th>Giờ Hẹn</th>
+                                <th>Remind 1 (24h)</th><th>Remind 2 (2h)</th><th>Kết Quả Showup</th>
+                                <th>Action Sau Showup</th><th>Sale</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
+                        <tbody><!-- renderRemindTable() --></tbody>
                     </table>
                 </div>
             </section>
@@ -425,24 +269,16 @@
             <!-- TAB PROTECTED: LEADER CỨU NET & FILE GHI ÂM -->
             <section id="cuunet-tab" class="tab-content">
                 <div class="galaxy-panel">
-                    <div class="panel-header">
-                        <h3>Leader Hường & 2 Sếp Nghe File Ghi Âm Cứu Net</h3>
-                    </div>
+                    <div class="panel-header"><h3>Leader Hường & 2 Sếp Nghe File Ghi Âm Cứu Net</h3></div>
                     <table class="galaxy-table">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Khách Hàng</th>
-                                <th>Gói DV</th>
-                                <th>NGHE GHI ÂM THỰC TẾ</th>
-                                <th>Đánh Giá Nguyên Nhân Thật</th>
-                                <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th>
-                                <th>Kết Quả</th>
+                                <th>STT</th><th>Khách Hàng</th><th>Ngành</th>
+                                <th>NGHE GHI ÂM</th><th>Nguyên Nhân Thật</th>
+                                <th>Góc Tiếp Cận Mới (Angle Cứu Net)</th><th>Kết Quả</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
+                        <tbody><!-- renderCuuNetTable() --></tbody>
                     </table>
                 </div>
             </section>
@@ -450,9 +286,7 @@
             <!-- TAB PROTECTED: CHECK-IN / CHECK-OUT -->
             <section id="checkin-tab" class="tab-content">
                 <div class="galaxy-panel">
-                    <div class="panel-header">
-                        <h3>Remind & Chấm Công Daily Solo Sale</h3>
-                    </div>
+                    <div class="panel-header"><h3>Remind & Chấm Công Daily</h3></div>
                     <div class="checkin-box">
                         <div class="checkin-actions">
                             <button class="btn btn-galaxy btn-lg" onclick="doCheckIn('in')"><i class="fa-solid fa-sun"></i> Check-in Đầu Ngày (08:30)</button>
@@ -462,20 +296,12 @@
                     <table class="galaxy-table">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Ngày</th>
-                                <th>Tên Sale</th>
-                                <th>Check-in Sáng</th>
-                                <th>Target Calls Sáng</th>
-                                <th>Check-out Chiều</th>
-                                <th>Calls Thực Hiện</th>
-                                <th>Deals Chốt</th>
-                                <th>Trạng Thái</th>
+                                <th>STT</th><th>Ngày</th><th>Sale</th><th>Check-in</th>
+                                <th>Target Calls</th><th>Check-out</th><th>Calls Thực</th>
+                                <th>Deals Chốt</th><th>Trạng Thái</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Dynamic rendering -->
-                        </tbody>
+                        <tbody><!-- renderCheckins() --></tbody>
                     </table>
                 </div>
             </section>
@@ -504,13 +330,130 @@
         <div class="modal-card galaxy-card">
             <div class="modal-icon"><i class="fa-solid fa-headphones"></i></div>
             <h3 id="audioCustomerTitle">Nghe File Ghi Âm Cuộc Gọi</h3>
-            <p id="audioMetaInfo">File audio cuộc gọi đã tải lên - Sẵn sàng phát</p>
+            <p id="audioMetaInfo">File audio cuộc gọi đã tải lên — Sẵn sàng phát</p>
             <div class="audio-player-mock">
                 <audio id="realAudioPlayer" controls style="width: 100%; border-radius: 8px;"></audio>
             </div>
             <div class="modal-actions">
                 <button class="btn btn-glass" onclick="closeAudioModal()">Đóng Player</button>
             </div>
+        </div>
+    </div>
+
+    <!-- ACTIVITY LOG MODAL (NEW) -->
+    <div class="modal-backdrop" id="activityModal">
+        <div class="modal-card galaxy-card" style="width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="margin:0;font-size:18px;">Lịch Sử Tiếp Xúc</h3>
+                <button class="btn btn-glass btn-sm" onclick="closeActivityModal()">&times; Đóng</button>
+            </div>
+            <p id="activityLeadName" style="color:var(--cyan-neon);font-weight:700;margin-bottom:16px;"></p>
+
+            <!-- Timeline -->
+            <div id="activityTimeline" class="activity-timeline"><!-- JS render --></div>
+
+            <!-- Quick Log Form -->
+            <div class="quick-log-form">
+                <h4 style="font-size:14px;margin-bottom:12px;color:var(--text-muted);">Ghi Nhanh (5 giây)</h4>
+                <input type="hidden" id="quickLogLeadId">
+                <div style="display:flex;gap:8px;margin-bottom:8px;">
+                    <select id="quickLogType" class="form-control" style="flex:1;">
+                        <option value="CALL">Gọi điện</option>
+                        <option value="ZALO">Nhắn Zalo</option>
+                        <option value="MEETING">Gặp trực tiếp</option>
+                        <option value="EMAIL">Email</option>
+                    </select>
+                    <select id="quickLogResult" class="form-control" style="flex:1;">
+                        <option value="Quan tâm">Quan tâm</option>
+                        <option value="Đã gửi Proposal">Đã gửi Proposal</option>
+                        <option value="Chờ phản hồi">Chờ phản hồi</option>
+                        <option value="Hẹn gọi lại">Hẹn gọi lại</option>
+                        <option value="Thuê bao">Thuê bao</option>
+                        <option value="Không nghe máy">Không nghe máy</option>
+                        <option value="Từ chối">Từ chối</option>
+                        <option value="Đã chốt HĐ">Đã chốt HĐ</option>
+                        <option value="Cần Sếp hỗ trợ">Cần Sếp hỗ trợ</option>
+                    </select>
+                </div>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="quickLogNote" class="form-control" placeholder="Ghi chú nhanh nội dung cuộc gọi..." style="flex:1;">
+                    <button class="btn btn-galaxy" onclick="submitQuickLog()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD LEAD MODAL (NEW) -->
+    <div class="modal-backdrop" id="addLeadModal">
+        <div class="modal-card galaxy-card" style="width:520px;max-height:85vh;overflow-y:auto;text-align:left;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="margin:0;font-size:18px;">Thêm Lead Mới</h3>
+                <button class="btn btn-glass btn-sm" onclick="closeAddLeadModal()">&times; Đóng</button>
+            </div>
+            <form id="addLeadForm">
+                <div class="form-group">
+                    <label>Tên Zalo / Tên KH:</label>
+                    <input type="text" id="newZaloName" class="form-control" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                    <label>Brand / Shop:</label>
+                    <input type="text" id="newBrand" class="form-control" placeholder="Tên thương hiệu / Shop" required>
+                </div>
+                <div class="form-group">
+                    <label>SĐT / Zalo:</label>
+                    <input type="text" id="newPhone" class="form-control" placeholder="09xxxxxxxx">
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Nguồn:</label>
+                        <select id="newSource" class="form-control">
+                            <option>Ads Facebook</option>
+                            <option>TikTok Ads</option>
+                            <option>TikTok Outbound</option>
+                            <option>Referral</option>
+                            <option>Outbound Zalo</option>
+                            <option>Event Agency</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Ngành hàng:</label>
+                        <select id="newCategory" class="form-control">
+                            <option>Mỹ Phẩm</option>
+                            <option>Thời Trang</option>
+                            <option>Gia Dụng</option>
+                            <option>Mẹ & Bé</option>
+                            <option>Nông Sản</option>
+                            <option>Khác</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Doanh thu dự kiến (VNĐ):</label>
+                        <input type="number" id="newRevenue" class="form-control" placeholder="10000000">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Sale phụ trách:</label>
+                        <select id="newSale" class="form-control">
+                            <option>Hường</option>
+                            <option>Huyền</option>
+                            <option>Uyên</option>
+                            <option>Ngân</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Follow-up tiếp theo:</label>
+                    <input type="date" id="newFollowUp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Thông tin / Nhu cầu khách:</label>
+                    <textarea id="newInfo" class="form-control" rows="2" placeholder="Ghi chú nhu cầu, pain point..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-galaxy" style="width:100%;justify-content:center;">
+                    <i class="fa-solid fa-plus"></i> Thêm Lead & Cập Nhật Dashboard
+                </button>
+            </form>
         </div>
     </div>
 
