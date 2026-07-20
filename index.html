@@ -231,10 +231,22 @@
                         <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xoá Lọc</button>
                     </div>
 
+                    <!-- FLOATING BULK TOOLBAR -->
+                    <div class="bulk-toolbar" id="bulkToolbar">
+                        <div class="bulk-info">Đã chọn <strong id="bulkCount">0</strong> khách hàng</div>
+                        <div class="bulk-actions">
+                            <button class="btn btn-xs btn-purple" onclick="bulkChangeStage('NGHIEM_THU')">Chuyển Nghiệm Thu</button>
+                            <button class="btn btn-xs btn-glass" onclick="bulkArchive()">Lưu Trữ</button>
+                            <button class="btn btn-xs btn-pink" onclick="bulkDelete()"><i class="fa-solid fa-trash"></i> Xóa Đã Chọn</button>
+                            <button class="btn btn-xs btn-glass" onclick="cancelBulkSelect()">Bỏ Chọn</button>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="galaxy-table table-bordered">
                             <thead>
                                 <tr>
+                                    <th style="width:36px;text-align:center;"><input type="checkbox" id="selectAllLeads" onchange="toggleSelectAll(this.checked)" title="Chọn tất cả"></th>
                                     <th>NGÀY</th><th>NGUỒN</th><th>TÊN ZALO</th><th>Brand</th><th>ZALO / SDT</th>
                                     <th>TIẾP XÚC 1</th><th>TIẾP XÚC 2</th><th>TIẾP XÚC 3+</th>
                                     <th>GIAI ĐOẠN</th><th>PHÂN LOẠI KH</th>
@@ -454,6 +466,15 @@
                     <i class="fa-solid fa-plus"></i> Thêm Lead & Cập Nhật Dashboard
                 </button>
             </form>
+        </div>
+    <!-- CUSTOMER DETAIL MODAL (NEW) -->
+    <div class="modal-backdrop" id="leadDetailModal">
+        <div class="modal-card galaxy-card detail-modal-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="margin:0;font-size:18px;">Chi Tiết Khách Hàng</h3>
+                <button class="btn btn-glass btn-sm" onclick="closeLeadDetail()">&times; Đóng</button>
+            </div>
+            <div id="leadDetailContent"><!-- openLeadDetail() renders here --></div>
         </div>
     </div>
 

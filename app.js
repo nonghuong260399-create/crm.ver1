@@ -203,6 +203,7 @@ let currentFilters = { search: '', stage: 'all', source: 'all', category: 'all',
 let CRMState = loadState();
 let isUnlocked = false;
 let pendingTabTarget = null;
+let selectedLeads = new Set();
 const DEFAULT_PIN = "8888";
 
 function loadState() {
@@ -458,6 +459,7 @@ function renderMasterLeads() {
     if (!tbody) return;
 
     let filtered = CRMState.leads.filter(l => {
+        if (l._archived) return false;
         const matchSearch = !currentFilters.search ||
             (l.zaloName || '').toLowerCase().includes(currentFilters.search) ||
             (l.brand || '').toLowerCase().includes(currentFilters.search) ||
@@ -475,47 +477,52 @@ function renderMasterLeads() {
     // SLA auto-sort: quá hạn lên đầu
     filtered.sort((a, b) => (a.slaDays || 999) - (b.slaDays || 999));
 
+    // Update bulk toolbar
+    updateBulkToolbar();
+
     if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="19" style="text-align:center;padding:32px;color:var(--text-muted);">Không tìm thấy khách hàng nào phù hợp bộ lọc.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="20" style="text-align:center;padding:32px;color:var(--text-muted);">Không tìm thấy khách hàng nào phù hợp bộ lọc.</td></tr>`;
         return;
     }
 
     tbody.innerHTML = filtered.map(l => {
         const sd = stageDisplay(l.stage);
-        const lastActivity = (l.activities && l.activities.length > 0) ? l.activities[l.activities.length - 1] : null;
         const actCount = l.activities ? l.activities.length : 0;
         const slaRowClass = l.slaDays <= 0 ? 'row-sla-overdue' : (l.slaDays <= 2 ? 'row-sla-warning' : '');
+        const isSelected = selectedLeads.has(l.id);
 
-        // Display last 3 activities or placeholders
         const act1 = l.activities?.[0];
         const act2 = l.activities?.[1];
         const act3 = l.activities?.[2];
 
         return `
-        <tr class="${slaRowClass}">
-            <td>${esc(l.date)}</td>
-            <td><span class="badge badge-purple">${esc(l.source)}</span></td>
-            <td><strong>${esc(l.zaloName)}</strong></td>
-            <td><span class="cust-primary">${esc(l.brand)}</span></td>
-            <td><span class="cust-secondary">${esc(l.phone)}</span></td>
+        <tr class="${slaRowClass} ${isSelected ? 'row-selected' : ''}" data-lead-id="${l.id}">
+            <td class="td-checkbox" onclick="event.stopPropagation()">
+                <input type="checkbox" class="lead-checkbox" value="${l.id}" ${isSelected ? 'checked' : ''} onchange="toggleLeadSelect('${l.id}', this.checked)">
+            </td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')">${esc(l.date)}</td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="badge badge-purple">${esc(l.source)}</span></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><strong>${esc(l.zaloName)}</strong></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary">${esc(l.brand)}</span></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-secondary">${esc(l.phone)}</span></td>
             <td style="max-width:140px;font-size:11px;" title="${act1 ? esc(act1.date + ' - ' + act1.note) : ''}">${act1 ? esc(act1.note) : '-'}</td>
             <td style="max-width:140px;font-size:11px;" title="${act2 ? esc(act2.date + ' - ' + act2.note) : ''}">${act2 ? esc(act2.note) : '-'}</td>
             <td style="max-width:140px;font-size:11px;">
                 ${act3 ? esc(act3.note) : '-'}
                 ${actCount > 3 ? `<span class="badge badge-muted" style="margin-left:4px;">+${actCount - 3}</span>` : ''}
-                <button class="btn btn-xs btn-glass" style="margin-left:4px;" onclick="openActivityLog('${l.id}')" title="Xem & Ghi chú">+</button>
+                <button class="btn btn-xs btn-glass" style="margin-left:4px;" onclick="event.stopPropagation();openActivityLog('${l.id}')" title="Xem & Ghi chú">+</button>
             </td>
-            <td><span class="cust-primary" style="font-size:12px;">${esc(l.customerInfo ? l.customerInfo.slice(0, 30) : '')}</span></td>
-            <td><span class="badge ${getHotBadge(l.customerClass)}">${esc(l.customerClass)}</span></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary" style="font-size:12px;">${esc(l.customerInfo ? l.customerInfo.slice(0, 30) : '')}</span></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="badge ${getHotBadge(l.customerClass)}">${esc(l.customerClass)}</span></td>
             <td>${esc(l.category)}</td>
             <td>${esc(l.mhkd)}</td>
             <td>
                 <div class="audio-cell">
                     ${l.attachments && l.attachments.some(a => a.type === 'audio')
-                        ? `<button class="btn btn-xs btn-purple" onclick="playAttachedAudio('${l.id}')">Nghe</button>`
-                        : `<button class="btn btn-xs btn-glass" onclick="playMockAudio('${esc(l.brand)}')">Audio</button>`
+                        ? `<button class="btn btn-xs btn-purple" onclick="event.stopPropagation();playAttachedAudio('${l.id}')">Nghe</button>`
+                        : `<button class="btn btn-xs btn-glass" onclick="event.stopPropagation();playMockAudio('${esc(l.brand)}')">Audio</button>`
                     }
-                    <label class="btn btn-xs btn-glass upload-btn" title="Upload Audio">
+                    <label class="btn btn-xs btn-glass upload-btn" title="Upload Audio" onclick="event.stopPropagation()">
                         Up<input type="file" accept="audio/*" onchange="handleAudioUpload(event, '${l.id}')" hidden>
                     </label>
                 </div>
@@ -528,6 +535,211 @@ function renderMasterLeads() {
             <td>${esc(l.contactMethod)}</td>
         </tr>`;
     }).join('');
+}
+
+/* ---------- MULTI-SELECT & BULK ACTIONS ---------- */
+
+function toggleLeadSelect(leadId, checked) {
+    if (checked) selectedLeads.add(leadId);
+    else selectedLeads.delete(leadId);
+    updateBulkToolbar();
+    // Update row visual
+    const row = document.querySelector(`tr[data-lead-id="${leadId}"]`);
+    if (row) row.classList.toggle('row-selected', checked);
+    // Update select-all checkbox
+    const selectAll = document.getElementById('selectAllLeads');
+    if (selectAll) {
+        const allCheckboxes = document.querySelectorAll('.lead-checkbox');
+        selectAll.checked = allCheckboxes.length > 0 && selectedLeads.size === allCheckboxes.length;
+        selectAll.indeterminate = selectedLeads.size > 0 && selectedLeads.size < allCheckboxes.length;
+    }
+}
+
+function toggleSelectAll(checked) {
+    const checkboxes = document.querySelectorAll('.lead-checkbox');
+    checkboxes.forEach(cb => {
+        cb.checked = checked;
+        if (checked) selectedLeads.add(cb.value);
+        else selectedLeads.delete(cb.value);
+        const row = document.querySelector(`tr[data-lead-id="${cb.value}"]`);
+        if (row) row.classList.toggle('row-selected', checked);
+    });
+    updateBulkToolbar();
+}
+
+function updateBulkToolbar() {
+    const toolbar = document.getElementById('bulkToolbar');
+    if (!toolbar) return;
+    if (selectedLeads.size > 0) {
+        toolbar.classList.add('active');
+        document.getElementById('bulkCount').textContent = selectedLeads.size;
+    } else {
+        toolbar.classList.remove('active');
+    }
+}
+
+function bulkDelete() {
+    if (selectedLeads.size === 0) return;
+    if (!confirm(`Bạn chắc chắn muốn XOÁ VĨNH VIỄN ${selectedLeads.size} khách hàng? Hành động này không thể hoàn tác!`)) return;
+    CRMState.leads = CRMState.leads.filter(l => !selectedLeads.has(l.id));
+    showToast('success', 'Đã xóa', `${selectedLeads.size} khách hàng đã được xóa khỏi hệ thống.`);
+    selectedLeads.clear();
+    saveState();
+}
+
+function bulkArchive() {
+    if (selectedLeads.size === 0) return;
+    let count = 0;
+    CRMState.leads.forEach(l => {
+        if (selectedLeads.has(l.id)) { l._archived = true; count++; }
+    });
+    showToast('info', 'Đã lưu trữ', `${count} khách hàng đã chuyển vào Lưu Trữ. Vào tab Lưu Trữ để xem.`);
+    selectedLeads.clear();
+    saveState();
+}
+
+function bulkChangeStage(newStage) {
+    if (selectedLeads.size === 0) return;
+    let count = 0;
+    CRMState.leads.forEach(l => {
+        if (selectedLeads.has(l.id)) { l.stage = newStage; count++; }
+    });
+    const sd = stageDisplay(newStage);
+    showToast('success', 'Đã cập nhật', `${count} khách đã chuyển sang "${sd.label}". Dashboard tự động cập nhật.`);
+    selectedLeads.clear();
+    saveState();
+}
+
+function cancelBulkSelect() {
+    selectedLeads.clear();
+    document.querySelectorAll('.lead-checkbox').forEach(cb => cb.checked = false);
+    const selectAll = document.getElementById('selectAllLeads');
+    if (selectAll) { selectAll.checked = false; selectAll.indeterminate = false; }
+    updateBulkToolbar();
+    renderMasterLeads();
+}
+
+/* ---------- CUSTOMER DETAIL MODAL ---------- */
+
+function openLeadDetail(leadId) {
+    const lead = CRMState.leads.find(l => l.id === leadId);
+    if (!lead) return;
+    const sd = stageDisplay(lead.stage);
+    const modal = document.getElementById('leadDetailModal');
+
+    // Build activity timeline HTML
+    let activitiesHTML = '';
+    if (lead.activities && lead.activities.length > 0) {
+        activitiesHTML = lead.activities.map(a => `
+            <div class="activity-entry">
+                <div class="activity-time">${esc(a.date)}</div>
+                <div class="activity-body">
+                    <span class="badge badge-purple" style="font-size:10px;">${esc(a.type)}</span>
+                    <span class="activity-sale">${esc(a.sale)}</span>
+                    <p class="activity-note">${esc(a.note)}</p>
+                    <span class="badge ${a.result === 'Từ chối' ? 'badge-hot' : 'badge-warm'}" style="font-size:10px;">${esc(a.result)}</span>
+                </div>
+            </div>
+        `).join('');
+    } else {
+        activitiesHTML = '<p style="color:var(--text-muted);text-align:center;padding:16px;">Chưa có lịch sử tiếp xúc</p>';
+    }
+
+    // Build attachments
+    let attachHTML = '';
+    if (lead.attachments && lead.attachments.length > 0) {
+        attachHTML = lead.attachments.map((a, i) => `
+            <div class="attach-item">
+                <i class="fa-solid ${a.type === 'audio' ? 'fa-headphones' : 'fa-file'}"></i>
+                <span>${esc(a.name)}</span>
+                <span class="badge badge-muted">${esc(a.date)}</span>
+                ${a.type === 'audio' ? `<button class="btn btn-xs btn-purple" onclick="event.stopPropagation(); let au=new Audio('${a.data.substring(0,50)}'); playAttachedAudio('${lead.id}')">Nghe</button>` : ''}
+            </div>
+        `).join('');
+    } else {
+        attachHTML = '<p style="color:var(--text-muted);font-size:12px;">Chưa có file đính kèm</p>';
+    }
+
+    const weightedRev = (lead.revenue || 0) * (FORECAST_WEIGHTS[lead.forecastType] ?? 0);
+
+    document.getElementById('leadDetailContent').innerHTML = `
+        <div class="detail-header">
+            <div class="detail-brand">
+                <h2>${esc(lead.brand || lead.zaloName)}</h2>
+                <span class="status-pill ${sd.css}">${sd.icon} ${sd.label}</span>
+                <span class="badge ${getHotBadge(lead.customerClass)}">${esc(lead.customerClass)}</span>
+            </div>
+            <div class="detail-meta">
+                <span>ID: ${esc(lead.id)}</span> · <span>Ngày tạo: ${esc(lead.date)}</span> · <span>Sale: <strong>${esc(lead.sale)}</strong></span>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-section">
+                <h4>Thông Tin Liên Hệ</h4>
+                <div class="detail-row"><span class="detail-label">Tên Zalo</span><span class="detail-value">${esc(lead.zaloName)}</span></div>
+                <div class="detail-row"><span class="detail-label">Brand / Shop</span><span class="detail-value"><strong>${esc(lead.brand)}</strong></span></div>
+                <div class="detail-row"><span class="detail-label">SĐT / Zalo</span><span class="detail-value">${esc(lead.phone)}</span></div>
+                <div class="detail-row"><span class="detail-label">Nguồn</span><span class="detail-value"><span class="badge badge-purple">${esc(lead.source)}</span></span></div>
+                <div class="detail-row"><span class="detail-label">Liên hệ qua</span><span class="detail-value">${esc(lead.contactMethod)}</span></div>
+            </div>
+
+            <div class="detail-section">
+                <h4>Thông Tin Kinh Doanh</h4>
+                <div class="detail-row"><span class="detail-label">Ngành hàng</span><span class="detail-value">${esc(lead.category)}</span></div>
+                <div class="detail-row"><span class="detail-label">Mô hình KD</span><span class="detail-value">${esc(lead.mhkd)}</span></div>
+                <div class="detail-row"><span class="detail-label">Doanh thu dự kiến</span><span class="detail-value text-cyan font-bold">${formatVND(lead.revenue)}</span></div>
+                <div class="detail-row"><span class="detail-label">Forecast</span><span class="detail-value"><span class="badge ${(lead.forecastType || '').includes('Firm') ? 'badge-hot' : 'badge-warm'}">${esc(lead.forecastType)}</span></span></div>
+                <div class="detail-row"><span class="detail-label">DT có trọng số</span><span class="detail-value font-bold">${formatVND(weightedRev)}</span></div>
+                <div class="detail-row"><span class="detail-label">Sprint</span><span class="detail-value">${esc(lead.sprintId)}</span></div>
+            </div>
+
+            <div class="detail-section">
+                <h4>Trạng Thái & SLA</h4>
+                <div class="detail-row"><span class="detail-label">Pipeline</span><span class="detail-value"><span class="status-pill ${sd.css}">${sd.icon} ${sd.label}</span></span></div>
+                <div class="detail-row"><span class="detail-label">Follow-up</span><span class="detail-value"><strong>${esc(lead.followUpDate)}</strong></span></div>
+                <div class="detail-row"><span class="detail-label">SLA còn lại</span><span class="detail-value"><strong style="color:${lead.slaDays <= 0 ? 'var(--red-rose)' : (lead.slaDays <= 2 ? 'var(--yellow-amber)' : 'var(--green-emerald)')}">${lead.slaDays} ngày</strong></span></div>
+                <div class="detail-row"><span class="detail-label">Trạng thái SLA</span><span class="detail-value"><span class="sla-pill ${getSlaCss(lead.slaStatus)}">${esc(lead.slaStatus)}</span></span></div>
+            </div>
+
+            <div class="detail-section">
+                <h4>Nhu Cầu / Pain Point</h4>
+                <p class="detail-info">${esc(lead.customerInfo) || 'Chưa ghi nhận'}</p>
+                ${lead.lostReason ? `<div class="detail-row"><span class="detail-label">Lý do mất deal</span><span class="detail-value" style="color:var(--red-rose);">${esc(lead.lostReason)}</span></div>` : ''}
+                ${lead.newAngle ? `<div class="detail-row"><span class="detail-label">Angle cứu net</span><span class="detail-value" style="color:var(--cyan-neon);">${esc(lead.newAngle)}</span></div>` : ''}
+            </div>
+        </div>
+
+        <div class="detail-section" style="margin-top:20px;">
+            <h4>Lịch Sử Tiếp Xúc (${lead.activities?.length || 0} lần)</h4>
+            <div class="activity-timeline">${activitiesHTML}</div>
+            <button class="btn btn-sm btn-galaxy" onclick="closeLeadDetail(); openActivityLog('${lead.id}');"><i class="fa-solid fa-plus"></i> Ghi Nhanh Tiếp Xúc Mới</button>
+        </div>
+
+        <div class="detail-section" style="margin-top:16px;">
+            <h4>File Đính Kèm (${lead.attachments?.length || 0})</h4>
+            <div class="attach-list">${attachHTML}</div>
+        </div>
+
+        <div class="detail-actions">
+            <button class="btn btn-galaxy" onclick="closeLeadDetail(); openActivityLog('${lead.id}');"><i class="fa-solid fa-pen"></i> Ghi Chú Mới</button>
+            <button class="btn btn-purple" onclick="quickStageAdvance('${lead.id}'); closeLeadDetail();"><i class="fa-solid fa-arrow-right"></i> Chuyển Nghiệm Thu</button>
+            <button class="btn btn-glass" style="color:var(--red-rose);" onclick="if(confirm('Xóa ${esc(lead.brand)} khỏi hệ thống?')) { deleteSingleLead('${lead.id}'); closeLeadDetail(); }"><i class="fa-solid fa-trash"></i> Xóa</button>
+        </div>
+    `;
+
+    modal.classList.add('active');
+}
+
+function closeLeadDetail() {
+    document.getElementById('leadDetailModal').classList.remove('active');
+}
+
+function deleteSingleLead(leadId) {
+    CRMState.leads = CRMState.leads.filter(l => l.id !== leadId);
+    selectedLeads.delete(leadId);
+    saveState();
+    showToast('success', 'Đã xóa', 'Khách hàng đã được xóa khỏi hệ thống.');
 }
 
 /* ---------- ACTIVITY LOG POPUP ---------- */
