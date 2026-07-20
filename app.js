@@ -201,7 +201,7 @@ const DEFAULT_STATE = {
 
 let currentFilters = { search: '', stage: 'all', source: 'all', category: 'all', sale: 'all', dateFrom: '', dateTo: '' };
 let CRMState = loadState();
-let isUnlocked = false;
+let isUnlocked = true;
 let pendingTabTarget = null;
 let selectedLeads = new Set();
 const DEFAULT_PIN = "8888";
