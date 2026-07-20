@@ -1,27 +1,38 @@
 /* ==========================================================================
-   Z CRM SYSTEM - FULL LIFECYCLE STAGES, ADVANCED MULTI-FILTERS & UX/UI REFINEMENT
+   Z CRM SYSTEM - 19 STANDARD COLUMNS RENDERING & DYNAMIC STATE
    ========================================================================== */
 
-// CENTRAL CRM STATE WITH FULL LIFECYCLE DATA
+// CENTRAL CRM STATE WITH 19 COLUMNS STRUCTURE
 const DEFAULT_STATE = {
     targetMoc1: 25000000,
     targetMoc2: 75000000,
     leads: [
         {
             id: 'L001',
-            name: 'Chị Hằng (Mỹ Phẩm)',
+            date: '21/07/2026',
+            source: 'Ads Facebook',
+            zaloName: 'Hằng Nguyễn',
+            brand: 'Mỹ Phẩm Hằng Beauty',
             phone: '0981xxxxxx',
-            channel: 'Shopee',
-            service: 'Xstream Mũi Nhọn',
-            stage: '4. Proposal & Báo Giá',
-            hotness: 'hot',
+            contact1: 'Gọi 21/07: Hỏi gói Xstream & Báo giá',
+            contact2: 'Nhắn Zalo: Gửi Proposal 1 trang',
+            contact3: 'Hẹn Call chốt: 22/07 10:00',
+            stageResult: 'Gửi Proposal / Báo Giá',
+            customerClass: 'Hot (ICP)',
+            category: 'Mỹ Phẩm',
+            mhkd: 'B2C / Online Shop',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Live mệt, tốn chi phí host, lead rớt sau gọi. Cần gói Xstream bám đuổi',
+            pipelineStage: '4. Proposal & Báo Giá',
+            followUpDate: '22/07/2026',
+            slaDays: 1,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo / Call',
             revenue: 16000000,
             forecastType: 'Firm (90%)',
             forecastDate: '2026-07-22',
-            nextActionDate: '2026-07-22',
-            nextAction: 'Call chốt ưu đãi Mốc 1 + HĐ',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '✅ Đã Gọi',
             remind2: '✅ Nhắn Link',
             showupStatus: '✅ Đã Tham Gia',
@@ -32,19 +43,30 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L002',
-            name: 'Anh Nam (Thời Trang)',
+            date: '21/07/2026',
+            source: 'TikTok Outbound',
+            zaloName: 'Nam Đỗ',
+            brand: 'Nam Shop Thời Trang',
             phone: '0912xxxxxx',
-            channel: 'TikTok Shop',
-            service: 'Xstream Mũi Nhọn',
-            stage: '⚡ Đang Triển Khai',
-            hotness: 'hot',
+            contact1: 'Gọi 21/07: Khai thác nỗi đau live',
+            contact2: 'Showup Demo Xstream 14:00',
+            contact3: 'Chờ chốt HĐ ngày 23/07',
+            stageResult: 'Đang Triển Khai HĐ',
+            customerClass: 'Hot',
+            category: 'Thời Trang',
+            mhkd: 'B2C Shop',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'TikTok Shop view thấp, muốn chạy Xstream tự động',
+            pipelineStage: '⚡ Đang Triển Khai',
+            followUpDate: '21/07/2026',
+            slaDays: 2,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo Call',
             revenue: 12000000,
             forecastType: 'Firm (85%)',
             forecastDate: '2026-07-23',
-            nextActionDate: '2026-07-21',
-            nextAction: 'Theo dõi chỉ số live tuần 1',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '✅ Đã Gọi',
             remind2: '✅ Nhắn Link',
             showupStatus: '✅ Đã Tham Gia',
@@ -55,19 +77,30 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L003',
-            name: 'Anh Minh (Đồ Điện)',
+            date: '20/07/2026',
+            source: 'Referral',
+            zaloName: 'Minh Trần',
+            brand: 'Điện Máy Minh Gia',
             phone: '0974xxxxxx',
-            channel: 'Website',
-            service: 'Gói Ecom Shopee',
-            stage: '✅ Nghiệm Thu (Thu Tiền)',
-            hotness: 'hot',
+            contact1: 'Họp Zoom 20/07: Tư vấn Ecom Shopee',
+            contact2: 'Gửi Hợp Đồng 21/07',
+            contact3: 'Đã thanh toán 100% đợt 1',
+            stageResult: 'Nghiệm Thu / Thu Tiền',
+            customerClass: 'VVIP (ICP)',
+            category: 'Gia Dụng / Đồ Điện',
+            mhkd: 'B2B & B2C',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Cần vận hành gian hàng Shopee trọn gói + Chạy ads tối ưu',
+            pipelineStage: '✅ Nghiệm Thu (Thu Tiền)',
+            followUpDate: '25/07/2026',
+            slaDays: 5,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Direct Meeting',
             revenue: 28000000,
             forecastType: 'Firm (100%)',
             forecastDate: '2026-07-20',
-            nextActionDate: '2026-07-25',
-            nextAction: 'Ký nghiệm thu đợt 1 & gửi báo cáo',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '-',
             remind2: '-',
             showupStatus: '-',
@@ -78,19 +111,30 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L004',
-            name: 'Chị Thu (Mẹ & Bé)',
+            date: '19/07/2026',
+            source: 'Event Agency',
+            zaloName: 'Thu Mẹ Bé',
+            brand: 'Thu Baby Store',
             phone: '0903xxxxxx',
-            channel: 'Shopee',
-            service: 'Gói Ecom Shopee',
-            stage: '💎 Khách Cũ (Retained)',
-            hotness: 'warm',
+            contact1: 'Gọi 19/07: Review gian hàng',
+            contact2: 'Gửi Proposal Retain',
+            contact3: 'Khách dời lịch ký sang tuần sau',
+            stageResult: 'Khách Cũ / Retention',
+            customerClass: 'Warm',
+            category: 'Mẹ & Bé',
+            mhkd: 'Retail / Chuỗi',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Khách cũ tái ký hợp đồng vận hành Shopee đợt 2',
+            pipelineStage: '💎 Khách Cũ (Retained)',
+            followUpDate: '26/07/2026',
+            slaDays: 0,
+            slaStatus: 'Cảnh Báo',
+            contactMethod: 'Zalo',
             revenue: 18000000,
             forecastType: 'Pipeline (70%)',
             forecastDate: '2026-07-25',
-            nextActionDate: '2026-07-26',
-            nextAction: 'Upsell gói Xstream duy trì',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '-',
             remind2: '-',
             showupStatus: '-',
@@ -101,19 +145,30 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L005',
-            name: 'Anh Tuấn (Nông Sản)',
+            date: '18/07/2026',
+            source: 'Ads Facebook',
+            zaloName: 'Tuấn Nông Sản',
+            brand: 'Nông Sản Xanh Tuấn',
             phone: '0945xxxxxx',
-            channel: 'TikTok Shop',
-            service: 'Xstream Mũi Nhọn',
-            stage: '⏸️ Ngưng Triển Khai',
-            hotness: 'cold',
+            contact1: 'Gọi 18/07: Tư vấn Xstream',
+            contact2: 'Khách dời lịch sang tháng sau',
+            contact3: 'Chờ nhập hàng mới',
+            stageResult: 'Ngưng Triển Khai',
+            customerClass: 'Cold',
+            category: 'Nông Sản',
+            mhkd: 'B2C Online',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Kho tạm dừng nhập hàng, chờ giải quyết xong đợt cũ',
+            pipelineStage: '⏸️ Ngưng Triển Khai',
+            followUpDate: '28/07/2026',
+            slaDays: -2,
+            slaStatus: 'Quá Hạn',
+            contactMethod: 'Call',
             revenue: 10000000,
             forecastType: 'Pipeline (40%)',
             forecastDate: '2026-07-30',
-            nextActionDate: '2026-07-28',
-            nextAction: 'Tạm dừng kho, chờ nhập hàng mới',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '✅ Đã Gọi',
             remind2: '⏳ Chờ',
             showupStatus: '✅ Đã Tham Gia',
@@ -124,47 +179,69 @@ const DEFAULT_STATE = {
         },
         {
             id: 'L006',
-            name: 'Anh Hoàng (Thời Trang Nam)',
+            date: '17/07/2026',
+            source: 'Outbound Zalo',
+            zaloName: 'Hoàng Nam',
+            brand: 'Hoàng Nam Menswear',
             phone: '0968xxxxxx',
-            channel: 'Kênh MT-GT',
-            service: 'Marketing MT-GT',
-            stage: '❌ Cancel / Hủy Deal',
-            hotness: 'cold',
+            contact1: 'Gọi 17/07: Pitching MT-GT',
+            contact2: 'Khách báo hủy dự án',
+            contact3: 'Bỏ qua',
+            stageResult: 'Cancel / Hủy Deal',
+            customerClass: 'Lost',
+            category: 'Thời Trang',
+            mhkd: 'B2C Offline',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Thay đổi kế hoạch kinh doanh tập trung mở shop phố',
+            pipelineStage: '❌ Cancel / Hủy Deal',
+            followUpDate: '20/07/2026',
+            slaDays: -5,
+            slaStatus: 'Quá Hạn',
+            contactMethod: 'Call',
             revenue: 0,
             forecastType: 'Lost',
             forecastDate: '2026-07-19',
-            nextActionDate: '2026-07-20',
-            nextAction: 'Khách dời dự án sang năm sau',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '-',
             remind2: '-',
             showupStatus: '-',
-            lostReason: 'Thay đổi ngân sách tập trung mở cửa hàng offline',
+            lostReason: 'Chuyển ngân sách mở cửa hàng phố',
             newAngle: '',
             cuuNetStatus: 'Đã Hủy',
             sprintId: 'sprint1'
         },
         {
             id: 'L007',
-            name: 'Chị Mai (Gia Dụng)',
+            date: '16/07/2026',
+            source: 'TikTok Ads',
+            zaloName: 'Mai Gia Dụng',
+            brand: 'Mai Home Mart',
             phone: '0935xxxxxx',
-            channel: 'TikTok Shop',
-            service: 'Xstream Mũi Nhọn',
-            stage: '🚨 Cứu Net (Win-back)',
-            hotness: 'cold',
+            contact1: 'Gọi 16/07: Tư vấn gói Xstream',
+            contact2: 'Khách im lặng sau nhận giá',
+            contact3: 'Hường chuyển góc Cứu Net',
+            stageResult: 'Cứu Net (Win-back)',
+            customerClass: 'Cold',
+            category: 'Gia Dụng',
+            mhkd: 'B2C Online',
+            link: '',
+            audioUrl: '',
+            customerInfo: 'Chê giá gói 1 tháng đắt so với thuê sinh viên live',
+            pipelineStage: '🚨 Cứu Net (Win-back)',
+            followUpDate: '22/07/2026',
+            slaDays: 1,
+            slaStatus: 'Đúng Hạn',
+            contactMethod: 'Zalo / Call',
             revenue: 14000000,
             forecastType: 'Pipeline (50%)',
             forecastDate: '2026-07-28',
-            nextActionDate: '2026-07-22',
-            nextAction: 'Hường nghe audio & gọi lại',
             sale: 'Hường',
-            audioUrl: '',
             remind1: '✅ Đã Gọi',
             remind2: '❌ Vắng',
             showupStatus: '❌ Vắng Mặt',
-            lostReason: 'Khách chê giá gói Xstream 1 tháng đắt so với thuê sinh viên live',
-            newAngle: 'Hường gọi lại: Phân tích bài toán ROI tiết kiệm 50% chi phí + Tặng 5 kịch bản live',
+            lostReason: 'Chê giá gói 1 tháng đắt so với thuê sinh viên live',
+            newAngle: 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live',
             cuuNetStatus: '⏳ Đang Gọi Lại',
             sprintId: 'sprint3'
         }
@@ -209,7 +286,7 @@ let pendingTabTarget = null;
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V1');
+    const saved = localStorage.getItem('Z_CRM_STATE_V2');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -217,7 +294,7 @@ function loadState() {
 }
 
 function saveState() {
-    localStorage.setItem('Z_CRM_STATE_V1', JSON.stringify(CRMState));
+    localStorage.setItem('Z_CRM_STATE_V2', JSON.stringify(CRMState));
     renderAll();
 }
 
@@ -250,7 +327,7 @@ function renderAll() {
 
 function renderDashboardStats() {
     const actualWon = CRMState.leads
-        .filter(l => l.stage.includes('Nghiệm Thu') || l.stage.includes('Thu Tiền') || l.stage.includes('Won'))
+        .filter(l => l.pipelineStage.includes('Nghiệm Thu') || l.pipelineStage.includes('Thu Tiền') || l.pipelineStage.includes('Won'))
         .reduce((sum, l) => sum + (l.revenue || 0), 0);
 
     const percentWon = Math.min(100, Math.round((actualWon / CRMState.targetMoc1) * 100));
@@ -267,10 +344,10 @@ function renderDashboardStats() {
     // Render Top Hot Deals
     const topDealsTbody = document.querySelector('#dashboard-tab .galaxy-table tbody');
     if (topDealsTbody) {
-        const hotLeads = CRMState.leads.filter(l => l.hotness === 'hot' || l.forecastType.includes('Firm')).slice(0, 4);
+        const hotLeads = CRMState.leads.filter(l => l.customerClass.includes('Hot') || l.customerClass.includes('VVIP') || l.forecastType.includes('Firm')).slice(0, 4);
         topDealsTbody.innerHTML = hotLeads.map(l => `
             <tr>
-                <td><span class="cust-primary">${escapeHtml(l.name)}</span><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
+                <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
                 <td>${escapeHtml(l.service)}</td>
                 <td class="text-cyan">${formatVNĐ(l.revenue)}</td>
                 <td><span class="badge badge-hot">${l.forecastType}</span></td>
@@ -281,7 +358,7 @@ function renderDashboardStats() {
 }
 
 /* ==========================================================================
-   2. MASTER LEAD TRACKER WITH ADVANCED MULTI-FILTER BAR & LIFECYCLE PILLS
+   2. MASTER LEAD TRACKER - 19 STANDARD COLUMNS RENDERING
    ========================================================================== */
 
 function initFilterBar() {
@@ -312,49 +389,53 @@ function renderMasterLeads() {
     const tbody = document.getElementById('masterLeadsTbody');
     if (!tbody) return;
 
-    // Apply Filter Logic
+    // Filter Logic
     const filteredLeads = CRMState.leads.filter(l => {
         const matchSearch = !currentFilters.search || 
-            l.name.toLowerCase().includes(currentFilters.search) || 
+            l.zaloName.toLowerCase().includes(currentFilters.search) || 
+            l.brand.toLowerCase().includes(currentFilters.search) || 
             l.phone.includes(currentFilters.search) || 
-            l.channel.toLowerCase().includes(currentFilters.search);
+            l.source.toLowerCase().includes(currentFilters.search);
 
-        const matchStage = currentFilters.stage === 'all' || l.stage.toLowerCase().includes(currentFilters.stage.toLowerCase());
-        const matchChannel = currentFilters.channel === 'all' || l.channel.toLowerCase().includes(currentFilters.channel.toLowerCase());
-        const matchService = currentFilters.service === 'all' || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
+        const matchStage = currentFilters.stage === 'all' || l.pipelineStage.toLowerCase().includes(currentFilters.stage.toLowerCase());
+        const matchChannel = currentFilters.channel === 'all' || l.channel.toLowerCase().includes(currentFilters.channel.toLowerCase()) || l.source.toLowerCase().includes(currentFilters.channel.toLowerCase());
+        const matchService = currentFilters.service === 'all' || l.category.toLowerCase().includes(currentFilters.service.toLowerCase()) || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
 
         return matchSearch && matchStage && matchChannel && matchService;
     });
 
-    tbody.innerHTML = filteredLeads.map((l, index) => `
+    tbody.innerHTML = filteredLeads.map(l => `
         <tr>
-            <td>${index + 1}</td>
-            <td>
-                <span class="cust-primary">${escapeHtml(l.name)}</span>
-                <span class="cust-secondary"><i class="fa-solid fa-phone"></i> ${escapeHtml(l.phone)}</span>
-            </td>
-            <td><span class="badge badge-purple">${escapeHtml(l.channel)}</span></td>
-            <td>${escapeHtml(l.service)}</td>
-            <td><span class="status-pill ${getStagePillClass(l.stage)}">${escapeHtml(l.stage)}</span></td>
-            <td><span class="badge ${l.hotness === 'hot' ? 'badge-hot' : 'badge-cold'}">${l.hotness === 'hot' ? '🔥 Hot' : '❄️ Cold'}</span></td>
-            <td class="text-cyan">${formatVNĐ(l.revenue)}</td>
+            <td>${escapeHtml(l.date)}</td>
+            <td><span class="badge badge-purple">${escapeHtml(l.source)}</span></td>
+            <td><strong>${escapeHtml(l.zaloName)}</strong></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand)}</span></td>
+            <td><span class="cust-secondary">${escapeHtml(l.phone)}</span></td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact1)}</td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact2)}</td>
+            <td style="max-width:140px; font-size:11px;">${escapeHtml(l.contact3)}</td>
+            <td><span class="cust-primary" style="font-size:12px;">${escapeHtml(l.stageResult)}</span></td>
+            <td><span class="badge ${getHotnessBadgeClass(l.customerClass)}">${escapeHtml(l.customerClass)}</span></td>
+            <td>${escapeHtml(l.category)}</td>
+            <td>${escapeHtml(l.mhkd)}</td>
             <td>
                 <div class="audio-cell">
                     ${l.audioUrl ? 
-                        `<button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')"><i class="fa-solid fa-play"></i> Nghe Audio</button>` :
-                        `<button class="btn btn-xs btn-glass" onclick="playMockAudio('${escapeHtml(l.name)}')"><i class="fa-solid fa-headphones"></i> Demo</button>`
+                        `<button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')">Nghe Audio</button>` :
+                        `<button class="btn btn-xs btn-glass" onclick="playMockAudio('${escapeHtml(l.brand)}')">Link / Audio</button>`
                     }
-                    <label class="btn btn-xs btn-glass upload-btn" title="Upload file audio">
-                        <i class="fa-solid fa-upload"></i> Thêm File
+                    <label class="btn btn-xs btn-glass upload-btn" title="Upload Audio">
+                        Upload
                         <input type="file" accept="audio/*" onchange="handleAudioUpload(event, '${l.id}')" hidden>
                     </label>
                 </div>
             </td>
-            <td>
-                <span class="cust-primary" style="font-size:12px;">${escapeHtml(l.nextActionDate)}</span>
-                <span class="cust-secondary">${escapeHtml(l.nextAction)}</span>
-            </td>
-            <td>${escapeHtml(l.sale)}</td>
+            <td style="max-width:180px; font-size:11px; white-space:normal;">${escapeHtml(l.customerInfo)}</td>
+            <td><span class="status-pill ${getStagePillClass(l.pipelineStage)}">${escapeHtml(l.pipelineStage)}</span></td>
+            <td><strong>${escapeHtml(l.followUpDate)}</strong></td>
+            <td style="text-align:center;"><strong>${l.slaDays} ngày</strong></td>
+            <td><span class="sla-pill ${getSlaPillClass(l.slaStatus)}">${escapeHtml(l.slaStatus)}</span></td>
+            <td>${escapeHtml(l.contactMethod)}</td>
         </tr>
     `).join('');
 }
@@ -370,7 +451,7 @@ function renderForecastTable() {
     tbody.innerHTML = CRMState.leads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td class="text-gradient">${formatVNĐ(l.revenue)}</td>
             <td><span class="badge ${l.forecastType.includes('Firm') ? 'badge-hot' : 'badge-warm'}">${escapeHtml(l.forecastType)}</span></td>
@@ -379,7 +460,7 @@ function renderForecastTable() {
             <td>21/07 14:00</td>
             <td>
                 <button class="btn btn-xs ${l.forecastType.includes('Firm') ? 'btn-green' : 'btn-purple'}" onclick="quickStageAdvance('${l.id}')">
-                    ${l.stage.includes('Nghiệm Thu') ? '✅ Đã Thu Tiền' : 'Chuyển Nghiệm Thu'}
+                    ${l.pipelineStage.includes('Nghiệm Thu') ? 'Đã Thu Tiền' : 'Chuyển Nghiệm Thu'}
                 </button>
             </td>
         </tr>
@@ -395,7 +476,7 @@ function renderRemindTable() {
     tbody.innerHTML = xstreamLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
             <td>${escapeHtml(l.phone)}</td>
             <td>21/07 14:00</td>
             <td><span class="badge badge-green">${escapeHtml(l.remind1 || '✅ Đã Gọi')}</span></td>
@@ -411,19 +492,19 @@ function renderCuuNetTable() {
     const tbody = document.querySelector('#cuunet-tab .galaxy-table tbody');
     if (!tbody) return;
 
-    const cuuNetLeads = CRMState.leads.filter(l => l.stage.includes('Cứu Net') || l.stage.includes('Lost') || l.stage.includes('Cancel') || l.cuuNetStatus !== 'Bình thường');
+    const cuuNetLeads = CRMState.leads.filter(l => l.pipelineStage.includes('Cứu Net') || l.pipelineStage.includes('Lost') || l.pipelineStage.includes('Cancel') || l.cuuNetStatus !== 'Bình thường');
 
     tbody.innerHTML = cuuNetLeads.map((l, index) => `
         <tr>
             <td>${index + 1}</td>
-            <td><span class="cust-primary">${escapeHtml(l.name)}</span></td>
+            <td><span class="cust-primary">${escapeHtml(l.brand || l.zaloName)}</span></td>
             <td>${escapeHtml(l.service)}</td>
             <td>
                 <button class="btn btn-xs btn-purple" onclick="playRealAudio('${l.id}')">
-                    <i class="fa-solid fa-play"></i> Nghe Audio Cuộc Gọi
+                    Nghe Audio Cuộc Gọi
                 </button>
             </td>
-            <td>${escapeHtml(l.lostReason || 'Thay đổi định hướng / Chưa phân tích rõ ROI')}</td>
+            <td>${escapeHtml(l.lostReason || 'Chưa phân tích rõ bài toán ROI tiết kiệm 50% chi phí')}</td>
             <td><strong>${escapeHtml(l.newAngle || 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live')}</strong></td>
             <td><span class="badge badge-yellow">${escapeHtml(l.cuuNetStatus || '⏳ Đang Gọi Lại')}</span></td>
         </tr>
@@ -479,7 +560,7 @@ function handleAudioUpload(event, leadId) {
         if (lead) {
             lead.audioUrl = audioUrl;
             saveState();
-            alert(`✅ Đã lưu và liên kết file ghi âm "${file.name}" cho ${lead.name}! Tất cả các trang CRM đã được đồng bộ.`);
+            alert(`✅ Đã lưu và liên kết file ghi âm "${file.name}" cho ${lead.brand || lead.zaloName}!`);
         }
     }
 }
@@ -490,13 +571,13 @@ function playRealAudio(leadId) {
 
     const modal = document.getElementById('audioModal');
     const player = document.getElementById('realAudioPlayer');
-    document.getElementById('audioCustomerTitle').textContent = `🎙️ File Ghi Âm: ${lead.name}`;
+    document.getElementById('audioCustomerTitle').textContent = `File Ghi Âm: ${lead.brand || lead.zaloName}`;
 
     if (lead.audioUrl) {
         player.src = lead.audioUrl;
         document.getElementById('audioMetaInfo').textContent = `File ghi âm thực tế đã tải lên`;
     } else {
-        document.getElementById('audioMetaInfo').textContent = `File ghi âm mẫu (Bấm "Thêm File" trên bảng để tải file thực tế)`;
+        document.getElementById('audioMetaInfo').textContent = `File ghi âm mẫu (Bấm Upload để chọn file từ máy)`;
         player.src = "";
     }
 
@@ -506,8 +587,8 @@ function playRealAudio(leadId) {
 
 function playMockAudio(name) {
     const modal = document.getElementById('audioModal');
-    document.getElementById('audioCustomerTitle').textContent = `🎙️ Ghi Âm Mẫu: ${name}`;
-    document.getElementById('audioMetaInfo').textContent = `Bấm "Thêm File" để tải file audio thực tế của bạn lên`;
+    document.getElementById('audioCustomerTitle').textContent = `Ghi Âm Mẫu: ${name}`;
+    document.getElementById('audioMetaInfo').textContent = `Bấm "Upload" để chọn file ghi âm thực tế của bạn`;
     modal.classList.add('active');
 }
 
@@ -520,9 +601,10 @@ function closeAudioModal() {
 function quickStageAdvance(leadId) {
     const lead = CRMState.leads.find(l => l.id === leadId);
     if (lead) {
-        lead.stage = '✅ Nghiệm Thu (Thu Tiền)';
+        lead.pipelineStage = '✅ Nghiệm Thu (Thu Tiền)';
+        lead.stageResult = 'Nghiệm Thu / Thu Tiền';
         saveState();
-        alert(`🎉 Chúc mừng Hường! Đã chuyển ${lead.name} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
+        alert(`🎉 Chúc mừng Hường! Đã chuyển ${lead.brand || lead.zaloName} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
     }
 }
 
@@ -624,13 +706,13 @@ function updatePageTitle(tabId) {
     const subtitleEl = document.getElementById('pageSubtitle');
 
     const titles = {
-        'dashboard': { title: '📊 Dashboard Overview Sếp', subtitle: 'Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)' },
-        'forecast': { title: '🚀 Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (Solo Sale)' },
-        'improvements': { title: '💡 Hộp Đề Xuất Cải Tiến', subtitle: 'Gửi khuyến nghị kịch bản & ưu đãi cho 2 Sếp phê duyệt' },
-        'leads': { title: '📋 Master Lead Tracker', subtitle: 'Phễu quản lý lead & tích hợp Upload file ghi âm cuộc gọi' },
-        'remind': { title: '📞 Call Remind & Showup Tracker', subtitle: 'Quản lý lịch nhắc 24h & 2h cho gói Xstream' },
-        'cuunet': { title: '🚨 Leader Cứu Net & File Audio', subtitle: 'Nghe lại ghi âm cuộc gọi & chuyển angle chốt mới' },
-        'checkin': { title: '⏰ Remind & Chấm Công Daily', subtitle: 'Điểm danh Check-in sáng 08:30 & Check-out chiều 17:30' }
+        'dashboard': { title: 'Dashboard Overview Sếp', subtitle: 'Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)' },
+        'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (Solo Sale)' },
+        'improvements': { title: 'Hộp Đề Xuất Cải Tiến', subtitle: 'Gửi khuyến nghị kịch bản & ưu đãi cho 2 Sếp phê duyệt' },
+        'leads': { title: 'Master Lead Tracker', subtitle: 'Chuẩn hóa 19 cột thông tin theo dõi chi tiết từ Tiếp xúc ➔ Pipeline ➔ SLA ➔ Nghiệm thu' },
+        'remind': { title: 'Call Remind & Showup Tracker', subtitle: 'Quản lý lịch nhắc 24h & 2h cho gói Xstream' },
+        'cuunet': { title: 'Leader Cứu Net & File Audio', subtitle: 'Nghe lại ghi âm cuộc gọi & chuyển angle chốt mới' },
+        'checkin': { title: 'Remind & Chấm Công Daily', subtitle: 'Điểm danh Check-in sáng 08:30 & Check-out chiều 17:30' }
     };
 
     if (titles[tabId]) {
@@ -688,9 +770,9 @@ function closeSecurityModal() {
 
 function doCheckIn(type) {
     if (type === 'in') {
-        alert('✅ Check-in thành công 08:25 AM! Chúc Hường chốt bùng nổ 25M trước 05/08!');
+        alert('Check-in thành công 08:25 AM! Chúc Hường chốt bùng nổ 25M trước 05/08!');
     } else {
-        alert('🌙 Check-out thành công 17:35 PM! Đã lưu tiến độ làm việc trong ngày!');
+        alert('Check-out thành công 17:35 PM! Đã lưu tiến độ làm việc trong ngày!');
     }
 }
 
@@ -719,6 +801,7 @@ function escapeHtml(str) {
 }
 
 function getStagePillClass(stage) {
+    if (!stage) return 'status-new';
     if (stage.includes('Nghiệm Thu') || stage.includes('Thu Tiền') || stage.includes('Won')) return 'status-delivered';
     if (stage.includes('Triển Khai')) return 'status-active';
     if (stage.includes('Proposal') || stage.includes('Giá')) return 'status-proposal';
@@ -727,4 +810,18 @@ function getStagePillClass(stage) {
     if (stage.includes('Cancel') || stage.includes('Hủy')) return 'status-canceled';
     if (stage.includes('Cứu Net') || stage.includes('Win-back')) return 'status-cuunet';
     return 'status-new';
+}
+
+function getHotnessBadgeClass(cls) {
+    if (!cls) return 'badge-cold';
+    if (cls.includes('Hot') || cls.includes('VVIP') || cls.includes('ICP')) return 'badge-hot';
+    if (cls.includes('Warm')) return 'badge-warm';
+    return 'badge-cold';
+}
+
+function getSlaPillClass(status) {
+    if (!status) return 'sla-ok';
+    if (status.includes('Đúng')) return 'sla-ok';
+    if (status.includes('Cảnh Báo')) return 'sla-warning';
+    return 'sla-overdue';
 }
