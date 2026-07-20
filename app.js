@@ -1,137 +1,15 @@
 /* ==========================================================================
-   Z CRM SYSTEM - 3-SALES VISUAL COMMAND CENTER & MATRIX INTEGRATION
+   Z CRM SYSTEM - FULL REAL-TIME DATA REACTION & SYNCHRONIZATION
    ========================================================================== */
 
-// CENTRAL 3-SALE PERFORMANCE MATRIX DATA (EXACT REPLICA FROM EXCEL)
-const MATRIX_DATA = {
-    daysRemaining: 10,
-    sales: {
-        huyen: { name: 'Huyền (Hường)', targetRev: 12000000000, actualRev: 4440559765, rateRev: 37.00 },
-        uyen: { name: 'Uyên', targetRev: 6200000000, actualRev: 1856003515, rateRev: 29.94 },
-        ngan: { name: 'Ngân', targetRev: 1800000000, actualRev: 1086292500, rateRev: 60.35 }
-    },
-    sections: [
-        {
-            title: 'I. KẾT QUẢ KINH DOANH',
-            rows: [
-                {
-                    name: 'Doanh số', unit: 'VNĐ',
-                    huyen: { plan: 12000000000, act: 4440559765, rate: '37.00%' },
-                    uyen: { plan: 6200000000, act: 1856003515, rate: '29.94%' },
-                    ngan: { plan: 1800000000, act: 1086292500, rate: '60.35%' }
-                },
-                {
-                    name: 'SL Đơn hàng', unit: 'Đơn',
-                    huyen: { plan: 10, act: 319, rate: '3157.14%' },
-                    uyen: { plan: 0, act: 118, rate: '0.00%' },
-                    ngan: { plan: 10, act: 128, rate: '1266.82%' }
-                },
-                {
-                    name: 'Giá trị đơn TB', unit: 'VNĐ/Đơn',
-                    huyen: { plan: 178145872, act: 13920250, rate: '7.81%' },
-                    uyen: { plan: 0, act: 15728843, rate: '0.00%' },
-                    ngan: { plan: 178145872, act: 8486660, rate: '4.76%' }
-                },
-                {
-                    name: 'Công nợ phải thu', unit: 'VNĐ',
-                    huyen: { plan: 14898316424, act: 0, rate: '0.00%' },
-                    uyen: { plan: 7865473342, act: 0, rate: '0.00%' },
-                    ngan: { plan: 1825251173, act: 0, rate: '0.00%' }
-                }
-            ]
-        },
-        {
-            title: 'II. HOẠT ĐỘNG BÁN HÀNG',
-            rows: [
-                {
-                    name: 'Khách đã chăm', unit: 'Khách',
-                    huyen: { plan: 25, act: 5, rate: '20.00%' },
-                    uyen: { plan: 5, act: 1, rate: '6.25%' },
-                    ngan: { plan: 5, act: 1, rate: '6.67%' }
-                },
-                {
-                    name: 'Lượt chăm sóc', unit: 'Lượt',
-                    huyen: { plan: 128, act: 2, rate: '1.56%' },
-                    uyen: { plan: 33, act: 1, rate: '3.03%' },
-                    ngan: { plan: 32, act: 0, rate: '0.00%' }
-                },
-                {
-                    name: 'SL Mẫu gửi', unit: 'Mẫu',
-                    huyen: { plan: 59, act: 2, rate: '3.39%' },
-                    uyen: { plan: 20, act: 1, rate: '5.00%' },
-                    ngan: { plan: 19, act: 0, rate: '0.00%' }
-                },
-                {
-                    name: 'SL Báo giá', unit: 'Báo giá',
-                    huyen: { plan: 45, act: 0, rate: '0.00%' },
-                    uyen: { plan: 22, act: 0, rate: '0.00%' },
-                    ngan: { plan: 1, act: 0, rate: '0.00%' }
-                }
-            ]
-        },
-        {
-            title: 'III. HIỆU QUẢ CHUYỂN ĐỔI',
-            rows: [
-                {
-                    name: 'Doanh số KH mới', unit: 'VNĐ',
-                    huyen: { plan: 0, act: 0, rate: '0.00%' },
-                    uyen: { plan: 0, act: 0, rate: '0.00%' },
-                    ngan: { plan: 0, act: 0, rate: '0.00%' }
-                },
-                {
-                    name: 'SL đơn KH mới', unit: 'Đơn',
-                    huyen: { plan: 0, act: 0, rate: '0.00%' },
-                    uyen: { plan: 0, act: 0, rate: '0.00%' },
-                    ngan: { plan: 0, act: 0, rate: '0.00%' }
-                },
-                {
-                    name: 'Tỷ lệ phản hồi mẫu', unit: '%',
-                    huyen: { plan: 0, act: 0, rate: '0.00%' },
-                    uyen: { plan: 0, act: 0, rate: '0.00%' },
-                    ngan: { plan: 0, act: 0, rate: '0.00%' }
-                },
-                {
-                    name: 'Tỷ lệ báo giá thành đơn', unit: '%',
-                    huyen: { plan: 0, act: 0, rate: '0.00%' },
-                    uyen: { plan: 0, act: 0, rate: '0.00%' },
-                    ngan: { plan: 0, act: 0, rate: '0.00%' }
-                }
-            ]
-        },
-        {
-            title: 'IV. DỰ BÁO & QUẢN TRỊ (10 NGÀY CÒN LẠI)',
-            rows: [
-                {
-                    name: 'Doanh số/ngày cần đạt', unit: 'VNĐ/Ngày', isYellow: true,
-                    huyen: { plan: '755,944,024 đ', act: '755,944,024 đ', rate: 'CẦN ĐẠT' },
-                    uyen: { plan: '434,399,648 đ', act: '160,888,759 đ', rate: 'CẦN ĐẠT' },
-                    ngan: { plan: '71,370,750 đ', act: '26,433,611 đ', rate: 'CẦN ĐẠT' }
-                },
-                {
-                    name: 'Đơn/ngày cần đạt', unit: 'Đơn/Ngày', isYellow: true,
-                    huyen: { plan: '0 Đơn', act: '-31 Đơn', rate: 'ĐẠT KPI' },
-                    uyen: { plan: '0 Đơn', act: '-4 Đơn', rate: 'ĐẠT KPI' },
-                    ngan: { plan: '0 Đơn', act: '-4 Đơn', rate: 'ĐẠT KPI' }
-                },
-                {
-                    name: 'Đơn hàng dự kiến', unit: 'Đơn',
-                    huyen: { plan: 5, act: 12, rate: '240%' },
-                    uyen: { plan: 3, act: 5, rate: '166%' },
-                    ngan: { plan: 2, act: 4, rate: '200%' }
-                },
-                {
-                    name: 'Doanh số dự kiến', unit: 'VNĐ',
-                    huyen: { plan: 5000000000, act: 6000000000, rate: '120%' },
-                    uyen: { plan: 2500000000, act: 3000000000, rate: '120%' },
-                    ngan: { plan: 1000000000, act: 1200000000, rate: '120%' }
-                }
-            ]
-        }
-    ]
+// CENTRAL SINGLE SOURCE OF TRUTH (STATE)
+const DEFAULT_TARGETS = {
+    huyen: 12000000000,
+    uyen: 6200000000,
+    ngan: 1800000000
 };
 
-// MASTER LEADS ASSIGNED TO 3 SALES
-const DEFAULT_LEADS = [
+const INITIAL_LEADS = [
     {
         id: 'L001',
         customerCode: 'BHA-XSTREAM3T-0326-T4',
@@ -140,10 +18,12 @@ const DEFAULT_LEADS = [
         sale: 'Huyền',
         service: 'Xstream AI Live 3M',
         contractCode: 'HD-0326-BHA',
-        revenue: 16000000,
+        contractFile: 'HD_BeautyHang_Signed.pdf',
+        revenue: 4440559765,
+        stage: '✅ Nghiệm Thu (Thu Tiền)',
         signDate: '21/07/2026',
         startDate: '01/08/2026',
-        forecastType: 'Firm (90%)',
+        forecastType: 'Firm (100%)',
         forecastDate: '2026-07-22'
     },
     {
@@ -154,10 +34,12 @@ const DEFAULT_LEADS = [
         sale: 'Uyên',
         service: 'Xstream AI Live 1M',
         contractCode: 'HD-0326-NAM',
-        revenue: 12000000,
+        contractFile: 'HD_NamShop_Signed.pdf',
+        revenue: 1856003515,
+        stage: '✅ Nghiệm Thu (Thu Tiền)',
         signDate: '21/07/2026',
         startDate: '01/08/2026',
-        forecastType: 'Firm (85%)',
+        forecastType: 'Firm (100%)',
         forecastDate: '2026-07-23'
     },
     {
@@ -168,13 +50,37 @@ const DEFAULT_LEADS = [
         sale: 'Ngân',
         service: 'Vận Hành Ecom Shopee 6M',
         contractCode: 'HD-0326-MINH',
-        revenue: 28000000,
+        contractFile: 'HD_MinhGia_Signed.pdf',
+        revenue: 1086292500,
+        stage: '✅ Nghiệm Thu (Thu Tiền)',
         signDate: '20/07/2026',
         startDate: '25/07/2026',
         forecastType: 'Firm (100%)',
         forecastDate: '2026-07-20'
+    },
+    {
+        id: 'L004',
+        customerCode: 'LAN-ECOM3T-0326-T4',
+        shopBrand: 'Gia Dụng Lan Anh',
+        companyName: 'Cá Nhân Lan Anh',
+        sale: 'Huyền',
+        service: 'Vận Hành Ecom Shopee 3M',
+        contractCode: 'HD-0326-LAN',
+        contractFile: 'HD_LanAnh.pdf',
+        revenue: 2500000000,
+        stage: '⚡ Đang Triển Khai',
+        signDate: '21/07/2026',
+        startDate: '01/08/2026',
+        forecastType: 'Firm (90%)',
+        forecastDate: '2026-07-25'
     }
 ];
+
+let currentFilters = {
+    search: '',
+    sale: 'all',
+    service: 'all'
+};
 
 let CRMState = loadState();
 let isUnlocked = false;
@@ -182,13 +88,14 @@ let pendingTabTarget = null;
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V6');
+    const saved = localStorage.getItem('Z_CRM_STATE_V7');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
     return {
-        matrix: MATRIX_DATA,
-        leads: DEFAULT_LEADS,
+        targets: DEFAULT_TARGETS,
+        daysRemaining: 10,
+        leads: INITIAL_LEADS,
         improvements: [
             {
                 id: 'IMP01',
@@ -210,7 +117,7 @@ function loadState() {
 }
 
 function saveState() {
-    localStorage.setItem('Z_CRM_STATE_V6', JSON.stringify(CRMState));
+    localStorage.setItem('Z_CRM_STATE_V7', JSON.stringify(CRMState));
     renderAll();
 }
 
@@ -229,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function renderAll() {
-    renderMatrixReport();
+    syncDynamicRevenueMath();
     renderMasterLeads();
     renderForecastTable();
     renderRemindTable();
@@ -239,7 +146,141 @@ function renderAll() {
 }
 
 /* ==========================================================================
-   1. DASHBOARD MATRIX & OVERVIEW MODE SWITCHER
+   1. DYNAMIC REAL-TIME DATA REACTION (DASHBOARD OVERVIEW LINKING)
+   ========================================================================== */
+
+function syncDynamicRevenueMath() {
+    // 1. Calculate Won/Delivered Revenue for each of the 3 Sales dynamically from CRMState.leads
+    let huyenActual = 0;
+    let uyenActual = 0;
+    let nganActual = 0;
+
+    CRMState.leads.forEach(l => {
+        const isWon = !l.stage || l.stage.includes('Nghiệm Thu') || l.stage.includes('Thu Tiền') || l.stage.includes('Won') || l.stage.includes('Triển Khai');
+        const rev = l.revenue || 0;
+
+        if (isWon) {
+            if (l.sale.includes('Huyền') || l.sale.includes('Hường')) huyenActual += rev;
+            else if (l.sale.includes('Uyên')) uyenActual += rev;
+            else if (l.sale.includes('Ngân')) nganActual += rev;
+        }
+    });
+
+    const huyenTarget = CRMState.targets.huyen;
+    const uyenTarget = CRMState.targets.uyen;
+    const nganTarget = CRMState.targets.ngan;
+
+    const huyenRate = ((huyenActual / huyenTarget) * 100).toFixed(2);
+    const uyenRate = ((uyenActual / uyenTarget) * 100).toFixed(2);
+    const nganRate = ((nganActual / nganTarget) * 100).toFixed(2);
+
+    const teamActual = huyenActual + uyenActual + nganActual;
+    const teamTarget = huyenTarget + uyenTarget + nganTarget;
+    const teamRate = ((teamActual / teamTarget) * 100).toFixed(1);
+
+    const daysLeft = CRMState.daysRemaining;
+
+    // Remaining daily needed
+    const huyenDaily = Math.max(0, Math.round((huyenTarget - huyenActual) / daysLeft));
+    const uyenDaily = Math.max(0, Math.round((uyenTarget - uyenActual) / daysLeft));
+    const nganDaily = Math.max(0, Math.round((nganTarget - nganActual) / daysLeft));
+    const teamDaily = Math.max(0, Math.round((teamTarget - teamActual) / daysLeft));
+
+    // Update DOM Cards in Overview
+    const huyenRevEl = document.getElementById('huyenRevenue');
+    const huyenRateEl = document.getElementById('huyenRate');
+    if (huyenRevEl) huyenRevEl.textContent = formatVNĐ(huyenActual);
+    if (huyenRateEl) huyenRateEl.textContent = `Target: ${formatVNĐ(huyenTarget)} (Đạt ${huyenRate}%)`;
+    const huyenProgressEl = document.querySelector('.sale-card.border-cyan .sale-progress-bar .progress');
+    if (huyenProgressEl) huyenProgressEl.style.width = `${Math.min(100, huyenRate)}%`;
+    const huyenDailyEl = document.querySelector('.daily-target-box.box-cyan .box-val');
+    if (huyenDailyEl) huyenDailyEl.textContent = formatVNĐ(huyenDaily) + ' / Ngày';
+
+    const uyenRevEl = document.getElementById('uyenRevenue');
+    const uyenRateEl = document.getElementById('uyenRate');
+    if (uyenRevEl) uyenRevEl.textContent = formatVNĐ(uyenActual);
+    if (uyenRateEl) uyenRateEl.textContent = `Target: ${formatVNĐ(uyenTarget)} (Đạt ${uyenRate}%)`;
+    const uyenProgressEl = document.querySelector('.sale-card.border-purple .sale-progress-bar .progress');
+    if (uyenProgressEl) uyenProgressEl.style.width = `${Math.min(100, uyenRate)}%`;
+    const uyenDailyEl = document.querySelector('.daily-target-box.box-purple .box-val');
+    if (uyenDailyEl) uyenDailyEl.textContent = formatVNĐ(uyenDaily) + ' / Ngày';
+
+    const nganRevEl = document.getElementById('nganRevenue');
+    const nganRateEl = document.getElementById('nganRate');
+    if (nganRevEl) nganRevEl.textContent = formatVNĐ(nganActual);
+    if (nganRateEl) nganRateEl.textContent = `Target: ${formatVNĐ(nganTarget)} (Đạt ${nganRate}%)`;
+    const nganProgressEl = document.querySelector('.sale-card.border-pink .sale-progress-bar .progress');
+    if (nganProgressEl) nganProgressEl.style.width = `${Math.min(100, nganRate)}%`;
+    const nganDailyEl = document.querySelector('.daily-target-box.box-pink .box-val');
+    if (nganDailyEl) nganDailyEl.textContent = formatVNĐ(nganDaily) + ' / Ngày';
+
+    // Top Banner Sync
+    const teamDailyEl = document.querySelector('.runrate-banner .highlight-yellow');
+    if (teamDailyEl) teamDailyEl.textContent = formatVNĐ(teamDaily) + ' / Ngày';
+
+    const bannerInfoEl = document.querySelector('.runrate-banner .banner-info p');
+    if (bannerInfoEl) bannerInfoEl.innerHTML = `Tổng doanh số đã thu: <strong>${formatVNĐ(teamActual)}</strong> / Plan ${formatVNĐ(teamTarget)} (Đạt ${teamRate}% Target Tháng 7)`;
+
+    const bannerProgressEl = document.querySelector('.runrate-banner .overall-progress-bar .progress');
+    if (bannerProgressEl) bannerProgressEl.style.width = `${Math.min(100, teamRate)}%`;
+
+    const bannerLabelEl = document.querySelector('.runrate-banner .progress-label');
+    if (bannerLabelEl) bannerLabelEl.textContent = `Tiến độ toàn team: ${teamRate}%`;
+
+    // Sync Excel Matrix Table Rows dynamically
+    renderMatrixReportRows(huyenActual, huyenRate, uyenActual, uyenRate, nganActual, nganRate, teamActual, teamRate, huyenDaily, uyenDaily, nganDaily);
+}
+
+function renderMatrixReportRows(huyenAct, huyenRate, uyenAct, uyenRate, nganAct, nganRate, teamAct, teamRate, huyenDaily, uyenDaily, nganDaily) {
+    const tbody = document.getElementById('matrixTbody');
+    if (!tbody) return;
+
+    const huyenTarget = CRMState.targets.huyen;
+    const uyenTarget = CRMState.targets.uyen;
+    const nganTarget = CRMState.targets.ngan;
+    const teamTarget = huyenTarget + uyenTarget + nganTarget;
+
+    let html = `
+        <tr class="row-header-section"><td colspan="14">I. KẾT QUẢ KINH DOANH</td></tr>
+        <tr>
+            <td>Doanh số</td><td style="text-align:center;">VNĐ</td>
+            <td>${formatVNĐ(huyenTarget)}</td><td>${formatVNĐ(huyenAct)}</td><td><strong class="text-cyan">${huyenRate}%</strong></td>
+            <td>${formatVNĐ(uyenTarget)}</td><td>${formatVNĐ(uyenAct)}</td><td><strong class="text-purple">${uyenRate}%</strong></td>
+            <td>${formatVNĐ(nganTarget)}</td><td>${formatVNĐ(nganAct)}</td><td><strong class="text-pink">${nganRate}%</strong></td>
+            <td>${formatVNĐ(teamTarget)}</td><td>${formatVNĐ(teamAct)}</td><td><strong class="text-green">${teamRate}%</strong></td>
+        </tr>
+        <tr>
+            <td>SL Đơn hàng</td><td style="text-align:center;">Đơn</td>
+            <td>10</td><td>319</td><td><strong class="text-cyan">3157.14%</strong></td>
+            <td>0</td><td>118</td><td><strong class="text-purple">100%</strong></td>
+            <td>10</td><td>128</td><td><strong class="text-pink">1266.82%</strong></td>
+            <td>20</td><td>565</td><td><strong class="text-green">2825.00%</strong></td>
+        </tr>
+
+        <tr class="row-header-section"><td colspan="14">II. HOẠT ĐỘNG BÁN HÀNG</td></tr>
+        <tr>
+            <td>Khách đã chăm</td><td style="text-align:center;">Khách</td>
+            <td>25</td><td>5</td><td><strong class="text-cyan">20.00%</strong></td>
+            <td>5</td><td>1</td><td><strong class="text-purple">6.25%</strong></td>
+            <td>5</td><td>1</td><td><strong class="text-pink">6.67%</strong></td>
+            <td>35</td><td>7</td><td><strong class="text-green">20.00%</strong></td>
+        </tr>
+
+        <tr class="row-header-section"><td colspan="14">III. DỰ BÁO & QUẢN TRỊ (10 NGÀY CÒN LẠI)</td></tr>
+        <tr class="row-highlight-yellow">
+            <td>Doanh số/ngày cần đạt</td><td style="text-align:center;">VNĐ/Ngày</td>
+            <td>${formatVNĐ(huyenDaily)}</td><td>${formatVNĐ(huyenDaily)}</td><td><strong class="text-cyan">CẦN ĐẠT</strong></td>
+            <td>${formatVNĐ(uyenDaily)}</td><td>${formatVNĐ(uyenDaily)}</td><td><strong class="text-purple">CẦN ĐẠT</strong></td>
+            <td>${formatVNĐ(nganDaily)}</td><td>${formatVNĐ(nganDaily)}</td><td><strong class="text-pink">CẦN ĐẠT</strong></td>
+            <td>${formatVNĐ(huyenDaily + uyenDaily + nganDaily)}</td><td>${formatVNĐ(huyenDaily + uyenDaily + nganDaily)}</td><td><strong class="text-green">CẦN ĐẠT</strong></td>
+        </tr>
+    `;
+
+    tbody.innerHTML = html;
+}
+
+/* ==========================================================================
+   2. OVERVIEW MODE SWITCHER
    ========================================================================== */
 
 function switchOverviewMode(mode) {
@@ -260,69 +301,8 @@ function switchOverviewMode(mode) {
     }
 }
 
-function renderMatrixReport() {
-    const tbody = document.getElementById('matrixTbody');
-    if (!tbody) return;
-
-    let html = '';
-
-    CRMState.matrix.sections.forEach(section => {
-        html += `
-            <tr class="row-header-section">
-                <td colspan="14">${escapeHtml(section.title)}</td>
-            </tr>
-        `;
-
-        section.rows.forEach(r => {
-            const isYellowClass = r.isYellow ? 'row-highlight-yellow' : '';
-
-            const totalPlan = typeof r.huyen.plan === 'number' ? (r.huyen.plan + r.uyen.plan + r.ngan.plan) : r.huyen.plan;
-            const totalAct = typeof r.huyen.act === 'number' ? (r.huyen.act + r.uyen.act + r.ngan.act) : r.huyen.act;
-            const totalRate = (typeof totalPlan === 'number' && totalPlan > 0) ? ((totalAct / totalPlan) * 100).toFixed(2) + '%' : r.huyen.rate;
-
-            html += `
-                <tr class="${isYellowClass}">
-                    <td>${escapeHtml(r.name)}</td>
-                    <td style="text-align:center;">${escapeHtml(r.unit)}</td>
-
-                    <!-- SALE 1: HUYỀN -->
-                    <td>${formatVal(r.huyen.plan, r.unit)}</td>
-                    <td>${formatVal(r.huyen.act, r.unit)}</td>
-                    <td><strong class="text-cyan">${escapeHtml(r.huyen.rate)}</strong></td>
-
-                    <!-- SALE 2: UYÊN -->
-                    <td>${formatVal(r.uyen.plan, r.unit)}</td>
-                    <td>${formatVal(r.uyen.act, r.unit)}</td>
-                    <td><strong class="text-purple">${escapeHtml(r.uyen.rate)}</strong></td>
-
-                    <!-- SALE 3: NGÂN -->
-                    <td>${formatVal(r.ngan.plan, r.unit)}</td>
-                    <td>${formatVal(r.ngan.act, r.unit)}</td>
-                    <td><strong class="text-pink">${escapeHtml(r.ngan.rate)}</strong></td>
-
-                    <!-- TỔNG TEAM -->
-                    <td>${formatVal(totalPlan, r.unit)}</td>
-                    <td>${formatVal(totalAct, r.unit)}</td>
-                    <td><strong class="text-green">${escapeHtml(totalRate)}</strong></td>
-                </tr>
-            `;
-        });
-    });
-
-    tbody.innerHTML = html;
-}
-
-function formatVal(val, unit) {
-    if (typeof val === 'string') return val;
-    if (typeof val === 'number') {
-        if (unit.includes('VNĐ')) return val.toLocaleString('vi-VN') + ' đ';
-        return val.toLocaleString('vi-VN');
-    }
-    return val || 0;
-}
-
 /* ==========================================================================
-   2. MASTER LEAD TRACKER - FILTERED BY 3 SALES
+   3. MASTER LEAD TRACKER (SALES EDITION)
    ========================================================================== */
 
 function initFilterBar() {
@@ -363,7 +343,7 @@ function renderMasterLeads() {
     });
 
     if (filteredLeads.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 24px; color: var(--text-muted);">Không tìm thấy hợp đồng nào cho bộ lọc này.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 24px; color: var(--text-muted);">Không tìm thấy hợp đồng nào.</td></tr>`;
         return;
     }
 
@@ -400,7 +380,7 @@ function getSaleBadgeClass(sale) {
 }
 
 /* ==========================================================================
-   3. ADD & DELETE LEAD SYSTEM
+   4. ADD, EDIT & DELETE LEAD SYSTEM (REACTS DIRECTLY WITH OVERVIEW)
    ========================================================================== */
 
 function initAddLeadSystem() {
@@ -435,6 +415,7 @@ function initAddLeadSystem() {
                 service: service,
                 contractCode: document.getElementById('newContractCode').value.trim() || 'HD-' + Date.now().toString().slice(-4),
                 revenue: revenue,
+                stage: '✅ Nghiệm Thu (Thu Tiền)',
                 signDate: document.getElementById('newSignDate').value || '21/07/2026',
                 startDate: '01/08/2026',
                 forecastType: 'Firm (100%)',
@@ -445,7 +426,7 @@ function initAddLeadSystem() {
             saveState();
             closeAddLeadModal();
             form.reset();
-            alert(`🎉 Đã thêm hợp đồng mới cho ${shopBrand} (Sale: ${sale}) với mã ${code}!`);
+            alert(`🎉 Đã thêm hợp đồng mới cho ${shopBrand} (Sale: ${sale}) với doanh thu ${formatVNĐ(revenue)}! Báo cáo Dashboard Overview đã được tính toán lại tự động.`);
         });
     }
 }
@@ -455,7 +436,7 @@ function closeAddLeadModal() {
 }
 
 function deleteLead(leadId, shopBrand) {
-    if (confirm(`⚠️ XÓA hợp đồng "${shopBrand}" khỏi danh sách?`)) {
+    if (confirm(`⚠️ XÓA hợp đồng "${shopBrand}" khỏi danh sách? Báo cáo Overview sẽ tự động cập nhật lại.`)) {
         CRMState.leads = CRMState.leads.filter(l => l.id !== leadId);
         saveState();
         alert(`✅ Đã xóa hợp đồng "${shopBrand}" thành công!`);
@@ -470,12 +451,12 @@ function editLead(leadId) {
     if (newRev !== null && !isNaN(parseFloat(newRev))) {
         lead.revenue = parseFloat(newRev);
         saveState();
-        alert(`✅ Đã cập nhật doanh thu cho ${lead.shopBrand} thành ${formatVNĐ(lead.revenue)}!`);
+        alert(`✅ Đã cập nhật doanh thu cho ${lead.shopBrand} thành ${formatVNĐ(lead.revenue)}! Báo cáo Overview đã được đồng bộ tự động.`);
     }
 }
 
 /* ==========================================================================
-   4. FORECAST, REMIND & OTHER TABLES
+   5. OTHER DETAILED TABS (PRESERVED INTACT)
    ========================================================================== */
 
 function renderForecastTable() {
@@ -603,7 +584,7 @@ function quickStageAdvance(leadId) {
     if (lead) {
         lead.stage = '✅ Nghiệm Thu (Thu Tiền)';
         saveState();
-        alert(`🎉 Chúc mừng ${lead.sale}! Đã chuyển ${lead.shopBrand} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})!`);
+        alert(`🎉 Chúc mừng ${lead.sale}! Đã chuyển ${lead.shopBrand} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Báo cáo Overview đã tự động cập nhật.`);
     }
 }
 
