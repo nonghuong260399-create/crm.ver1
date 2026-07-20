@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z CRM System</title>
+    <title>Z CRM System - Sales Edition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -311,41 +311,23 @@
                 </div>
             </section>
 
-            <!-- TAB PROTECTED: MASTER LEAD TRACKER -->
+            <!-- TAB PROTECTED: MASTER LEAD TRACKER (OPTIMIZED FOR SALES) -->
             <section id="leads-tab" class="tab-content">
                 <div class="galaxy-panel">
                     <div class="panel-header">
                         <div>
-                            <h3>Master Lead & Hợp Đồng Tracker</h3>
-                            <p class="panel-desc">Chuẩn hóa cấu trúc Mã Khách Hàng (Vd: BHA-XSTREAM3T-0326-T4) và 31 cột quản lý toàn diện</p>
+                            <h3>Master Lead & Hợp Đồng Tracker (Sales Edition)</h3>
+                            <p class="panel-desc">Tối ưu tinh gọn cho Sale bám deal. Hỗ trợ Thêm Khách mới & Xóa Lead trực tiếp.</p>
                         </div>
-                        <button class="btn btn-galaxy"><i class="fa-solid fa-user-plus"></i> Thêm Hợp Đồng / Lead Mới</button>
+                        <button class="btn btn-galaxy" id="openAddLeadModalBtn">
+                            <i class="fa-solid fa-plus"></i> Thêm Hợp Đồng / Khách Mới
+                        </button>
                     </div>
 
                     <!-- BỘ LỌC NÂNG CAO (MULTI-FILTER BAR) -->
                     <div class="filter-bar">
                         <div class="filter-item search-box">
-                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm Mã KH, Shop Name, Tên Công Ty, SĐT...">
-                        </div>
-                        <div class="filter-item">
-                            <select id="filterStage" class="filter-control">
-                                <option value="all">Tất Cả Giai Đoạn</option>
-                                <option value="Proposal">4. Proposal & Báo Giá</option>
-                                <option value="Triển Khai">Đang Triển Khai</option>
-                                <option value="Nghiệm Thu">Nghiệm Thu / Đã Thu Tiền</option>
-                                <option value="Khách Cũ">Khách Cũ / Retention</option>
-                                <option value="Ngưng">Ngưng Triển Khai</option>
-                                <option value="Cancel">Cancel / Hủy Deal</option>
-                                <option value="Cứu Net">Cứu Net (Win-back)</option>
-                            </select>
-                        </div>
-                        <div class="filter-item">
-                            <select id="filterChannel" class="filter-control">
-                                <option value="all">Tất Cả Loại Hình DN</option>
-                                <option value="Cá Nhân">Cá Nhân / Shop Online</option>
-                                <option value="Công Ty">Công Ty TNHH / Cổ Phần</option>
-                                <option value="Chuỗi">Chuỗi / Retail</option>
-                            </select>
+                            <input type="text" id="searchInput" class="filter-control" placeholder="Tìm Mã KH, Shop Name, Tên Công Ty, Dịch vụ...">
                         </div>
                         <div class="filter-item">
                             <select id="filterService" class="filter-control">
@@ -363,6 +345,7 @@
                         <table class="galaxy-table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>STT</th>
                                     <th>MÃ KHÁCH HÀNG</th>
                                     <th>TÊN SHOP / NHÃN HÀNG</th>
                                     <th>TÊN CÔNG TY / CÁ NHÂN</th>
@@ -373,31 +356,11 @@
                                     <th>NGÀY KÝ</th>
                                     <th>NGÀY BẮT ĐẦU</th>
                                     <th>NGÀY HẾT HẠN</th>
-                                    <th>LOẠI HÌNH DN</th>
-                                    <th>DOANH THU THỰC NHẬN</th>
-                                    <th>VAT</th>
-                                    <th>TỔNG GIÁ TRỊ</th>
-                                    <th>CƠ SỞ HOA HỒNG</th>
-                                    <th>CHỨNG TỪ</th>
-                                    <th>JOB CODE</th>
-                                    <th>WORKING FILE</th>
-                                    <th>SHOP NAME</th>
-                                    <th>T1</th>
-                                    <th>T2</th>
-                                    <th>T3</th>
-                                    <th>T4</th>
-                                    <th>T5 (Phuc Yen)</th>
-                                    <th>GIAI ĐOẠN</th>
-                                    <th>Follow up tiếp theo</th>
-                                    <th>SLA (ngày còn lại)</th>
-                                    <th>Trạng thái SLA</th>
-                                    <th>Cách thức liên hệ</th>
-                                    <th>Giờ</th>
-                                    <th>Ngày</th>
+                                    <th>HÀNH ĐỘNG</th>
                                 </tr>
                             </thead>
                             <tbody id="masterLeadsTbody">
-                                <!-- Dynamic 31-column rendering -->
+                                <!-- Dynamic 10-column rendering optimized for Sales -->
                             </tbody>
                         </table>
                     </div>
@@ -416,7 +379,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Khách Hàng</th>
-                                    <th>SĐT</th>
+                                    <th>Mã KH</th>
                                     <th>Giờ Hẹn Showup</th>
                                     <th>Remind 1 (24h)</th>
                                     <th>Remind 2 (2h)</th>
@@ -495,6 +458,72 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- ADD NEW LEAD / CONTRACT MODAL -->
+    <div class="modal-backdrop" id="addLeadModal">
+        <div class="modal-card galaxy-card" style="width: 540px; text-align: left;">
+            <div class="modal-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <h3 style="text-align: center;">Thêm Khách Hàng / Hợp Đồng Mới</h3>
+            <p style="text-align: center;">Dành riêng cho Sale Hường nhập nhanh thông tin deal</p>
+
+            <form id="addLeadForm">
+                <div class="form-group">
+                    <label>Mã Khách Hàng (Tự tạo hoặc nhập):</label>
+                    <input type="text" id="newCustomerCode" class="form-control" placeholder="Ví dụ: BHA-XSTREAM3T-0326-T4">
+                </div>
+                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
+                    <div class="form-group">
+                        <label>Tên Shop / Nhãn Hàng (*):</label>
+                        <input type="text" id="newShopBrand" class="form-control" placeholder="Mỹ Phẩm Hằng Beauty" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tên Công Ty / Cá Nhân (*):</label>
+                        <input type="text" id="newCompanyName" class="form-control" placeholder="Công Ty TNHH..." required>
+                    </div>
+                </div>
+                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
+                    <div class="form-group">
+                        <label>Gói Dịch Vụ (*):</label>
+                        <select id="newService" class="form-control">
+                            <option value="Xstream AI Live 3M">Xstream AI Live 3M</option>
+                            <option value="Xstream AI Live 1M">Xstream AI Live 1M</option>
+                            <option value="Vận Hành Ecom Shopee 6M">Vận Hành Ecom Shopee 6M</option>
+                            <option value="TikTok Growth Partner">TikTok Growth Partner</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Doanh Thu (VNĐ) (*):</label>
+                        <input type="number" id="newRevenue" class="form-control" placeholder="16000000" required>
+                    </div>
+                </div>
+                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
+                    <div class="form-group">
+                        <label>Mã Hợp Đồng:</label>
+                        <input type="text" id="newContractCode" class="form-control" placeholder="HD-0326-BHA">
+                    </div>
+                    <div class="form-group">
+                        <label>File Hợp Đồng (PDF):</label>
+                        <input type="text" id="newContractFile" class="form-control" placeholder="HD_Signed.pdf">
+                    </div>
+                </div>
+                <div class="grid-2col" style="gap: 12px; margin-bottom: 0;">
+                    <div class="form-group">
+                        <label>Ngày Ký:</label>
+                        <input type="date" id="newSignDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày Bắt Đầu:</label>
+                        <input type="date" id="newStartDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-actions" style="margin-top: 24px;">
+                    <button type="button" class="btn btn-glass" onclick="closeAddLeadModal()">Hủy Bỏ</button>
+                    <button type="submit" class="btn btn-galaxy">Lưu Khách Hàng</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- SECURITY PASSCODE MODAL -->
