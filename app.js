@@ -1,119 +1,180 @@
 /* ==========================================================================
-   Z CRM SYSTEM - SALES EDITION WITH ADD & DELETE LEAD FUNCTIONALITY
+   Z CRM SYSTEM - EXECUTIVE 3-SALE MATRIX REPORT (EXCEL REPLICA)
    ========================================================================== */
 
-// CENTRAL CRM STATE WITH SALES-FOCUSED LEADS
-const DEFAULT_STATE = {
-    targetMoc1: 25000000,
-    targetMoc2: 75000000,
-    leads: [
+// CENTRAL 3-SALE PERFORMANCE MATRIX DATA (EXACT REPLICA FROM EXCEL)
+const MATRIX_DATA = {
+    daysRemaining: 10,
+    sales: {
+        huyen: { name: 'Huyền (Hường)', targetRev: 12000000000, actualRev: 4440559765, rateRev: 37.00 },
+        uyen: { name: 'Uyên', targetRev: 6200000000, actualRev: 1856003515, rateRev: 29.94 },
+        ngan: { name: 'Ngân', targetRev: 1800000000, actualRev: 1086292500, rateRev: 60.35 }
+    },
+    sections: [
         {
-            id: 'L001',
-            customerCode: 'BHA-XSTREAM3T-0326-T4',
-            shopBrand: 'Mỹ Phẩm Hằng Beauty',
-            companyName: 'Công Ty TNHH Beauty Hằng',
-            service: 'Xstream AI Live 3M',
-            contractCode: 'HD-0326-BHA',
-            contractFile: 'HD_BeautyHang_Signed.pdf',
-            revenue: 16000000,
-            signDate: '21/07/2026',
-            startDate: '01/08/2026',
-            endDate: '01/11/2026',
-            stage: '⚡ Đang Triển Khai',
-            forecastType: 'Firm (90%)',
-            forecastDate: '2026-07-22',
-            sale: 'Hường',
-            audioUrl: '',
-            remind1: '✅ Đã Gọi',
-            remind2: '✅ Nhắn Link',
-            showupStatus: '✅ Đã Tham Gia',
-            lostReason: '',
-            newAngle: '',
-            cuuNetStatus: 'Bình thường',
-            sprintId: 'sprint1'
+            title: 'I. KẾT QUẢ KINH DOANH',
+            rows: [
+                {
+                    name: 'Doanh số', unit: 'VNĐ',
+                    huyen: { plan: 12000000000, act: 4440559765, rate: '37.00%' },
+                    uyen: { plan: 6200000000, act: 1856003515, rate: '29.94%' },
+                    ngan: { plan: 1800000000, act: 1086292500, rate: '60.35%' }
+                },
+                {
+                    name: 'SL Đơn hàng', unit: 'Đơn',
+                    huyen: { plan: 10, act: 319, rate: '3157.14%' },
+                    uyen: { plan: 0, act: 118, rate: '0.00%' },
+                    ngan: { plan: 10, act: 128, rate: '1266.82%' }
+                },
+                {
+                    name: 'Giá trị đơn TB', unit: 'VNĐ/Đơn',
+                    huyen: { plan: 178145872, act: 13920250, rate: '7.81%' },
+                    uyen: { plan: 0, act: 15728843, rate: '0.00%' },
+                    ngan: { plan: 178145872, act: 8486660, rate: '4.76%' }
+                },
+                {
+                    name: 'Công nợ phải thu', unit: 'VNĐ',
+                    huyen: { plan: 14898316424, act: 0, rate: '0.00%' },
+                    uyen: { plan: 7865473342, act: 0, rate: '0.00%' },
+                    ngan: { plan: 1825251173, act: 0, rate: '0.00%' }
+                }
+            ]
         },
         {
-            id: 'L002',
-            customerCode: 'NAM-XSTREAM1T-0326-T4',
-            shopBrand: 'Nam Shop Thời Trang',
-            companyName: 'Cá Nhân Đỗ Nam',
-            service: 'Xstream AI Live 1M',
-            contractCode: 'HD-0326-NAM',
-            contractFile: 'HD_NamShop_Signed.pdf',
-            revenue: 12000000,
-            signDate: '21/07/2026',
-            startDate: '01/08/2026',
-            endDate: '01/09/2026',
-            stage: '⚡ Đang Triển Khai',
-            forecastType: 'Firm (85%)',
-            forecastDate: '2026-07-23',
-            sale: 'Hường',
-            audioUrl: '',
-            remind1: '✅ Đã Gọi',
-            remind2: '✅ Nhắn Link',
-            showupStatus: '✅ Đã Tham Gia',
-            lostReason: '',
-            newAngle: '',
-            cuuNetStatus: 'Bình thường',
-            sprintId: 'sprint1'
+            title: 'II. HOẠT ĐỘNG BÁN HÀNG',
+            rows: [
+                {
+                    name: 'Khách đã chăm', unit: 'Khách',
+                    huyen: { plan: 25, act: 5, rate: '20.00%' },
+                    uyen: { plan: 5, act: 1, rate: '6.25%' },
+                    ngan: { plan: 5, act: 1, rate: '6.67%' }
+                },
+                {
+                    name: 'Lượt chăm sóc', unit: 'Lượt',
+                    huyen: { plan: 128, act: 2, rate: '1.56%' },
+                    uyen: { plan: 33, act: 1, rate: '3.03%' },
+                    ngan: { plan: 32, act: 0, rate: '0.00%' }
+                },
+                {
+                    name: 'SL Mẫu gửi', unit: 'Mẫu',
+                    huyen: { plan: 59, act: 2, rate: '3.39%' },
+                    uyen: { plan: 20, act: 1, rate: '5.00%' },
+                    ngan: { plan: 19, act: 0, rate: '0.00%' }
+                },
+                {
+                    name: 'SL Báo giá', unit: 'Báo giá',
+                    huyen: { plan: 45, act: 0, rate: '0.00%' },
+                    uyen: { plan: 22, act: 0, rate: '0.00%' },
+                    ngan: { plan: 1, act: 0, rate: '0.00%' }
+                }
+            ]
         },
         {
-            id: 'L003',
-            customerCode: 'MINH-ECOM6T-0326-T4',
-            shopBrand: 'Điện Máy Minh Gia',
-            companyName: 'Công Ty Cổ Phần Minh Gia',
-            service: 'Vận Hành Ecom Shopee 6M',
-            contractCode: 'HD-0326-MINH',
-            contractFile: 'HD_MinhGia_Signed.pdf',
-            revenue: 28000000,
-            signDate: '20/07/2026',
-            startDate: '25/07/2026',
-            endDate: '25/01/2027',
-            stage: '✅ Nghiệm Thu (Thu Tiền)',
-            forecastType: 'Firm (100%)',
-            forecastDate: '2026-07-20',
-            sale: 'Hường',
-            audioUrl: '',
-            remind1: '-',
-            remind2: '-',
-            showupStatus: '-',
-            lostReason: '',
-            newAngle: '',
-            cuuNetStatus: 'Bình thường',
-            sprintId: 'sprint1'
-        }
-    ],
-    improvements: [
+            title: 'III. HIỆU QUẢ CHUYỂN ĐỔI',
+            rows: [
+                {
+                    name: 'Doanh số KH mới', unit: 'VNĐ',
+                    huyen: { plan: 0, act: 0, rate: '0.00%' },
+                    uyen: { plan: 0, act: 0, rate: '0.00%' },
+                    ngan: { plan: 0, act: 0, rate: '0.00%' }
+                },
+                {
+                    name: 'SL đơn KH mới', unit: 'Đơn',
+                    huyen: { plan: 0, act: 0, rate: '0.00%' },
+                    uyen: { plan: 0, act: 0, rate: '0.00%' },
+                    ngan: { plan: 0, act: 0, rate: '0.00%' }
+                },
+                {
+                    name: 'Tỷ lệ phản hồi mẫu', unit: '%',
+                    huyen: { plan: 0, act: 0, rate: '0.00%' },
+                    uyen: { plan: 0, act: 0, rate: '0.00%' },
+                    ngan: { plan: 0, act: 0, rate: '0.00%' }
+                },
+                {
+                    name: 'Tỷ lệ báo giá thành đơn', unit: '%',
+                    huyen: { plan: 0, act: 0, rate: '0.00%' },
+                    uyen: { plan: 0, act: 0, rate: '0.00%' },
+                    ngan: { plan: 0, act: 0, rate: '0.00%' }
+                }
+            ]
+        },
         {
-            id: 'IMP01',
-            author: 'Hường (Solo Sale)',
-            date: '21/07/2026',
-            problem: 'Khách chê giá gói Xstream 1 tháng.',
-            solution: 'Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán mốc 25M.',
-            budget: '0 VNĐ',
-            status: 'approved',
-            statusText: '✅ Sếp Phong Đã Duyệt'
-        }
-    ],
-    checkins: [
-        {
-            date: '21/07/2026',
-            sale: 'Hường',
-            timeIn: '08:25 AM',
-            targetCalls: '20 calls',
-            timeOut: '17:35 PM',
-            actualCalls: '22 calls',
-            dealsWon: '1 Deal (14M)',
-            status: '✅ Chuẩn KPI'
+            title: 'IV. DỰ BÁO & QUẢN TRỊ (10 NGÀY CÒN LẠI)',
+            rows: [
+                {
+                    name: 'Doanh số/ngày cần đạt', unit: 'VNĐ/Ngày', isYellow: true,
+                    huyen: { plan: '755,944,024 đ', act: '755,944,024 đ', rate: 'CẦN ĐẠT' },
+                    uyen: { plan: '434,399,648 đ', act: '160,888,759 đ', rate: 'CẦN ĐẠT' },
+                    ngan: { plan: '71,370,750 đ', act: '26,433,611 đ', rate: 'CẦN ĐẠT' }
+                },
+                {
+                    name: 'Đơn/ngày cần đạt', unit: 'Đơn/Ngày', isYellow: true,
+                    huyen: { plan: '0 Đơn', act: '-31 Đơn', rate: 'ĐẠT KPI' },
+                    uyen: { plan: '0 Đơn', act: '-4 Đơn', rate: 'ĐẠT KPI' },
+                    ngan: { plan: '0 Đơn', act: '-4 Đơn', rate: 'ĐẠT KPI' }
+                },
+                {
+                    name: 'Đơn hàng dự kiến', unit: 'Đơn',
+                    huyen: { plan: 5, act: 12, rate: '240%' },
+                    uyen: { plan: 3, act: 5, rate: '166%' },
+                    ngan: { plan: 2, act: 4, rate: '200%' }
+                },
+                {
+                    name: 'Doanh số dự kiến', unit: 'VNĐ',
+                    huyen: { plan: 5000000000, act: 6000000000, rate: '120%' },
+                    uyen: { plan: 2500000000, act: 3000000000, rate: '120%' },
+                    ngan: { plan: 1000000000, act: 1200000000, rate: '120%' }
+                }
+            ]
         }
     ]
 };
 
-// Filter State
-let currentFilters = {
-    search: '',
-    service: 'all'
-};
+// MASTER LEADS ASSIGNED TO 3 SALES
+const DEFAULT_LEADS = [
+    {
+        id: 'L001',
+        customerCode: 'BHA-XSTREAM3T-0326-T4',
+        shopBrand: 'Mỹ Phẩm Hằng Beauty',
+        companyName: 'Công Ty TNHH Beauty Hằng',
+        sale: 'Huyền',
+        service: 'Xstream AI Live 3M',
+        contractCode: 'HD-0326-BHA',
+        revenue: 16000000,
+        signDate: '21/07/2026',
+        startDate: '01/08/2026',
+        forecastType: 'Firm (90%)',
+        forecastDate: '2026-07-22'
+    },
+    {
+        id: 'L002',
+        customerCode: 'NAM-XSTREAM1T-0326-T4',
+        shopBrand: 'Nam Shop Thời Trang',
+        companyName: 'Cá Nhân Đỗ Nam',
+        sale: 'Uyên',
+        service: 'Xstream AI Live 1M',
+        contractCode: 'HD-0326-NAM',
+        revenue: 12000000,
+        signDate: '21/07/2026',
+        startDate: '01/08/2026',
+        forecastType: 'Firm (85%)',
+        forecastDate: '2026-07-23'
+    },
+    {
+        id: 'L003',
+        customerCode: 'MINH-ECOM6T-0326-T4',
+        shopBrand: 'Điện Máy Minh Gia',
+        companyName: 'Công Ty Cổ Phần Minh Gia',
+        sale: 'Ngân',
+        service: 'Vận Hành Ecom Shopee 6M',
+        contractCode: 'HD-0326-MINH',
+        revenue: 28000000,
+        signDate: '20/07/2026',
+        startDate: '25/07/2026',
+        forecastType: 'Firm (100%)',
+        forecastDate: '2026-07-20'
+    }
+];
 
 let CRMState = loadState();
 let isUnlocked = false;
@@ -121,15 +182,35 @@ let pendingTabTarget = null;
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V4');
+    const saved = localStorage.getItem('Z_CRM_STATE_V5');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
-    return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    return {
+        matrix: MATRIX_DATA,
+        leads: DEFAULT_LEADS,
+        improvements: [
+            {
+                id: 'IMP01',
+                author: 'Hường (Solo Sale)',
+                date: '21/07/2026',
+                problem: 'Khách chê giá gói Xstream 1 tháng.',
+                solution: 'Tặng kèm 10 kịch bản live cho khách chốt trước ngày 05/08 để hỗ trợ cán target 3 Sale.',
+                budget: '0 VNĐ',
+                status: 'approved',
+                statusText: '✅ Sếp Phong Đã Duyệt'
+            }
+        ],
+        checkins: [
+            { date: '21/07/2026', sale: 'Huyền', timeIn: '08:25 AM', targetCalls: '30 calls', timeOut: '17:35 PM', actualCalls: '32 calls', dealsWon: '1 Deal (16M)', status: '✅ Chuẩn KPI' },
+            { date: '21/07/2026', sale: 'Uyên', timeIn: '08:28 AM', targetCalls: '25 calls', timeOut: '17:30 PM', actualCalls: '26 calls', dealsWon: '1 Deal (12M)', status: '✅ Chuẩn KPI' },
+            { date: '21/07/2026', sale: 'Ngân', timeIn: '08:30 AM', targetCalls: '25 calls', timeOut: '17:40 PM', actualCalls: '28 calls', dealsWon: '1 Deal (28M)', status: '✅ Chuẩn KPI' }
+        ]
+    };
 }
 
 function saveState() {
-    localStorage.setItem('Z_CRM_STATE_V4', JSON.stringify(CRMState));
+    localStorage.setItem('Z_CRM_STATE_V5', JSON.stringify(CRMState));
     renderAll();
 }
 
@@ -148,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function renderAll() {
-    renderDashboardStats();
+    renderMatrixReport();
     renderMasterLeads();
     renderForecastTable();
     renderRemindTable();
@@ -158,57 +239,91 @@ function renderAll() {
 }
 
 /* ==========================================================================
-   1. DASHBOARD STATS (DYNAMIC REVENUE MATH)
+   1. DASHBOARD MATRIX REPORT - EXACT 3-SALE EXCEL REPLICA
    ========================================================================== */
 
-function renderDashboardStats() {
-    const actualWon = CRMState.leads
-        .filter(l => l.stage && (l.stage.includes('Nghiệm Thu') || l.stage.includes('Thu Tiền') || l.stage.includes('Won')))
-        .reduce((sum, l) => sum + (l.revenue || 0), 0);
+function renderMatrixReport() {
+    const tbody = document.getElementById('matrixTbody');
+    if (!tbody) return;
 
-    const percentWon = Math.min(100, Math.round((actualWon / CRMState.targetMoc1) * 100));
-    const remainingWon = Math.max(0, CRMState.targetMoc1 - actualWon);
+    let html = '';
 
-    const moc1ValEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-value');
-    const moc1ProgEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .progress');
-    const moc1SubEl = document.querySelector('#dashboard-tab .stat-card:nth-child(1) .card-sub');
-
-    if (moc1ValEl) moc1ValEl.textContent = formatVNĐ(actualWon);
-    if (moc1ProgEl) moc1ProgEl.style.width = `${percentWon}%`;
-    if (moc1SubEl) moc1SubEl.textContent = `Đạt ${percentWon}% - Còn thiếu ${formatVNĐ(remainingWon)} (15 Ngày)`;
-
-    // Render Top Hot Deals
-    const topDealsTbody = document.querySelector('#dashboard-tab .galaxy-table tbody');
-    if (topDealsTbody) {
-        const hotLeads = CRMState.leads.slice(0, 4);
-        topDealsTbody.innerHTML = hotLeads.map(l => `
-            <tr>
-                <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span><span class="cust-secondary">${escapeHtml(l.customerCode)}</span></td>
-                <td>${escapeHtml(l.service)}</td>
-                <td class="text-cyan">${formatVNĐ(l.revenue)}</td>
-                <td><span class="badge badge-hot">${l.forecastType || 'Firm (90%)'}</span></td>
-                <td>${escapeHtml(l.forecastDate || '22/07/2026')}</td>
+    CRMState.matrix.sections.forEach(section => {
+        // Section title header row
+        html += `
+            <tr class="row-header-section">
+                <td colspan="14">${escapeHtml(section.title)}</td>
             </tr>
-        `).join('');
+        `;
+
+        section.rows.forEach(r => {
+            const isYellowClass = r.isYellow ? 'row-highlight-yellow' : '';
+
+            // Calculate Team Totals
+            const totalPlan = typeof r.huyen.plan === 'number' ? (r.huyen.plan + r.uyen.plan + r.ngan.plan) : r.huyen.plan;
+            const totalAct = typeof r.huyen.act === 'number' ? (r.huyen.act + r.uyen.act + r.ngan.act) : r.huyen.act;
+            const totalRate = (typeof totalPlan === 'number' && totalPlan > 0) ? ((totalAct / totalPlan) * 100).toFixed(2) + '%' : r.huyen.rate;
+
+            html += `
+                <tr class="${isYellowClass}">
+                    <td>${escapeHtml(r.name)}</td>
+                    <td style="text-align:center;">${escapeHtml(r.unit)}</td>
+
+                    <!-- SALE 1: HUYỀN -->
+                    <td>${formatVal(r.huyen.plan, r.unit)}</td>
+                    <td>${formatVal(r.huyen.act, r.unit)}</td>
+                    <td><strong class="text-cyan">${escapeHtml(r.huyen.rate)}</strong></td>
+
+                    <!-- SALE 2: UYÊN -->
+                    <td>${formatVal(r.uyen.plan, r.unit)}</td>
+                    <td>${formatVal(r.uyen.act, r.unit)}</td>
+                    <td><strong class="text-purple">${escapeHtml(r.uyen.rate)}</strong></td>
+
+                    <!-- SALE 3: NGÂN -->
+                    <td>${formatVal(r.ngan.plan, r.unit)}</td>
+                    <td>${formatVal(r.ngan.act, r.unit)}</td>
+                    <td><strong class="text-pink">${escapeHtml(r.ngan.rate)}</strong></td>
+
+                    <!-- TỔNG TEAM -->
+                    <td>${formatVal(totalPlan, r.unit)}</td>
+                    <td>${formatVal(totalAct, r.unit)}</td>
+                    <td><strong class="text-green">${escapeHtml(totalRate)}</strong></td>
+                </tr>
+            `;
+        });
+    });
+
+    tbody.innerHTML = html;
+}
+
+function formatVal(val, unit) {
+    if (typeof val === 'string') return val;
+    if (typeof val === 'number') {
+        if (unit.includes('VNĐ')) return val.toLocaleString('vi-VN') + ' đ';
+        return val.toLocaleString('vi-VN');
     }
+    return val || 0;
 }
 
 /* ==========================================================================
-   2. MASTER LEAD TRACKER - STREAMLINED SALES EDITION (10 COLUMNS)
+   2. MASTER LEAD TRACKER - FILTERED BY 3 SALES
    ========================================================================== */
 
 function initFilterBar() {
     const searchInput = document.getElementById('searchInput');
+    const saleSelect = document.getElementById('filterSale');
     const serviceSelect = document.getElementById('filterService');
     const resetBtn = document.getElementById('resetFilterBtn');
 
     if (searchInput) searchInput.addEventListener('input', (e) => { currentFilters.search = e.target.value.toLowerCase(); renderMasterLeads(); });
+    if (saleSelect) saleSelect.addEventListener('change', (e) => { currentFilters.sale = e.target.value; renderMasterLeads(); });
     if (serviceSelect) serviceSelect.addEventListener('change', (e) => { currentFilters.service = e.target.value; renderMasterLeads(); });
 
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            currentFilters = { search: '', service: 'all' };
+            currentFilters = { search: '', sale: 'all', service: 'all' };
             if (searchInput) searchInput.value = '';
+            if (saleSelect) saleSelect.value = 'all';
             if (serviceSelect) serviceSelect.value = 'all';
             renderMasterLeads();
         });
@@ -224,16 +339,16 @@ function renderMasterLeads() {
         const matchSearch = !currentFilters.search || 
             l.customerCode.toLowerCase().includes(currentFilters.search) || 
             l.shopBrand.toLowerCase().includes(currentFilters.search) || 
-            l.companyName.toLowerCase().includes(currentFilters.search) || 
-            l.contractCode.toLowerCase().includes(currentFilters.search);
+            l.companyName.toLowerCase().includes(currentFilters.search);
 
-        const matchService = currentFilters.service === 'all' || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
+        const matchSale = !currentFilters.sale || currentFilters.sale === 'all' || l.sale.toLowerCase().includes(currentFilters.sale.toLowerCase());
+        const matchService = !currentFilters.service || currentFilters.service === 'all' || l.service.toLowerCase().includes(currentFilters.service.toLowerCase());
 
-        return matchSearch && matchService;
+        return matchSearch && matchSale && matchService;
     });
 
     if (filteredLeads.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding: 24px; color: var(--text-muted);">Không tìm thấy khách hàng nào. Bấm "Thêm Hợp Đồng / Khách Mới" để tạo mới!</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 24px; color: var(--text-muted);">Không tìm thấy hợp đồng nào cho bộ lọc này.</td></tr>`;
         return;
     }
 
@@ -243,29 +358,30 @@ function renderMasterLeads() {
             <td><span class="code-pill">${escapeHtml(l.customerCode)}</span></td>
             <td><strong>${escapeHtml(l.shopBrand)}</strong></td>
             <td><span class="cust-primary">${escapeHtml(l.companyName)}</span></td>
+            <td><span class="badge ${getSaleBadgeClass(l.sale)}">${escapeHtml(l.sale)}</span></td>
             <td>${escapeHtml(l.service)}</td>
-            <td><span class="cust-secondary">${escapeHtml(l.contractCode || 'HD-PENDING')}</span></td>
-            <td>
-                <a href="#" class="btn btn-xs btn-glass" onclick="alert('File Hợp Đồng: ${escapeHtml(l.contractFile || 'Chưa tải lên')}')">
-                    <i class="fa-solid fa-file-pdf"></i> ${escapeHtml(l.contractFile || 'Chi tiết HĐ')}
-                </a>
-            </td>
+            <td><span class="cust-secondary">${escapeHtml(l.contractCode)}</span></td>
             <td class="text-cyan font-bold">${formatVNĐ(l.revenue)}</td>
-            <td>${escapeHtml(l.signDate || '21/07/2026')}</td>
-            <td>${escapeHtml(l.startDate || '01/08/2026')}</td>
-            <td>${escapeHtml(l.endDate || '01/11/2026')}</td>
+            <td>${escapeHtml(l.signDate)}</td>
+            <td>${escapeHtml(l.startDate)}</td>
             <td>
                 <div style="display:flex; gap: 6px;">
-                    <button class="btn btn-xs btn-purple" title="Sửa thông tin" onclick="editLead('${l.id}')">
+                    <button class="btn btn-xs btn-purple" title="Sửa doanh thu" onclick="editLead('${l.id}')">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button class="btn btn-xs btn-pink" title="Xóa khách" onclick="deleteLead('${l.id}', '${escapeHtml(l.shopBrand)}')">
+                    <button class="btn btn-xs btn-pink" title="Xóa hợp đồng" onclick="deleteLead('${l.id}', '${escapeHtml(l.shopBrand)}')">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
             </td>
         </tr>
     `).join('');
+}
+
+function getSaleBadgeClass(sale) {
+    if (sale.includes('Huyền') || sale.includes('Hường')) return 'badge-hot';
+    if (sale.includes('Uyên')) return 'badge-purple';
+    return 'badge-warm';
 }
 
 /* ==========================================================================
@@ -285,12 +401,12 @@ function initAddLeadSystem() {
             
             const shopBrand = document.getElementById('newShopBrand').value.trim();
             const companyName = document.getElementById('newCompanyName').value.trim();
+            const sale = document.getElementById('newSale').value;
             const service = document.getElementById('newService').value;
             const revenue = parseFloat(document.getElementById('newRevenue').value) || 0;
             let code = document.getElementById('newCustomerCode').value.trim();
 
             if (!code) {
-                // Auto generate formula code e.g. BHA-XSTREAM3T-0726-T4
                 const acronym = shopBrand.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 3) || 'CUST';
                 code = `${acronym}-${service.includes('Xstream') ? 'XSTREAM' : 'ECOM'}-0726-T4`;
             }
@@ -300,24 +416,21 @@ function initAddLeadSystem() {
                 customerCode: code,
                 shopBrand: shopBrand,
                 companyName: companyName,
+                sale: sale,
                 service: service,
                 contractCode: document.getElementById('newContractCode').value.trim() || 'HD-' + Date.now().toString().slice(-4),
-                contractFile: document.getElementById('newContractFile').value.trim() || 'HD_Signed.pdf',
                 revenue: revenue,
                 signDate: document.getElementById('newSignDate').value || '21/07/2026',
-                startDate: document.getElementById('newStartDate').value || '01/08/2026',
-                endDate: '01/11/2026',
-                stage: '✅ Nghiệm Thu (Thu Tiền)',
+                startDate: '01/08/2026',
                 forecastType: 'Firm (100%)',
-                forecastDate: '2026-07-21',
-                sale: 'Hường'
+                forecastDate: '2026-07-21'
             };
 
             CRMState.leads.unshift(newLead);
             saveState();
             closeAddLeadModal();
             form.reset();
-            alert(`🎉 Đã thêm thành công khách hàng "${shopBrand}" với mã ${code}! Doanh thu Dashboard đã được tính tự động.`);
+            alert(`🎉 Đã thêm hợp đồng mới cho ${shopBrand} (Sale: ${sale}) với mã ${code}!`);
         });
     }
 }
@@ -327,10 +440,10 @@ function closeAddLeadModal() {
 }
 
 function deleteLead(leadId, shopBrand) {
-    if (confirm(`⚠️ Bạn có chắc chắn muốn XÓA khách hàng "${shopBrand}" khỏi hệ thống không? Action này không thể hoàn tác.`)) {
+    if (confirm(`⚠️ XÓA hợp đồng "${shopBrand}" khỏi danh sách?`)) {
         CRMState.leads = CRMState.leads.filter(l => l.id !== leadId);
         saveState();
-        alert(`✅ Đã xóa khách hàng "${shopBrand}" thành công!`);
+        alert(`✅ Đã xóa hợp đồng "${shopBrand}" thành công!`);
     }
 }
 
@@ -338,7 +451,7 @@ function editLead(leadId) {
     const lead = CRMState.leads.find(l => l.id === leadId);
     if (!lead) return;
 
-    const newRev = prompt(`Sửa doanh thu cho ${lead.shopBrand} (VNĐ):`, lead.revenue);
+    const newRev = prompt(`Sửa doanh thu hợp đồng ${lead.shopBrand} (VNĐ):`, lead.revenue);
     if (newRev !== null && !isNaN(parseFloat(newRev))) {
         lead.revenue = parseFloat(newRev);
         saveState();
@@ -362,7 +475,7 @@ function renderForecastTable() {
             <td class="text-gradient">${formatVNĐ(l.revenue)}</td>
             <td><span class="badge ${l.forecastType && l.forecastType.includes('Firm') ? 'badge-hot' : 'badge-warm'}">${escapeHtml(l.forecastType || 'Firm (90%)')}</span></td>
             <td>${escapeHtml(l.forecastDate || '22/07/2026')}</td>
-            <td>${escapeHtml(l.sale || 'Hường')}</td>
+            <td><strong>${escapeHtml(l.sale)}</strong></td>
             <td>21/07 14:00</td>
             <td>
                 <button class="btn btn-xs btn-green" onclick="quickStageAdvance('${l.id}')">
@@ -384,12 +497,12 @@ function renderRemindTable() {
             <td>${index + 1}</td>
             <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span></td>
             <td>${escapeHtml(l.customerCode)}</td>
+            <td><strong>${escapeHtml(l.sale)}</strong></td>
             <td>21/07 14:00</td>
             <td><span class="badge badge-green">✅ Đã Gọi</span></td>
             <td><span class="badge badge-green">✅ Nhắn Link</span></td>
             <td><span class="badge badge-green">✅ Đã Tham Gia</span></td>
             <td>Call nhắc chốt HĐ</td>
-            <td>${escapeHtml(l.sale || 'Hường')}</td>
         </tr>
     `).join('');
 }
@@ -402,15 +515,16 @@ function renderCuuNetTable() {
         <tr>
             <td>${index + 1}</td>
             <td><span class="cust-primary">${escapeHtml(l.shopBrand)}</span></td>
+            <td><strong>${escapeHtml(l.sale)}</strong></td>
             <td>${escapeHtml(l.service)}</td>
             <td>
                 <button class="btn btn-xs btn-purple" onclick="playMockAudio('${escapeHtml(l.shopBrand)}')">
                     Nghe Audio Cuộc Gọi
                 </button>
             </td>
-            <td>${escapeHtml(l.lostReason || 'Chưa phân tích rõ bài toán ROI')}</td>
-            <td><strong>${escapeHtml(l.newAngle || 'Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live')}</strong></td>
-            <td><span class="badge badge-yellow">${escapeHtml(l.cuuNetStatus || '⏳ Đang Bám Chốt')}</span></td>
+            <td>Chưa phân tích rõ bài toán ROI</td>
+            <td><strong>Hường gọi lại: Phân tích ROI thực tế + Tặng 5 kịch bản live</strong></td>
+            <td><span class="badge badge-yellow">⏳ Đang Bám Chốt</span></td>
         </tr>
     `).join('');
 }
@@ -474,7 +588,7 @@ function quickStageAdvance(leadId) {
     if (lead) {
         lead.stage = '✅ Nghiệm Thu (Thu Tiền)';
         saveState();
-        alert(`🎉 Chúc mừng Hường! Đã chuyển ${lead.shopBrand} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})! Doanh thu Dashboard đã được cộng tự động.`);
+        alert(`🎉 Chúc mừng ${lead.sale}! Đã chuyển ${lead.shopBrand} sang Nghiệm Thu (${formatVNĐ(lead.revenue)})!`);
     }
 }
 
@@ -576,10 +690,10 @@ function updatePageTitle(tabId) {
     const subtitleEl = document.getElementById('pageSubtitle');
 
     const titles = {
-        'dashboard': { title: 'Dashboard Overview Sếp', subtitle: 'Đo lường doanh số mốc 25M (trước 05/08) & 75M (Tháng 8)' },
-        'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (Solo Sale)' },
+        'dashboard': { title: 'KẾ HOẠCH VÀ BÁO CÁO THÁNG 07/2026 (TEAM 3 SALE)', subtitle: 'Theo dõi chỉ số KPI & Doanh số thực tế của 3 Sale: Huyền (Hường) - Uyên - Ngân' },
+        'forecast': { title: 'Chu Kỳ 3 Ngày & Deal Forecasting', subtitle: 'Đo lường & dự báo số deal về trong chu kỳ 3 ngày (3 Sale)' },
         'improvements': { title: 'Hộp Đề Xuất Cải Tiến', subtitle: 'Gửi khuyến nghị kịch bản & ưu đãi cho 2 Sếp phê duyệt' },
-        'leads': { title: 'Master Lead & Hợp Đồng Tracker (Sales Edition)', subtitle: 'Tối ưu tinh gọn cho Sale bám deal. Hỗ trợ Thêm Khách mới & Xóa Lead trực tiếp.' },
+        'leads': { title: 'Master Lead & Hợp Đồng Tracker (Phân Cho 3 Sale)', subtitle: 'Theo dõi thông tin chi tiết từng hợp đồng phân bổ cho 3 Sale: Huyền (Hường), Uyên, Ngân.' },
         'remind': { title: 'Call Remind & Showup Tracker', subtitle: 'Quản lý lịch nhắc 24h & 2h cho gói Xstream' },
         'cuunet': { title: 'Leader Cứu Net & File Audio', subtitle: 'Nghe lại ghi âm cuộc gọi & chuyển angle chốt mới' },
         'checkin': { title: 'Remind & Chấm Công Daily', subtitle: 'Điểm danh Check-in sáng 08:30 & Check-out chiều 17:30' }
@@ -640,7 +754,7 @@ function closeSecurityModal() {
 
 function doCheckIn(type) {
     if (type === 'in') {
-        alert('Check-in thành công 08:25 AM! Chúc Hường chốt bùng nổ 25M trước 05/08!');
+        alert('Check-in thành công 08:25 AM! Chúc Team 3 Sale bùng nổ KPI!');
     } else {
         alert('Check-out thành công 17:35 PM! Đã lưu tiến độ làm việc trong ngày!');
     }
