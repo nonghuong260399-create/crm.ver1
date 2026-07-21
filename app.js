@@ -522,15 +522,15 @@ function renderMasterLeads() {
         const lastResult = (l.activities && l.activities.length > 0) ? l.activities[l.activities.length - 1].result : (l.stageResult || 'Đã tiếp cận');
 
         return `
-        <tr class="${slaRowClass} ${isSelected ? 'row-selected' : ''}" data-lead-id="${l.id}">
+        <tr class="lead-row ${slaRowClass} ${isSelected ? 'row-selected' : ''}" data-lead-id="${l.id}" onclick="openLeadDetail('${l.id}')">
             <td class="td-checkbox" onclick="event.stopPropagation()">
                 <input type="checkbox" class="lead-checkbox" value="${l.id}" ${isSelected ? 'checked' : ''} onchange="toggleLeadSelect('${l.id}', this.checked)">
             </td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')">${esc(l.date)}</td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="badge badge-purple">${esc(l.source)}</span></td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><strong>${esc(l.zaloName)}</strong></td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary">${esc(l.brand)}</span></td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-secondary">${esc(l.phone)}</span></td>
+            <td>${esc(l.date)}</td>
+            <td><span class="badge badge-purple">${esc(l.source)}</span></td>
+            <td><strong>${esc(l.zaloName)}</strong></td>
+            <td><span class="cust-primary">${esc(l.brand)}</span></td>
+            <td><span class="cust-secondary">${esc(l.phone)}</span></td>
             <td style="max-width:140px;font-size:11px;" title="${act1 ? esc(act1.date + ' - ' + act1.note) : ''}">${act1 ? esc(act1.note) : '-'}</td>
             <td style="max-width:140px;font-size:11px;" title="${act2 ? esc(act2.date + ' - ' + act2.note) : ''}">${act2 ? esc(act2.note) : '-'}</td>
             <td style="max-width:140px;font-size:11px;">
@@ -538,8 +538,8 @@ function renderMasterLeads() {
                 ${actCount > 3 ? `<span class="badge badge-muted" style="margin-left:4px;">+${actCount - 3}</span>` : ''}
                 <button class="btn btn-xs btn-glass" style="margin-left:4px;" onclick="event.stopPropagation();openActivityLog('${l.id}')" title="Xem & Ghi chú">+</button>
             </td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary" style="font-size:12px;">${esc(lastResult)}</span></td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="badge ${getHotBadge(l.customerClass)}">${esc(l.customerClass)}</span></td>
+            <td><span class="cust-primary" style="font-size:12px;">${esc(lastResult)}</span></td>
+            <td><span class="badge ${getHotBadge(l.customerClass)}">${esc(l.customerClass)}</span></td>
             <td>${esc(l.category)}</td>
             <td>${esc(l.mhkd)}</td>
             <td>
