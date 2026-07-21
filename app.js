@@ -459,14 +459,20 @@ function renderMasterLeads() {
     if (!tbody) return;
 
     let filtered = CRMState.leads.filter(l => {
-        if (l._archived) return false;
+        const isArchivedFilter = currentFilters.stage === 'ARCHIVED';
+        if (isArchivedFilter) {
+            if (!l._archived) return false;
+        } else {
+            if (l._archived) return false;
+        }
+
         const matchSearch = !currentFilters.search ||
             (l.zaloName || '').toLowerCase().includes(currentFilters.search) ||
             (l.brand || '').toLowerCase().includes(currentFilters.search) ||
             (l.phone || '').includes(currentFilters.search) ||
             (l.source || '').toLowerCase().includes(currentFilters.search);
 
-        const matchStage = currentFilters.stage === 'all' || l.stage === currentFilters.stage;
+        const matchStage = isArchivedFilter || currentFilters.stage === 'all' || l.stage === currentFilters.stage;
         const matchSource = currentFilters.source === 'all' || (l.source || '').toLowerCase().includes(currentFilters.source.toLowerCase());
         const matchCategory = currentFilters.category === 'all' || (l.category || '').toLowerCase().includes(currentFilters.category.toLowerCase());
         const matchSale = currentFilters.sale === 'all' || (l.sale || '').toLowerCase().includes(currentFilters.sale.toLowerCase());
@@ -593,9 +599,28 @@ function bulkArchive() {
     CRMState.leads.forEach(l => {
         if (selectedLeads.has(l.id)) { l._archived = true; count++; }
     });
-    showToast('info', 'Đã lưu trữ', `${count} khách hàng đã chuyển vào Lưu Trữ. Vào tab Lưu Trữ để xem.`);
+    showToast('info', 'Đã lưu trữ', `${count} khách hàng đã chuyển vào Lưu Trữ. Bạn có thể chọn "Khách Đã Lưu Trữ" ở bộ lọc Pipeline để xem và lấy lại bất kỳ lúc nào.`);
     selectedLeads.clear();
     saveState();
+}
+
+function bulkRestore() {
+    if (selectedLeads.size === 0) return;
+    let count = 0;
+    CRMState.leads.forEach(l => {
+        if (selectedLeads.has(l.id)) { l._archived = false; count++; }
+    });
+    showToast('success', 'Đã khôi phục', `${count} khách hàng đã được đưa trở lại danh sách làm việc!`);
+    selectedLeads.clear();
+    saveState();
+}
+
+function restoreSingleLead(leadId) {
+    const lead = CRMState.leads.find(l => l.id === leadId);
+    if (!lead) return;
+    lead._archived = false;
+    saveState();
+    showToast('success', 'Đã khôi phục', `Khách hàng ${lead.brand || lead.zaloName} đã được quay lại danh sách chính!`);
 }
 
 function bulkChangeStage(newStage) {
@@ -668,6 +693,7 @@ function openLeadDetail(leadId) {
                 <h2>${esc(lead.brand || lead.zaloName)}</h2>
                 <span class="status-pill ${sd.css}">${sd.icon} ${sd.label}</span>
                 <span class="badge ${getHotBadge(lead.customerClass)}">${esc(lead.customerClass)}</span>
+                ${lead._archived ? '<span class="badge badge-muted">📦 Đã Lưu Trữ</span>' : ''}
             </div>
             <div class="detail-meta">
                 <span>ID: ${esc(lead.id)}</span> · <span>Ngày tạo: ${esc(lead.date)}</span> · <span>Sale: <strong>${esc(lead.sale)}</strong></span>
@@ -722,8 +748,12 @@ function openLeadDetail(leadId) {
         </div>
 
         <div class="detail-actions">
-            <button class="btn btn-galaxy" onclick="closeLeadDetail(); openActivityLog('${lead.id}');"><i class="fa-solid fa-pen"></i> Ghi Chú Mới</button>
-            <button class="btn btn-purple" onclick="quickStageAdvance('${lead.id}'); closeLeadDetail();"><i class="fa-solid fa-arrow-right"></i> Chuyển Nghiệm Thu</button>
+            ${lead._archived ? `
+                <button class="btn btn-green" onclick="restoreSingleLead('${lead.id}'); closeLeadDetail();"><i class="fa-solid fa-rotate-left"></i> Khôi Phục Về Danh Sách Bán Hàng</button>
+            ` : `
+                <button class="btn btn-galaxy" onclick="closeLeadDetail(); openActivityLog('${lead.id}');"><i class="fa-solid fa-pen"></i> Ghi Chú Mới</button>
+                <button class="btn btn-purple" onclick="quickStageAdvance('${lead.id}'); closeLeadDetail();"><i class="fa-solid fa-arrow-right"></i> Chuyển Nghiệm Thu</button>
+            `}
             <button class="btn btn-glass" style="color:var(--red-rose);" onclick="if(confirm('Xóa ${esc(lead.brand)} khỏi hệ thống?')) { deleteSingleLead('${lead.id}'); closeLeadDetail(); }"><i class="fa-solid fa-trash"></i> Xóa</button>
         </div>
     `;
