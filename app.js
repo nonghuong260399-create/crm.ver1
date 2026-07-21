@@ -519,6 +519,7 @@ function renderMasterLeads() {
         const act1 = l.activities?.[0];
         const act2 = l.activities?.[1];
         const act3 = l.activities?.[2];
+        const lastResult = (l.activities && l.activities.length > 0) ? l.activities[l.activities.length - 1].result : (l.stageResult || 'Đã tiếp cận');
 
         return `
         <tr class="${slaRowClass} ${isSelected ? 'row-selected' : ''}" data-lead-id="${l.id}">
@@ -537,7 +538,7 @@ function renderMasterLeads() {
                 ${actCount > 3 ? `<span class="badge badge-muted" style="margin-left:4px;">+${actCount - 3}</span>` : ''}
                 <button class="btn btn-xs btn-glass" style="margin-left:4px;" onclick="event.stopPropagation();openActivityLog('${l.id}')" title="Xem & Ghi chú">+</button>
             </td>
-            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary" style="font-size:12px;">${esc(l.customerInfo ? l.customerInfo.slice(0, 30) : '')}</span></td>
+            <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="cust-primary" style="font-size:12px;">${esc(lastResult)}</span></td>
             <td class="td-clickable" onclick="openLeadDetail('${l.id}')"><span class="badge ${getHotBadge(l.customerClass)}">${esc(l.customerClass)}</span></td>
             <td>${esc(l.category)}</td>
             <td>${esc(l.mhkd)}</td>
