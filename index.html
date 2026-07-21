@@ -220,10 +220,31 @@
                             </select>
                         </div>
                         <div class="filter-item">
-                            <input type="date" id="filterDateFrom" class="filter-control" title="Từ ngày">
+                            <select id="filterPeriod2026" class="filter-control" title="Lọc Nhanh Thời Gian Lịch 2026">
+                                <option value="all">📅 Tất Cả Lịch 2026</option>
+                                <option value="T1_2026">Tháng 1 / 2026</option>
+                                <option value="T2_2026">Tháng 2 / 2026</option>
+                                <option value="T3_2026">Tháng 3 / 2026</option>
+                                <option value="T4_2026">Tháng 4 / 2026</option>
+                                <option value="T5_2026">Tháng 5 / 2026</option>
+                                <option value="T6_2026">Tháng 6 / 2026</option>
+                                <option value="T7_2026">Tháng 7 / 2026</option>
+                                <option value="T8_2026">Tháng 8 / 2026</option>
+                                <option value="T9_2026">Tháng 9 / 2026</option>
+                                <option value="T10_2026">Tháng 10 / 2026</option>
+                                <option value="T11_2026">Tháng 11 / 2026</option>
+                                <option value="T12_2026">Tháng 12 / 2026</option>
+                                <option value="Q1_2026">Quý 1 / 2026 (T1 - T3)</option>
+                                <option value="Q2_2026">Quý 2 / 2026 (T4 - T6)</option>
+                                <option value="Q3_2026">Quý 3 / 2026 (T7 - T9)</option>
+                                <option value="Q4_2026">Quý 4 / 2026 (T10 - T12)</option>
+                            </select>
                         </div>
                         <div class="filter-item">
-                            <input type="date" id="filterDateTo" class="filter-control" title="Đến ngày">
+                            <input type="date" id="filterDateFrom" class="filter-control" title="Từ ngày" min="2026-01-01" max="2026-12-31">
+                        </div>
+                        <div class="filter-item">
+                            <input type="date" id="filterDateTo" class="filter-control" title="Đến ngày" min="2026-01-01" max="2026-12-31">
                         </div>
                         <button class="btn btn-glass btn-sm" id="resetFilterBtn">Xoá Lọc</button>
                     </div>
@@ -464,14 +485,205 @@
                 </button>
             </form>
         </div>
-    <!-- CUSTOMER DETAIL MODAL (NEW) -->
-    <div class="modal-backdrop" id="leadDetailModal">
-        <div class="modal-card galaxy-card detail-modal-card">
+    <!-- EDIT ALL LEAD VARIABLES MODAL (NEW) -->
+    <div class="modal-backdrop" id="editLeadModal">
+        <div class="modal-card galaxy-card" style="width:640px;max-height:88vh;overflow-y:auto;text-align:left;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                <h3 style="margin:0;font-size:18px;">Chi Tiết Khách Hàng</h3>
-                <button class="btn btn-glass btn-sm" onclick="closeLeadDetail()">&times; Đóng</button>
+                <h3 style="margin:0;font-size:18px;">✏️ Chỉnh Sửa Tất Cả Biến Khách Hàng</h3>
+                <button class="btn btn-glass btn-sm" onclick="closeEditLeadModal()">&times; Đóng</button>
             </div>
-            <div id="leadDetailContent"><!-- openLeadDetail() renders here --></div>
+            <form id="editLeadForm">
+                <input type="hidden" id="editLeadId">
+                
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Tên Zalo / Tên KH:</label>
+                        <input type="text" id="editZaloName" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Brand / Shop:</label>
+                        <input type="text" id="editBrand" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>SĐT / Zalo:</label>
+                        <input type="text" id="editPhone" class="form-control">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Nguồn Lead:</label>
+                        <select id="editSource" class="form-control">
+                            <option value="Ads Facebook">Ads Facebook</option>
+                            <option value="TikTok Ads">TikTok Ads</option>
+                            <option value="TikTok Outbound">TikTok Outbound</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Outbound Zalo">Outbound Zalo</option>
+                            <option value="Event Agency">Event Agency</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Giai Đoạn Pipeline (Stage):</label>
+                        <select id="editStage" class="form-control">
+                            <option value="KHACH_MOI">Khách Mới</option>
+                            <option value="TIEP_CAN">Đang Tiếp Cận</option>
+                            <option value="PROPOSAL">Proposal & Báo Giá</option>
+                            <option value="DANG_TRIEN_KHAI">Đang Triển Khai</option>
+                            <option value="NGHIEM_THU">Nghiệm Thu (Thu Tiền)</option>
+                            <option value="KHACH_CU">Khách Cũ (Retained)</option>
+                            <option value="NGUNG">Ngưng Triển Khai</option>
+                            <option value="CANCEL">Cancel / Hủy Deal</option>
+                            <option value="CUU_NET">Cứu Net (Win-back)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Phân Loại KH:</label>
+                        <select id="editCustomerClass" class="form-control">
+                            <option value="Hot (ICP)">Hot (ICP)</option>
+                            <option value="VVIP (ICP)">VVIP (ICP)</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Warm">Warm</option>
+                            <option value="Cold">Cold</option>
+                            <option value="Lost">Lost</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Ngành Hàng:</label>
+                        <select id="editCategory" class="form-control">
+                            <option value="Mỹ Phẩm">Mỹ Phẩm</option>
+                            <option value="Thời Trang">Thời Trang</option>
+                            <option value="Gia Dụng">Gia Dụng</option>
+                            <option value="Mẹ & Bé">Mẹ & Bé</option>
+                            <option value="Nông Sản">Nông Sản</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Mô Hình Kinh Doanh (MHKD):</label>
+                        <input type="text" id="editMhkd" class="form-control">
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Doanh Thu Dự Kiến (VNĐ):</label>
+                        <input type="number" id="editRevenue" class="form-control">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Dự Báo Forecast:</label>
+                        <select id="editForecastType" class="form-control">
+                            <option value="Firm (100%)">Firm (100%)</option>
+                            <option value="Firm (90%)">Firm (90%)</option>
+                            <option value="Firm (85%)">Firm (85%)</option>
+                            <option value="Pipeline (70%)">Pipeline (70%)</option>
+                            <option value="Pipeline (50%)">Pipeline (50%)</option>
+                            <option value="Pipeline (40%)">Pipeline (40%)</option>
+                            <option value="Lost">Lost (0%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Sale Phụ Trách:</label>
+                        <select id="editSale" class="form-control">
+                            <option value="Hường">Hường</option>
+                            <option value="Huyền">Huyền</option>
+                            <option value="Uyên">Uyên</option>
+                            <option value="Ngân">Ngân</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Sprint Chu Kỳ:</label>
+                        <select id="editSprintId" class="form-control">
+                            <option value="sprint1">Sprint 1 (21-23/07)</option>
+                            <option value="sprint2">Sprint 2 (24-26/07)</option>
+                            <option value="sprint3">Sprint 3 (27-29/07)</option>
+                            <option value="sprint4">Sprint 4 (30/07-01/08)</option>
+                            <option value="sprint5">Sprint 5 (02-04/08)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Follow-up Tiếp Theo:</label>
+                        <input type="text" id="editFollowUpDate" class="form-control" placeholder="22/07/2026">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Số Ngày SLA Còn Lại:</label>
+                        <input type="number" id="editSlaDays" class="form-control">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Trạng Thái SLA:</label>
+                        <select id="editSlaStatus" class="form-control">
+                            <option value="Đúng Hạn">Đúng Hạn</option>
+                            <option value="Cảnh Báo">Cảnh Báo</option>
+                            <option value="Quá Hạn">Quá Hạn</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Hình Thức Liên Hệ:</label>
+                    <input type="text" id="editContactMethod" class="form-control" placeholder="Zalo / Call">
+                </div>
+
+                <div class="form-group">
+                    <label>Thông Tin / Nhu Cầu / Pain Point:</label>
+                    <textarea id="editCustomerInfo" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Lý Do Mất Deal (Nếu cancel):</label>
+                        <input type="text" id="editLostReason" class="form-control">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Góc Tiếp Cận Mới (Angle cứu net):</label>
+                        <input type="text" id="editNewAngle" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-actions" style="margin-top:20px;">
+                    <button type="button" class="btn btn-glass" onclick="closeEditLeadModal()">Hủy Bỏ</button>
+                    <button type="submit" class="btn btn-galaxy"><i class="fa-solid fa-floppy-disk"></i> Lưu Tất Cả Biến</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- EDIT TARGETS & KPIS MODAL (NEW) -->
+    <div class="modal-backdrop" id="editTargetsModal">
+        <div class="modal-card galaxy-card" style="width:460px;text-align:left;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="margin:0;font-size:18px;">✏️ Sửa Biến Target & KPI</h3>
+                <button class="btn btn-glass btn-sm" onclick="closeEditTargetsModal()">&times; Đóng</button>
+            </div>
+            <form id="editTargetsForm">
+                <div class="form-group">
+                    <label>Target Mốc 1 (VNĐ):</label>
+                    <input type="number" id="targetMoc1Input" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Target Mốc 2 (VNĐ):</label>
+                    <input type="number" id="targetMoc2Input" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Số Ngày Còn Lại Mốc 1 (Days Remaining):</label>
+                    <input type="number" id="daysRemainingInput" class="form-control" required>
+                </div>
+                <div class="modal-actions" style="margin-top:20px;">
+                    <button type="button" class="btn btn-glass" onclick="closeEditTargetsModal()">Hủy Bỏ</button>
+                    <button type="submit" class="btn btn-galaxy"><i class="fa-solid fa-floppy-disk"></i> Lưu Target</button>
+                </div>
+            </form>
         </div>
     </div>
 

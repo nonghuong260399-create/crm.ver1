@@ -199,7 +199,7 @@ const DEFAULT_STATE = {
 
 /* ---------- STATE MANAGEMENT ---------- */
 
-let currentFilters = { search: '', stage: 'all', source: 'all', category: 'all', sale: 'all', dateFrom: '', dateTo: '' };
+let currentFilters = { search: '', stage: 'all', source: 'all', category: 'all', sale: 'all', dateFrom: '', dateTo: '', period2026: 'all' };
 let CRMState = loadState();
 let isUnlocked = true;
 let pendingTabTarget = null;
@@ -237,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilterBar();
     initForms();
     initAddLeadSystem();
+    initEditSystem();
     renderAll();
     checkStartupNotifications();
     startScheduledReminders();
@@ -299,12 +300,13 @@ function renderDashboardCards() {
 
     container.innerHTML = `
         <div class="stat-card galaxy-card">
+            <button class="btn btn-xs btn-glass" onclick="openEditTargetsModal()" style="position:absolute;top:16px;right:16px;z-index:2;" title="Sửa Target & KPI"><i class="fa-solid fa-pen"></i> Sửa Target</button>
             <div class="card-icon cyan"><i class="fa-solid fa-vault"></i></div>
             <div class="card-data">
                 <span class="card-label">Doanh Thu Đã Thu (Mốc 1: 05/08)</span>
                 <h2 class="card-value">${formatVND(actualRev)}</h2>
                 <div class="progress-bar"><div class="progress" style="width:${pctMoc1}%"></div></div>
-                <span class="card-sub">Đạt ${pctMoc1}% — Còn thiếu ${formatVND(remainMoc1)} (${CRMState.daysRemaining} ngày)</span>
+                <span class="card-sub">Đạt ${pctMoc1}% / Target ${formatVND(CRMState.targetMoc1)} — Còn ${CRMState.daysRemaining} ngày</span>
             </div>
         </div>
         <div class="stat-card galaxy-card">
@@ -426,7 +428,7 @@ function renderTopDeals() {
    ========================================================================== */
 
 function initFilterBar() {
-    const ids = ['searchInput', 'filterStage', 'filterSource', 'filterCategory', 'filterSale', 'filterDateFrom', 'filterDateTo'];
+    const ids = ['searchInput', 'filterStage', 'filterSource', 'filterCategory', 'filterSale', 'filterPeriod2026', 'filterDateFrom', 'filterDateTo'];
     ids.forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -437,6 +439,7 @@ function initFilterBar() {
             currentFilters.source = document.getElementById('filterSource')?.value || 'all';
             currentFilters.category = document.getElementById('filterCategory')?.value || 'all';
             currentFilters.sale = document.getElementById('filterSale')?.value || 'all';
+            currentFilters.period2026 = document.getElementById('filterPeriod2026')?.value || 'all';
             currentFilters.dateFrom = document.getElementById('filterDateFrom')?.value || '';
             currentFilters.dateTo = document.getElementById('filterDateTo')?.value || '';
             renderMasterLeads();
@@ -446,7 +449,7 @@ function initFilterBar() {
     const resetBtn = document.getElementById('resetFilterBtn');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            currentFilters = { search: '', stage: 'all', source: 'all', category: 'all', sale: 'all', dateFrom: '', dateTo: '' };
+            currentFilters = { search: '', stage: 'all', source: 'all', category: 'all', sale: 'all', dateFrom: '', dateTo: '', period2026: 'all' };
             ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = id.startsWith('filterDate') ? '' : 'all'; });
             if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
             renderMasterLeads();
@@ -477,7 +480,23 @@ function renderMasterLeads() {
         const matchCategory = currentFilters.category === 'all' || (l.category || '').toLowerCase().includes(currentFilters.category.toLowerCase());
         const matchSale = currentFilters.sale === 'all' || (l.sale || '').toLowerCase().includes(currentFilters.sale.toLowerCase());
 
-        return matchSearch && matchStage && matchSource && matchCategory && matchSale;
+        // 2026 Period Filter
+        let matchPeriod = true;
+        if (currentFilters.period2026 !== 'all') {
+            const dateStr = l.date || '';
+            if (currentFilters.period2026.startsWith('T')) {
+                const monthNum = parseInt(currentFilters.period2026.split('_')[0].substring(1));
+                const monthStr = String(monthNum).padStart(2, '0');
+                matchPeriod = dateStr.includes(`/${monthStr}/2026`) || dateStr.startsWith(`2026-${monthStr}`);
+            } else if (currentFilters.period2026.startsWith('Q')) {
+                const qNum = parseInt(currentFilters.period2026.substring(1, 2));
+                const startM = (qNum - 1) * 3 + 1;
+                const months = [startM, startM + 1, startM + 2].map(m => String(m).padStart(2, '0'));
+                matchPeriod = months.some(m => dateStr.includes(`/${m}/2026`) || dateStr.startsWith(`2026-${m}`));
+            }
+        }
+
+        return matchSearch && matchStage && matchSource && matchCategory && matchSale && matchPeriod;
     });
 
     // SLA auto-sort: quá hạn lên đầu
@@ -538,7 +557,10 @@ function renderMasterLeads() {
             <td><strong>${esc(l.followUpDate)}</strong></td>
             <td style="text-align:center;"><strong>${l.slaDays} ngày</strong></td>
             <td><span class="sla-pill ${getSlaCss(l.slaStatus)}">${esc(l.slaStatus)}</span></td>
-            <td>${esc(l.contactMethod)}</td>
+            <td>
+                ${esc(l.contactMethod)}
+                <button class="btn btn-xs btn-galaxy" style="margin-left:6px;" onclick="event.stopPropagation();openEditLeadModal('${l.id}')" title="Sửa tất cả biến"><i class="fa-solid fa-pen"></i></button>
+            </td>
         </tr>`;
     }).join('');
 }
@@ -1280,3 +1302,107 @@ function getSlaCss(s) {
     if (s.includes('Cảnh Báo')) return 'sla-warning';
     return 'sla-overdue';
 }
+
+/* ==========================================================================
+   VARIABLE EDITING SYSTEM (EDIT LEAD & EDIT TARGETS)
+   ========================================================================== */
+
+function initEditSystem() {
+    // Edit Targets Form submit
+    const targetsForm = document.getElementById('editTargetsForm');
+    if (targetsForm) {
+        targetsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const moc1 = parseFloat(document.getElementById('targetMoc1Input').value) || 0;
+            const moc2 = parseFloat(document.getElementById('targetMoc2Input').value) || 0;
+            const days = parseInt(document.getElementById('daysRemainingInput').value) || 0;
+
+            CRMState.targetMoc1 = moc1;
+            CRMState.targetMoc2 = moc2;
+            CRMState.daysRemaining = days;
+
+            saveState();
+            closeEditTargetsModal();
+            showToast('success', 'Đã cập nhật Target', 'Các biến Target & KPI đã được lưu và cập nhật trên Dashboard!');
+        });
+    }
+
+    // Edit Lead Form submit
+    const leadForm = document.getElementById('editLeadForm');
+    if (leadForm) {
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const leadId = document.getElementById('editLeadId').value;
+            const lead = CRMState.leads.find(l => l.id === leadId);
+            if (!lead) return;
+
+            lead.zaloName = document.getElementById('editZaloName').value.trim();
+            lead.brand = document.getElementById('editBrand').value.trim();
+            lead.phone = document.getElementById('editPhone').value.trim();
+            lead.source = document.getElementById('editSource').value;
+            lead.stage = document.getElementById('editStage').value;
+            lead.customerClass = document.getElementById('editCustomerClass').value;
+            lead.category = document.getElementById('editCategory').value;
+            lead.mhkd = document.getElementById('editMhkd').value.trim();
+            lead.revenue = parseFloat(document.getElementById('editRevenue').value) || 0;
+            lead.forecastType = document.getElementById('editForecastType').value;
+            lead.sale = document.getElementById('editSale').value;
+            lead.sprintId = document.getElementById('editSprintId').value;
+            lead.followUpDate = document.getElementById('editFollowUpDate').value.trim();
+            lead.slaDays = parseInt(document.getElementById('editSlaDays').value) || 0;
+            lead.slaStatus = document.getElementById('editSlaStatus').value;
+            lead.contactMethod = document.getElementById('editContactMethod').value.trim();
+            lead.customerInfo = document.getElementById('editCustomerInfo').value.trim();
+            lead.lostReason = document.getElementById('editLostReason').value.trim();
+            lead.newAngle = document.getElementById('editNewAngle').value.trim();
+
+            saveState();
+            closeEditLeadModal();
+            showToast('success', 'Đã lưu biến', `Thông tin khách hàng ${lead.brand || lead.zaloName} đã được cập nhật thành công!`);
+        });
+    }
+}
+
+function openEditTargetsModal() {
+    document.getElementById('targetMoc1Input').value = CRMState.targetMoc1 || 25000000;
+    document.getElementById('targetMoc2Input').value = CRMState.targetMoc2 || 75000000;
+    document.getElementById('daysRemainingInput').value = CRMState.daysRemaining || 15;
+    document.getElementById('editTargetsModal').classList.add('active');
+}
+
+function closeEditTargetsModal() {
+    document.getElementById('editTargetsModal').classList.remove('active');
+}
+
+function openEditLeadModal(leadId) {
+    const lead = CRMState.leads.find(l => l.id === leadId);
+    if (!lead) return;
+
+    document.getElementById('editLeadId').value = lead.id;
+    document.getElementById('editZaloName').value = lead.zaloName || '';
+    document.getElementById('editBrand').value = lead.brand || '';
+    document.getElementById('editPhone').value = lead.phone || '';
+    document.getElementById('editSource').value = lead.source || 'Ads Facebook';
+    document.getElementById('editStage').value = lead.stage || 'KHACH_MOI';
+    document.getElementById('editCustomerClass').value = lead.customerClass || 'Hot';
+    document.getElementById('editCategory').value = lead.category || 'Mỹ Phẩm';
+    document.getElementById('editMhkd').value = lead.mhkd || 'B2C Online';
+    document.getElementById('editRevenue').value = lead.revenue || 0;
+    document.getElementById('editForecastType').value = lead.forecastType || 'Pipeline (50%)';
+    document.getElementById('editSale').value = lead.sale || 'Hường';
+    document.getElementById('editSprintId').value = lead.sprintId || 'sprint1';
+    document.getElementById('editFollowUpDate').value = lead.followUpDate || '';
+    document.getElementById('editSlaDays').value = lead.slaDays ?? 3;
+    document.getElementById('editSlaStatus').value = lead.slaStatus || 'Đúng Hạn';
+    document.getElementById('editContactMethod').value = lead.contactMethod || 'Zalo';
+    document.getElementById('editCustomerInfo').value = lead.customerInfo || '';
+    document.getElementById('editLostReason').value = lead.lostReason || '';
+    document.getElementById('editNewAngle').value = lead.newAngle || '';
+
+    document.getElementById('editLeadModal').classList.add('active');
+}
+
+function closeEditLeadModal() {
+    document.getElementById('editLeadModal').classList.remove('active');
+}
+
