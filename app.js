@@ -60,6 +60,7 @@ const DEFAULT_STATE = {
         {
             id: 'L001', date: '21/07/2026', source: 'Ads Facebook',
             zaloName: 'Hằng Nguyễn', brand: 'Mỹ Phẩm Hằng Beauty', phone: '0981xxxxxx',
+            stageResult: 'Hẹn call chốt HĐ',
             activities: [
                 { date: '2026-07-21 09:30', sale: 'Hường', type: 'CALL', note: 'Gọi lần 1: Hỏi gói Xstream & Báo giá', result: 'Quan tâm' },
                 { date: '2026-07-21 11:00', sale: 'Hường', type: 'ZALO', note: 'Gửi Proposal 1 trang', result: 'Đã gửi Proposal' },
@@ -78,6 +79,7 @@ const DEFAULT_STATE = {
         {
             id: 'L002', date: '21/07/2026', source: 'TikTok Outbound',
             zaloName: 'Nam Đỗ', brand: 'Nam Shop Thời Trang', phone: '0912xxxxxx',
+            stageResult: 'Chờ chốt HĐ đợt 1',
             activities: [
                 { date: '2026-07-21 09:00', sale: 'Hường', type: 'CALL', note: 'Khai thác nỗi đau live', result: 'Quan tâm' },
                 { date: '2026-07-21 14:00', sale: 'Hường', type: 'MEETING', note: 'Showup Demo Xstream', result: 'Đã gửi Proposal' },
@@ -96,6 +98,7 @@ const DEFAULT_STATE = {
         {
             id: 'L003', date: '20/07/2026', source: 'Referral',
             zaloName: 'Minh Trần', brand: 'Điện Máy Minh Gia', phone: '0974xxxxxx',
+            stageResult: 'Đã chốt HĐ (Thu 28M)',
             activities: [
                 { date: '2026-07-20 10:00', sale: 'Hường', type: 'MEETING', note: 'Họp Zoom: Tư vấn Ecom Shopee', result: 'Quan tâm' },
                 { date: '2026-07-21 09:00', sale: 'Hường', type: 'ZALO', note: 'Gửi Hợp Đồng', result: 'Đã gửi Proposal' },
@@ -114,6 +117,7 @@ const DEFAULT_STATE = {
         {
             id: 'L004', date: '19/07/2026', source: 'Event Agency',
             zaloName: 'Thu Mẹ Bé', brand: 'Thu Baby Store', phone: '0903xxxxxx',
+            stageResult: 'Hẹn tái ký HĐ đợt 2',
             activities: [
                 { date: '2026-07-19 10:00', sale: 'Hường', type: 'CALL', note: 'Review gian hàng', result: 'Quan tâm' },
                 { date: '2026-07-20 14:00', sale: 'Hường', type: 'ZALO', note: 'Gửi Proposal Retain', result: 'Đã gửi Proposal' },
@@ -132,6 +136,7 @@ const DEFAULT_STATE = {
         {
             id: 'L005', date: '18/07/2026', source: 'Ads Facebook',
             zaloName: 'Tuấn Nông Sản', brand: 'Nông Sản Xanh Tuấn', phone: '0945xxxxxx',
+            stageResult: 'Tạm ngưng (Kho hết hàng)',
             activities: [
                 { date: '2026-07-18 09:00', sale: 'Hường', type: 'CALL', note: 'Tư vấn Xstream', result: 'Quan tâm' },
                 { date: '2026-07-19 10:00', sale: 'Hường', type: 'CALL', note: 'Khách dời lịch sang tháng sau', result: 'Hẹn gọi lại' }
@@ -149,9 +154,10 @@ const DEFAULT_STATE = {
         {
             id: 'L006', date: '17/07/2026', source: 'Outbound Zalo',
             zaloName: 'Hoàng Nam', brand: 'Hoàng Nam Menswear', phone: '0968xxxxxx',
+            stageResult: 'Khách hủy (Mở shop phố)',
             activities: [
                 { date: '2026-07-17 10:00', sale: 'Hường', type: 'CALL', note: 'Pitching MT-GT', result: 'Quan tâm' },
-                { date: '2026-07-18 09:00', sale: 'Hường', type: 'CALL', note: 'Khách báo hủy dự án', result: 'Từ chối' }
+                { date: '2026-07-18 09:00', sale: 'Hường', type: 'CALL', note: 'Khách báo hủy dự án do đổi KH', result: 'Từ chối' }
             ],
             stage: 'CANCEL',
             customerClass: 'Lost', category: 'Thời Trang', mhkd: 'B2C Offline',
@@ -166,6 +172,7 @@ const DEFAULT_STATE = {
         {
             id: 'L007', date: '16/07/2026', source: 'TikTok Ads',
             zaloName: 'Mai Gia Dụng', brand: 'Mai Home Mart', phone: '0935xxxxxx',
+            stageResult: 'Đang Cứu Net (Chê giá)',
             activities: [
                 { date: '2026-07-16 10:00', sale: 'Hường', type: 'CALL', note: 'Tư vấn gói Xstream', result: 'Quan tâm' },
                 { date: '2026-07-17 14:00', sale: 'Hường', type: 'ZALO', note: 'Gửi báo giá', result: 'Đã gửi Proposal' },
@@ -207,7 +214,7 @@ let selectedLeads = new Set();
 const DEFAULT_PIN = "8888";
 
 function loadState() {
-    const saved = localStorage.getItem('Z_CRM_STATE_V3');
+    const saved = localStorage.getItem('Z_CRM_STATE_V4');
     if (saved) {
         try { return JSON.parse(saved); } catch (e) { console.error('State load error:', e); }
     }
@@ -221,7 +228,7 @@ function saveState() {
         if (parseFloat(sizeMB) > 4) {
             showToast('warning', 'Dung lượng lưu trữ', `Đang dùng ${sizeMB}MB / 5MB. Hãy xóa file audio cũ để tránh mất data.`);
         }
-        localStorage.setItem('Z_CRM_STATE_V3', stateStr);
+        localStorage.setItem('Z_CRM_STATE_V4', stateStr);
     } catch (e) {
         showToast('error', 'Lỗi lưu trữ', 'localStorage đã đầy! Hãy xóa bớt file đính kèm.');
     }
